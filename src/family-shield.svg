@@ -1,32 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" role="img" aria-labelledby="title desc">
   <title id="title">Metcalfe and Kavanagh family tree shield</title>
-  <desc id="desc">A cream heritage shield containing a natural mature tree with fine branches, exposed roots and small realistic leaves.</desc>
+  <desc id="desc">A cream heritage shield containing a natural spreading family tree with fine branches, exposed roots and many small leaves.</desc>
   <path d="M120 10C94 27 67 38 31 48v78c0 66 37 108 89 142 52-34 89-76 89-142V48c-36-10-63-21-89-38Z" fill="#f8f1e2" stroke="#173b32" stroke-width="8" stroke-linejoin="round"/>
   <g fill="none" stroke="#173b32" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M119 220c-3-24-2-45 0-66 2-20 2-38 0-56" stroke-width="10"/>
-    <path d="M118 155C103 139 90 126 76 117M120 149c15-15 28-29 44-43M118 131c-12-13-21-27-27-43M121 126c11-14 18-29 22-46M112 120c-14-9-28-16-43-20M128 118c15-9 30-15 46-18" stroke-width="6.2"/>
-    <path d="M76 117C64 108 52 104 40 105M76 117C68 105 61 94 58 82M69 100C59 91 50 87 40 87M90 88C82 78 78 67 77 55M91 88C100 78 106 67 108 54M143 80C137 68 135 57 136 45M143 80C153 70 160 58 163 46M164 106C175 98 187 95 199 96M174 100C181 90 185 79 185 68M165 91C176 82 186 78 198 77" stroke-width="3.5"/>
-    <path d="M58 82C50 75 43 72 36 72M58 82C55 72 55 62 57 53M77 55C70 48 64 44 57 42M77 55C82 47 86 40 87 33M108 54C102 45 99 36 99 28M108 54C116 46 120 37 122 29M136 45C131 38 130 31 131 25M136 45C143 38 147 31 149 24M163 46C169 39 173 32 174 25M185 68C192 62 199 59 206 59M185 68C185 59 188 50 192 43M199 96C207 91 214 89 221 90M69 100C61 100 53 102 45 107M165 91C171 84 177 78 181 70" stroke-width="2.5"/>
-    <path d="M118 220C103 225 91 235 82 248M118 220C104 216 92 216 79 220M120 220C135 225 148 235 157 248M120 220C134 216 147 216 161 220M119 221C112 235 109 246 109 258M120 221C127 235 130 246 131 258M94 229c-7 4-14 10-20 17M145 229c8 4 15 10 21 17" stroke-width="4.3"/>
-    <path d="M117 153C108 170 106 185 107 198M121 151C131 169 134 184 133 199" stroke-width="2.8"/>
+    <path d="M120 222c0-20 0-39-1-57-1-20 2-37 2-55 0-17-1-35 1-56" stroke-width="11"/>
+    <path d="M120 158C104 141 90 128 72 115M119 151C137 134 151 120 170 106M120 132C103 117 91 102 83 86M121 127C138 111 150 94 157 77M120 108C109 94 101 81 98 66M122 102C133 88 140 72 143 56" stroke-width="6"/>
+    <path d="M77 118C63 111 51 109 39 111M83 111C69 99 59 89 54 76M92 103C78 91 68 80 64 66M166 108C181 100 192 98 203 101M158 101C172 89 182 78 187 64M149 93C163 82 172 70 176 57" stroke-width="4.3"/>
+    <path d="M55 77C48 68 44 60 44 51M64 67C57 57 54 48 55 39M83 87C77 76 75 66 76 56M98 66C91 56 88 46 89 36M143 57C149 47 151 38 150 29M157 78C164 68 168 58 168 48M176 58C183 49 187 40 188 31M187 65C195 57 201 50 205 41" stroke-width="3"/>
+    <path d="M72 115C61 123 53 130 46 140M88 128C77 136 69 145 64 154M169 106C181 114 190 122 197 133M153 120C164 130 172 139 177 150" stroke-width="3.6"/>
+    <path d="M119 222C106 226 94 234 84 246M119 222C106 219 94 220 82 225M121 222C134 227 146 235 157 246M121 222C134 219 147 220 160 225M120 223C114 236 112 248 112 259M120 223C127 236 129 248 129 259M102 230C96 240 91 249 88 257M139 230C145 240 150 249 153 257" stroke-width="4.8"/>
+    <path d="M119 157C110 171 106 184 107 198M121 157C131 171 135 185 134 199" stroke-width="3.4"/>
   </g>
   <g fill="#315f50">
-    <ellipse cx="36" cy="72" rx="3" ry="5.5" transform="rotate(-58 36 72)"/>
-    <ellipse cx="57" cy="53" rx="3" ry="5.5" transform="rotate(-18 57 53)"/>
-    <ellipse cx="57" cy="42" rx="3" ry="5.5" transform="rotate(-38 57 42)"/>
-    <ellipse cx="87" cy="33" rx="3" ry="5.5" transform="rotate(13 87 33)"/>
-    <ellipse cx="99" cy="28" rx="3" ry="5.5" transform="rotate(-6 99 28)"/>
-    <ellipse cx="122" cy="29" rx="3" ry="5.5" transform="rotate(18 122 29)"/>
-    <ellipse cx="131" cy="25" rx="3" ry="5.5" transform="rotate(-6 131 25)"/>
-    <ellipse cx="149" cy="24" rx="3" ry="5.5" transform="rotate(18 149 24)"/>
-    <ellipse cx="174" cy="25" rx="3" ry="5.5" transform="rotate(27 174 25)"/>
-    <ellipse cx="192" cy="43" rx="3" ry="5.5" transform="rotate(35 192 43)"/>
-    <ellipse cx="206" cy="59" rx="3" ry="5.5" transform="rotate(55 206 59)"/>
-    <ellipse cx="198" cy="77" rx="3" ry="5.5" transform="rotate(62 198 77)"/>
-    <ellipse cx="221" cy="90" rx="3" ry="5.5" transform="rotate(70 221 90)"/>
-    <ellipse cx="40" cy="87" rx="3" ry="5.5" transform="rotate(-62 40 87)"/>
-    <ellipse cx="40" cy="105" rx="3" ry="5.5" transform="rotate(-70 40 105)"/>
-    <ellipse cx="45" cy="107" rx="3" ry="5.5" transform="rotate(-72 45 107)"/>
-    <ellipse cx="181" cy="70" rx="3" ry="5.5" transform="rotate(38 181 70)"/>
+    <ellipse cx="39" cy="111" rx="3.5" ry="6" transform="rotate(-68 39 111)"/><ellipse cx="46" cy="140" rx="3.5" ry="6" transform="rotate(-54 46 140)"/><ellipse cx="50" cy="96" rx="3.5" ry="6" transform="rotate(-57 50 96)"/>
+    <ellipse cx="44" cy="51" rx="3.4" ry="5.8" transform="rotate(-18 44 51)"/><ellipse cx="55" cy="39" rx="3.4" ry="5.8" transform="rotate(-8 55 39)"/><ellipse cx="54" cy="76" rx="3.5" ry="6" transform="rotate(-31 54 76)"/>
+    <ellipse cx="64" cy="66" rx="3.5" ry="6" transform="rotate(-28 64 66)"/><ellipse cx="76" cy="56" rx="3.5" ry="6" transform="rotate(-15 76 56)"/><ellipse cx="83" cy="86" rx="3.5" ry="6" transform="rotate(-26 83 86)"/>
+    <ellipse cx="89" cy="36" rx="3.5" ry="6" transform="rotate(-4 89 36)"/><ellipse cx="98" cy="66" rx="3.5" ry="6" transform="rotate(-12 98 66)"/><ellipse cx="109" cy="88" rx="3.5" ry="6" transform="rotate(-20 109 88)"/>
+    <ellipse cx="150" cy="29" rx="3.5" ry="6" transform="rotate(7 150 29)"/><ellipse cx="143" cy="56" rx="3.5" ry="6" transform="rotate(15 143 56)"/><ellipse cx="132" cy="84" rx="3.5" ry="6" transform="rotate(22 132 84)"/>
+    <ellipse cx="168" cy="48" rx="3.5" ry="6" transform="rotate(20 168 48)"/><ellipse cx="157" cy="77" rx="3.5" ry="6" transform="rotate(24 157 77)"/><ellipse cx="188" cy="31" rx="3.5" ry="6" transform="rotate(12 188 31)"/>
+    <ellipse cx="176" cy="57" rx="3.5" ry="6" transform="rotate(30 176 57)"/><ellipse cx="187" cy="64" rx="3.5" ry="6" transform="rotate(38 187 64)"/><ellipse cx="205" cy="41" rx="3.5" ry="6" transform="rotate(34 205 41)"/>
+    <ellipse cx="203" cy="101" rx="3.5" ry="6" transform="rotate(66 203 101)"/><ellipse cx="197" cy="133" rx="3.5" ry="6" transform="rotate(57 197 133)"/><ellipse cx="190" cy="90" rx="3.5" ry="6" transform="rotate(55 190 90)"/>
+    <ellipse cx="64" cy="154" rx="3.5" ry="6" transform="rotate(-42 64 154)"/><ellipse cx="74" cy="132" rx="3.5" ry="6" transform="rotate(-36 74 132)"/><ellipse cx="177" cy="150" rx="3.5" ry="6" transform="rotate(44 177 150)"/>
+    <ellipse cx="166" cy="129" rx="3.5" ry="6" transform="rotate(38 166 129)"/><ellipse cx="102" cy="118" rx="3.5" ry="6" transform="rotate(-15 102 118)"/><ellipse cx="139" cy="117" rx="3.5" ry="6" transform="rotate(15 139 117)"/>
+    <ellipse cx="92" cy="103" rx="3.3" ry="5.6" transform="rotate(-24 92 103)"/><ellipse cx="149" cy="93" rx="3.3" ry="5.6" transform="rotate(24 149 93)"/><ellipse cx="83" cy="111" rx="3.3" ry="5.6" transform="rotate(-35 83 111)"/>
+    <ellipse cx="158" cy="101" rx="3.3" ry="5.6" transform="rotate(35 158 101)"/><ellipse cx="72" cy="115" rx="3.3" ry="5.6" transform="rotate(-46 72 115)"/><ellipse cx="169" cy="106" rx="3.3" ry="5.6" transform="rotate(46 169 106)"/>
   </g>
 </svg>
