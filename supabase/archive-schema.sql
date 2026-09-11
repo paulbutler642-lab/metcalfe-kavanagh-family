@@ -11,6 +11,11 @@ insert into public.media_people(media_id,person_id)
 select id,person_id from public.media where person_id is not null
 on conflict do nothing;
 
+-- media_people is the canonical relationship. Keeping the legacy person_id
+-- column is useful to older clients, but its FK made PostgREST embedding
+-- ambiguous once the many-to-many relationship was added.
+alter table public.media drop constraint if exists media_person_id_fkey;
+
 drop policy if exists "public contribute photos" on public.media;
 drop policy if exists "public contribute archive items" on public.media;
 create policy "public contribute archive items" on public.media
