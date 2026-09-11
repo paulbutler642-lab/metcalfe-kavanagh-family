@@ -22,13 +22,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css?v=20260911-11">
-<link rel="stylesheet" href="/hills.css?v=20260911-11">
-<link rel="stylesheet" href="/tree-v2.css?v=20260911-11">
-<link rel="stylesheet" href="/gallery.css?v=20260911-11">
-<link rel="stylesheet" href="/admin.css?v=20260911-11">
+<link rel="stylesheet" href="/styles.css?v=20260911-12">
+<link rel="stylesheet" href="/hills.css?v=20260911-12">
+<link rel="stylesheet" href="/tree-v2.css?v=20260911-12">
+<link rel="stylesheet" href="/gallery.css?v=20260911-12">
+<link rel="stylesheet" href="/admin.css?v=20260911-12">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/config.js?v=20260911-11"></script>
+<script src="/config.js?v=20260911-12"></script>
 </head>
 <body>
 <header class="top"><div class="wrap topin"><a class="brand" href="/"><span class="brandmark">⌁</span><strong>The Metcalfe &amp; Kavanagh Family</strong></a><button id="menuButton" class="hamb" aria-label="Open menu">☰</button><nav class="nav"><a href="/?view=tree">Tree</a><a href="/?view=people">People</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a><a href="/?view=gallery">Gallery</a></nav></div><div id="mobileMenu" class="mobilemenu"><a href="/?view=tree">Family Tree</a><a href="/?view=people">People</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a><a href="/?view=records">Records</a><a href="/?view=gallery">Gallery</a></div></header>
@@ -36,11 +36,11 @@
 <nav class="bottom"><a href="/">⌂<span>Home</span></a><a href="/?view=tree">♧<span>Tree</span></a><a href="/?view=people">●●<span>People</span></a><a href="#" id="bottomMenu">☰<span>Menu</span></a></nav>
 <script type="module">
 const currentView=new URLSearchParams(location.search).get('view')||'home';
-if(currentView==='tree') await import('/tree-v2.js?v=20260911-11');
-else if(currentView==='gallery') await import('/gallery.js?v=20260911-11');
-else if(currentView==='admin') await import('/admin.js?v=20260911-11');
-else await import('/app.js?v=20260911-11');
+if(currentView==='tree') await import('/tree-v2.js?v=20260911-12');
+else if(currentView==='gallery') await import('/gallery.js?v=20260911-12');
+else if(currentView==='admin') await import('/admin.js?v=20260911-12');
+else await import('/app.js?v=20260911-12');
 </script>
-<script type="module" src="/surname-note.js?v=20260911-11"></script>
+<script type="module" src="/surname-note.js?v=20260911-12"></script>
 </body>
 </html>
