@@ -24,7 +24,14 @@ async function load(){
         <div id="fileSummary" class="file-summary muted">No photos selected yet.</div>
         <div class="field"><label for="photoTitle"><strong>Photo title</strong> <span class="muted">(optional)</span></label><input id="photoTitle" maxlength="120" placeholder="e.g. Family gathering in Blackrock"></div>
         <div class="field"><label for="photoCaption"><strong>Caption or memory</strong> <span class="muted">(optional)</span></label><textarea id="photoCaption" maxlength="1000" placeholder="Add names, place, occasion or anything you remember..."></textarea></div>
-        <div class="people-picker"><div class="picker-head"><strong>Who is in the photo?</strong><span class="muted">Select at least one person. Group photos can have several.</span></div><input id="personSearch" class="person-search" type="search" placeholder="Search family members"><div id="peopleOptions" class="people-options">${ps.map(p=>`<label class="person-choice" data-name="${esc(p.name.toLowerCase())}"><input type="checkbox" value="${esc(p.id)}"><span>${esc(p.name)}</span></label>`).join('')}</div></div>
+        <div class="people-picker">
+          <div class="picker-head"><strong>Who is in the photo?</strong><span class="muted">Start typing a name, then tap a match. Add as many people as needed.</span></div>
+          <div id="selectedPeople" class="selected-people" aria-live="polite"></div>
+          <div class="autocomplete-wrap">
+            <input id="personSearch" class="person-search" type="search" placeholder="Type a family member's name" autocomplete="off" aria-autocomplete="list" aria-controls="peopleSuggestions">
+            <div id="peopleSuggestions" class="people-suggestions" role="listbox" hidden></div>
+          </div>
+        </div>
         <div id="uploadStatus" class="status" hidden></div>
         <button class="btn upload-btn" type="submit">Upload to Family Gallery</button>
       </form>
@@ -32,12 +39,54 @@ async function load(){
   </div></section>
   <section class="section"><div class="wrap"><h2>Family Photos</h2><div id="galleryGrid" class="media-grid gallery-grid">${photos.map(m=>{const tagged=namesFor(m.id);return `<a class="card gallery-photo" target="_blank" href="${publicUrl(m)}"><img src="${publicUrl(m)}" alt="${esc(m.title||'Family photograph')}"><h3>${esc(m.title||'Family photograph')}</h3>${m.description?`<p>${esc(m.description)}</p>`:''}${tagged.length?`<p class="tagged-people"><strong>People:</strong> ${tagged.map(esc).join(', ')}</p>`:''}</a>`}).join('')||'<div class="card">No photographs have been added yet.</div>'}</div></div></section>`;
 
-  const files=document.getElementById('galleryFiles'),summary=document.getElementById('fileSummary'),search=document.getElementById('personSearch'),status=document.getElementById('uploadStatus'),form=document.getElementById('galleryUploadForm');
+  const files=document.getElementById('galleryFiles');
+  const summary=document.getElementById('fileSummary');
+  const search=document.getElementById('personSearch');
+  const suggestions=document.getElementById('peopleSuggestions');
+  const selectedBox=document.getElementById('selectedPeople');
+  const status=document.getElementById('uploadStatus');
+  const form=document.getElementById('galleryUploadForm');
+  const selected=new Set();
+
+  const renderSelected=()=>{
+    selectedBox.innerHTML=[...selected].map(id=>`<button type="button" class="person-chip" data-remove="${esc(id)}"><span>${esc(byId[id]?.name||'Family member')}</span><b aria-hidden="true">×</b></button>`).join('');
+    selectedBox.hidden=selected.size===0;
+  };
+
+  const showMatches=()=>{
+    const q=search.value.trim().toLowerCase();
+    if(!q){suggestions.hidden=true;suggestions.innerHTML='';return;}
+    const matches=ps.filter(p=>!selected.has(p.id)&&p.name.toLowerCase().includes(q)).slice(0,8);
+    suggestions.innerHTML=matches.length?matches.map(p=>`<button type="button" class="person-suggestion" data-person-id="${esc(p.id)}" role="option"><span class="suggestion-avatar">${esc((p.name||'?').split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase())}</span><span>${esc(p.name)}</span></button>`).join(''):`<div class="no-suggestions">No matching family member</div>`;
+    suggestions.hidden=false;
+  };
+
   files.addEventListener('change',()=>{const fs=[...files.files];summary.textContent=fs.length?`${fs.length} photo${fs.length===1?'':'s'} selected: ${fs.map(f=>f.name).join(', ')}`:'No photos selected yet.'});
-  search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();document.querySelectorAll('.person-choice').forEach(el=>el.hidden=q&&!el.dataset.name.includes(q))});
+  search.addEventListener('input',showMatches);
+  search.addEventListener('focus',()=>{if(search.value.trim())showMatches()});
+  suggestions.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-person-id]');
+    if(!btn)return;
+    selected.add(btn.dataset.personId);
+    search.value='';
+    suggestions.hidden=true;
+    suggestions.innerHTML='';
+    renderSelected();
+    search.focus();
+  });
+  selectedBox.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-remove]');
+    if(!btn)return;
+    selected.delete(btn.dataset.remove);
+    renderSelected();
+    search.focus();
+  });
+  document.addEventListener('click',e=>{if(!e.target.closest('.autocomplete-wrap'))suggestions.hidden=true});
+  renderSelected();
+
   form.addEventListener('submit',async e=>{
     e.preventDefault();
-    const chosen=[...document.querySelectorAll('.person-choice input:checked')].map(x=>x.value), fs=[...files.files];
+    const chosen=[...selected], fs=[...files.files];
     if(!fs.length){status.hidden=false;status.className='status error';status.textContent='Please choose at least one photo.';return}
     if(!chosen.length){status.hidden=false;status.className='status error';status.textContent='Please select at least one family member.';return}
     for(const f of fs){if(f.size>10*1024*1024){status.hidden=false;status.className='status error';status.textContent=`${f.name} is larger than 10 MB.`;return}}
