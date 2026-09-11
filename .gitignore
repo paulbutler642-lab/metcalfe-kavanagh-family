@@ -1,0 +1,5 @@
+dist/
+upload/
+*.log
+*-database-backup-*.json
+archive-mobile.png
