@@ -25,11 +25,11 @@ async function load(){
         <div class="field"><label for="photoTitle"><strong>Photo title</strong> <span class="muted">(optional)</span></label><input id="photoTitle" maxlength="120" placeholder="e.g. Family gathering in Blackrock"></div>
         <div class="field"><label for="photoCaption"><strong>Caption or memory</strong> <span class="muted">(optional)</span></label><textarea id="photoCaption" maxlength="1000" placeholder="Add names, place, occasion or anything you remember..."></textarea></div>
         <div class="people-picker">
-          <div class="picker-head"><strong>Who is in the photo?</strong><span class="muted">Start typing a name, then tap a match. Add as many people as needed.</span></div>
+          <div class="picker-head"><strong>Who is in the photo?</strong><span class="muted">Choose from the list or start typing to narrow it down. Add as many people as needed.</span></div>
           <div id="selectedPeople" class="selected-people" aria-live="polite"></div>
           <div class="autocomplete-wrap">
-            <input id="personSearch" class="person-search" type="search" placeholder="Type a family member's name" autocomplete="off" aria-autocomplete="list" aria-controls="peopleSuggestions">
-            <div id="peopleSuggestions" class="people-suggestions" role="listbox" hidden></div>
+            <input id="personSearch" class="person-search" type="search" placeholder="Search family members" autocomplete="off" aria-autocomplete="list" aria-controls="peopleSuggestions">
+            <div id="peopleSuggestions" class="people-suggestions" role="listbox"></div>
           </div>
         </div>
         <div id="uploadStatus" class="status" hidden></div>
@@ -55,23 +55,21 @@ async function load(){
 
   const showMatches=()=>{
     const q=search.value.trim().toLowerCase();
-    if(!q){suggestions.hidden=true;suggestions.innerHTML='';return;}
-    const matches=ps.filter(p=>!selected.has(p.id)&&p.name.toLowerCase().includes(q)).slice(0,8);
+    const matches=ps.filter(p=>!selected.has(p.id)&&(!q||p.name.toLowerCase().includes(q)));
     suggestions.innerHTML=matches.length?matches.map(p=>`<button type="button" class="person-suggestion" data-person-id="${esc(p.id)}" role="option"><span class="suggestion-avatar">${esc((p.name||'?').split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase())}</span><span>${esc(p.name)}</span></button>`).join(''):`<div class="no-suggestions">No matching family member</div>`;
     suggestions.hidden=false;
   };
 
   files.addEventListener('change',()=>{const fs=[...files.files];summary.textContent=fs.length?`${fs.length} photo${fs.length===1?'':'s'} selected: ${fs.map(f=>f.name).join(', ')}`:'No photos selected yet.'});
   search.addEventListener('input',showMatches);
-  search.addEventListener('focus',()=>{if(search.value.trim())showMatches()});
+  search.addEventListener('focus',showMatches);
   suggestions.addEventListener('click',e=>{
     const btn=e.target.closest('[data-person-id]');
     if(!btn)return;
     selected.add(btn.dataset.personId);
     search.value='';
-    suggestions.hidden=true;
-    suggestions.innerHTML='';
     renderSelected();
+    showMatches();
     search.focus();
   });
   selectedBox.addEventListener('click',e=>{
@@ -79,10 +77,11 @@ async function load(){
     if(!btn)return;
     selected.delete(btn.dataset.remove);
     renderSelected();
+    showMatches();
     search.focus();
   });
-  document.addEventListener('click',e=>{if(!e.target.closest('.autocomplete-wrap'))suggestions.hidden=true});
   renderSelected();
+  showMatches();
 
   form.addEventListener('submit',async e=>{
     e.preventDefault();
