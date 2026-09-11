@@ -4,7 +4,7 @@ import path from 'node:path';
 const out = path.resolve('dist');
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-for (const file of ['index.html','styles.css','tree-v2.css','app.js','tree-v2.js','surname-note.js','favicon.svg']) {
+for (const file of ['index.html','styles.css','hills.css','tree-v2.css','app.js','tree-v2.js','surname-note.js','favicon.svg']) {
   fs.copyFileSync(path.resolve('src',file),path.join(out,file));
 }
 const url = process.env.SUPABASE_URL || '';
