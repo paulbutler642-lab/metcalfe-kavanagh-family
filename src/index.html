@@ -22,8 +22,10 @@
 <header class="top"><div class="wrap topin"><a class="brand" href="/"><span class="brandmark">⌁</span><strong>The Metcalfe &amp; Kavanagh Family</strong></a><button id="menuButton" class="hamb" aria-label="Open menu">☰</button><nav class="nav"><a href="/?view=tree">Tree</a><a href="/?view=people">People</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a><a href="/?view=gallery">Gallery</a></nav></div><div id="mobileMenu" class="mobilemenu"><a href="/?view=tree">Family Tree</a><a href="/?view=people">People</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a><a href="/?view=records">Records</a><a href="/?view=gallery">Gallery</a></div></header>
 <main id="app"></main>
 <nav class="bottom"><a href="/">⌂<span>Home</span></a><a href="/?view=tree">♧<span>Tree</span></a><a href="/?view=people">●●<span>People</span></a><a href="#" id="bottomMenu">☰<span>Menu</span></a></nav>
-<script type="module" src="/app.js"></script>
-<script type="module" src="/tree.js"></script>
+<script type="module">
+const currentView=new URLSearchParams(location.search).get('view')||'home';
+if(currentView==='tree') await import('/tree.js'); else await import('/app.js');
+</script>
 <script type="module" src="/surname-note.js"></script>
 </body>
 </html>
