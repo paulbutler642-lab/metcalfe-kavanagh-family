@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="/layout-fixes.css?v=20260912-repair">
 <link rel="stylesheet" href="/admin.css?v=20260912-sources">
 <link rel="stylesheet" href="/person-management.css?v=20260912-1">
+<link rel="stylesheet" href="/change-history.css?v=20260912-1">
 <link rel="stylesheet" href="/sources.css?v=20260912-1">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/config.js?v=20260911-24"></script>
@@ -49,7 +50,7 @@ if(currentView==='tree') await import('/tree-v2.js?v=20260911-24');
 else if(currentView==='people') await import('/people.js?v=20260911-24');
 else if(currentView==='gallery'||currentView==='archive'||currentView==='records') await import('/gallery.js?v=20260912-photo-layout');
 else if(currentView==='visitors'||currentView==='guestbook') await import('/visitors.js?v=20260912-2');
-else if(currentView==='admin') await import('/admin.js?v=20260912-merge-disabled');
+else if(currentView==='admin') await import('/admin.js?v=20260912-change-history');
 else await import('/app.js?v=20260912-timeline-early-years');
 </script>
 <script type="module" src="/surname-note.js?v=20260911-24"></script>

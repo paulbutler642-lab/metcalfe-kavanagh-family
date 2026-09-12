@@ -52,6 +52,10 @@ Matching public-site thumbnail before adding family tabs to the Timeline: `93c21
 
 Correct surname grouping and early-year sorting before adding person merge and delete tools: `15bd66cbe0c996e31f2261fbe74b987e0e4ef65e`
 
+## William and Billy restored — 12 September 2026
+
+William and Billy restored as separate profiles, with unsafe merging disabled, before adding Profile Change History: `799bda411ea1b4caf0256e41d2e3a955d3258dd2`
+
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
