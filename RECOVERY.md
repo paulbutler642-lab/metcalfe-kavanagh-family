@@ -27,6 +27,11 @@ Backup branch: `backup/research-sources-v1-2026-09-12`
 Assisted document importer and external archive-search release before recurring GEDCOM updates: `dd3a9654a730a0f0dd100d28ad0fb31f93e56612`
 Backup branch: `backup/research-tools-v2-2026-09-12`
 
+## GEDCOM Import v3 — 12 September 2026
+
+Recurring GEDCOM update importer before adding the 1926 Census search: `ecf10ec8385d85739bfe1f429b4887081bc47d21`
+Backup branch: `backup/gedcom-import-v3-2026-09-12`
+
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
