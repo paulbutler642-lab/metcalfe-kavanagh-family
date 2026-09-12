@@ -1,5 +1,10 @@
 # Website recovery points
 
+## Pre-Media-Storage-v1 — 12 September 2026
+
+Known-good site immediately before automatic image optimisation: `7aed8cf78e5f1ca5c5d0ee548e539353b111db3c`
+Backup branch: `Pre-Media-Storage-v1`
+
 ## Pre-Family-Profile-v1 — 12 September 2026
 
 Known-good site immediately before the individual profile presentation upgrade: `a1b23aa`

@@ -20,7 +20,7 @@ async function render(){
   if(pe||me)throw pe||me;
   const ps=people||[],photos=media||[];
   const profileFor=id=>photos.find(m=>m.person_id===id&&m.is_profile_photo);
-  const mediaUrl=m=>m?`${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name||'family-media'}/${m.storage_path}`:'';
+  const mediaUrl=m=>m?`${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name||'family-media'}/${m.thumbnail_path||m.storage_path}`:'';
   const isMetcalfe=p=>/metcalfe/i.test(p.family_line||'')||/children/i.test(p.family_line||'');
   const isKavanagh=p=>/^kavanagh$/i.test((p.family_line||'').trim());
   const groups={metcalfe:ps.filter(isMetcalfe),kavanagh:ps.filter(isKavanagh)};
