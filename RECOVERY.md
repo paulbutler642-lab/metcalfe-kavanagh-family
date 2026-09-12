@@ -22,6 +22,11 @@ Backup branch: `backup/family-archive-stable-2026-09-12`
 Structured research database before assisted document import and external archive search tools: `ef2e6df293c1db292aebb17db8fdca87280858cf`
 Backup branch: `backup/research-sources-v1-2026-09-12`
 
+## Research Tools v2 — 12 September 2026
+
+Assisted document importer and external archive-search release before recurring GEDCOM updates: `dd3a9654a730a0f0dd100d28ad0fb31f93e56612`
+Backup branch: `backup/research-tools-v2-2026-09-12`
+
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
