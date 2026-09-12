@@ -36,6 +36,10 @@ Backup branch: `backup/gedcom-import-v3-2026-09-12`
 
 Official 1926 Irish Census search before adding Lisa Butler as an administrator: `84787cc3806a47073e911fe3ae5eb0f81d847670`
 
+## Lisa administrator access — 12 September 2026
+
+Lisa Butler administrator access before adding a dedicated WhatsApp Admin preview: `6ee46dcad2e4d58816f182419bc15c3e28053b04`
+
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
