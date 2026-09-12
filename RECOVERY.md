@@ -40,6 +40,10 @@ Official 1926 Irish Census search before adding Lisa Butler as an administrator:
 
 Lisa Butler administrator access before adding a dedicated WhatsApp Admin preview: `6ee46dcad2e4d58816f182419bc15c3e28053b04`
 
+## Admin WhatsApp preview — 12 September 2026
+
+Working administrator thumbnail before adding the matching public-site thumbnail: `a060f692e4e38216f38eafca5b65359783049e87`
+
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
