@@ -19,7 +19,7 @@ function renderLogin(){
 }
 
 async function renderAdmin(session){
-  const {attachPersonManagement}=await import('/person-management.js?v=20260912-1');
+  const {attachPersonManagement}=await import('/person-management.js?v=20260912-2');
   if(!(await isAdmin())){app.innerHTML=header('Administration','This account does not have editing access.')+`<section class="section"><div class="wrap"><div class="status error">Signed in as ${esc(session.user.email||'this account')}, but this email is not an approved site administrator.</div><button id="adminSignOut" class="btn">Sign out</button></div></section>`;document.getElementById('adminSignOut').onclick=async()=>{await db.auth.signOut();location.reload()};return}
   const [{data:ps,error:pe},{data:med,error:me},{data:guestRows,error:ge},{data:contactRows,error:ce},{data:sourceRows,error:se}]=await Promise.all([db.from('people').select('*').order('name'),db.from('media').select('*').eq('media_type','photo').order('created_at',{ascending:false}),db.from('guestbook_entries').select('*').order('created_at',{ascending:false}),db.from('guestbook_contacts').select('entry_id,email,contact_details,visibility'),db.from('research_sources').select('*, research_source_people(*)').order('created_at',{ascending:false})]);
   if(pe||me||ge||ce||se)throw pe||me||ge||ce||se;

@@ -134,5 +134,4 @@ $$;
 
 revoke all on function public.merge_people(text,text) from public, anon;
 revoke all on function public.delete_person_entry(text) from public, anon;
-grant execute on function public.merge_people(text,text) to authenticated;
 grant execute on function public.delete_person_entry(text) to authenticated;
