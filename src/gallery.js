@@ -15,7 +15,9 @@ async function load(){
     db.from('media_people').select('media_id,person_id')
   ]);
   if(pe||me||te)throw pe||me||te;
-  const ps=people||[],items=media||[],tagRows=tags||[],byId=Object.fromEntries(ps.map(p=>[p.id,p]));
+  // Profile photographs already appear on their person's profile. Keeping them
+  // out of the main archive prevents the same image looking like a duplicate.
+  const ps=people||[],items=(media||[]).filter(item=>!item.is_profile_photo),tagRows=tags||[],byId=Object.fromEntries(ps.map(p=>[p.id,p]));
   const peopleFor=mid=>tagRows.filter(t=>t.media_id===mid).map(t=>byId[t.person_id]).filter(Boolean);
 
   app.innerHTML=`<section class="heritage"><div class="wrap"><h1>Photos &amp; Documents</h1><p>Photographs, official records and memories preserved together.</p></div></section>
