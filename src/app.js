@@ -3,7 +3,7 @@ const app=document.getElementById('app');
 const qs=new URLSearchParams(location.search);const view=qs.get('view')||'home';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const initials=p=>(p.name||'?').split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();
-const year=s=>{const m=String(s||'').match(/(18|19|20)\d{2}/);return m?m[0]:''};
+const year=s=>{const m=String(s||'').match(/\b(1\d{3}|20\d{2})\b/);return m?m[0]:''};
 const years=p=>{const a=year(p.birth_date_text),b=year(p.death_date_text);return a||b?`${a||'?'} – ${b||''}`:''};
 const header=(t,s)=>`<section class="heritage"><div class="wrap"><h1>${esc(t)}</h1><p>${esc(s)}</p></div></section>`;
 if(!cfg.SUPABASE_URL||!cfg.SUPABASE_PUBLISHABLE_KEY){app.innerHTML=header('Site configuration needed','The family archive is ready, but the Supabase connection has not yet been configured in Vercel.')+'<section class="section"><div class="wrap"><div class="status error">Missing SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY.</div></div></section>';throw new Error('Missing Supabase config')}
