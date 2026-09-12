@@ -50,7 +50,7 @@
 <nav class="bottom"><a href="/">⌂<span>Home</span></a><a href="/?view=tree">♧<span>Tree</span></a><a href="/?view=people">●●<span>People</span></a><a href="#" id="bottomMenu">☰<span>Menu</span></a></nav>
 <script type="module">
 const currentView=new URLSearchParams(location.search).get('view')||'home';
-if(currentView==='tree') await import('/tree-v2.js?v=20260912-1');
+if(currentView==='tree') await import('/tree-v2.js?v=20260912-2');
 else if(currentView==='people') await import('/people.js?v=20260911-24');
 else if(currentView==='gallery'||currentView==='archive'||currentView==='records') await import('/gallery.js?v=20260912-photo-layout');
 else if(currentView==='visitors'||currentView==='guestbook') await import('/visitors.js?v=20260912-2');
