@@ -48,6 +48,10 @@ Working administrator thumbnail before adding the matching public-site thumbnail
 
 Matching public-site thumbnail before adding family tabs to the Timeline: `93c21fea2cc89acc4e4a5132073492a2dbeae194`
 
+## Corrected Timeline — 12 September 2026
+
+Correct surname grouping and early-year sorting before adding person merge and delete tools: `15bd66cbe0c996e31f2261fbe74b987e0e4ef65e`
+
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
