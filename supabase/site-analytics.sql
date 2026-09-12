@@ -1,0 +1,16 @@
+create table if not exists public.site_visits (id uuid primary key default gen_random_uuid(),visitor_id uuid not null,session_id uuid not null,path text not null check (char_length(path) between 1 and 300),referrer text check (char_length(referrer)<=200),user_agent text check (char_length(user_agent)<=500),visited_at timestamptz not null default now());
+create index if not exists site_visits_visited_idx on public.site_visits(visited_at desc);
+create index if not exists site_visits_visitor_idx on public.site_visits(visitor_id);
+create index if not exists site_visits_session_idx on public.site_visits(session_id);
+create table if not exists public.site_stats (stat_key text primary key,stat_value bigint not null default 0,updated_at timestamptz not null default now());
+insert into public.site_stats(stat_key,stat_value) values ('visits',0) on conflict (stat_key) do nothing;
+create or replace function public.update_site_visit_count() returns trigger language plpgsql security definer set search_path=public,pg_temp as $$ begin update public.site_stats set stat_value=stat_value+1,updated_at=now() where stat_key='visits'; return new; end; $$;
+revoke all on function public.update_site_visit_count() from public,anon,authenticated;
+drop trigger if exists site_visit_counter on public.site_visits;
+create trigger site_visit_counter after insert on public.site_visits for each row execute function public.update_site_visit_count();
+alter table public.site_visits enable row level security; alter table public.site_stats enable row level security;
+revoke all on public.site_visits,public.site_stats from anon,authenticated;
+grant insert on public.site_visits to anon,authenticated; grant select on public.site_visits to authenticated; grant select on public.site_stats to anon,authenticated;
+create policy "visitors record page views" on public.site_visits for insert to anon,authenticated with check(true);
+create policy "admins read site visits" on public.site_visits for select to authenticated using(public.is_site_admin());
+create policy "public read visit counter" on public.site_stats for select to anon,authenticated using(stat_key='visits');

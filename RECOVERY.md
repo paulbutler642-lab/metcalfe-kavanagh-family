@@ -64,6 +64,10 @@ Profile Change History before adding structured date entry: `1627f319b308c059097
 
 Structured genealogy date controls before adding profile relationships: `c912436cc79cd076c4ace7d6cde28c8f59a04806`
 
+## Profile relationships — 12 September 2026
+
+Reciprocal profile relationships before adding visitor analytics: `347d31bc7f68c735ec8b5ebe0a80b2d0c32589c6`
+
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
