@@ -32,6 +32,10 @@ Backup branch: `backup/research-tools-v2-2026-09-12`
 Recurring GEDCOM update importer before adding the 1926 Census search: `ecf10ec8385d85739bfe1f429b4887081bc47d21`
 Backup branch: `backup/gedcom-import-v3-2026-09-12`
 
+## Census 1926 — 12 September 2026
+
+Official 1926 Irish Census search before adding Lisa Butler as an administrator: `84787cc3806a47073e911fe3ae5eb0f81d847670`
+
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
