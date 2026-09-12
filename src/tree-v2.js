@@ -1,149 +1,24 @@
 const params=new URLSearchParams(location.search);
 if((params.get('view')||'home')==='tree'){
-  const cfg=window.__APP_CONFIG__||{};
-  const root=document.getElementById('app');
-  const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const initials=p=>(p.name||'?').split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();
-  const year=s=>{const m=String(s||'').match(/(17|18|19|20)\d{2}/);return m?m[0]:''};
-  const years=p=>{const a=year(p.birth_date_text),b=year(p.death_date_text);return a||b?`${a||'?'} – ${b||''}`:''};
-  const db=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY);
-  const unique=list=>{const seen=new Set();return list.filter(p=>p&&!seen.has(p.id)&&seen.add(p.id));};
-  const mediaUrl=m=>m?`${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name||'family-media'}/${m.storage_path}`:'';
+const cfg=window.__APP_CONFIG__||{},root=document.getElementById('app'),db=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const unique=a=>[...new Map(a.filter(Boolean).map(x=>[String(x.id),x])).values()];
+const yr=v=>String(v||'').match(/(?:17|18|19|20)\d{2}/)?.[0]||'';
+const life=p=>{const b=yr(p.birth_date_text),d=yr(p.death_date_text);return b||d?`${b||'?'} – ${d||''}`:'Dates not recorded'};
+const initials=p=>(p.name||'?').split(/\s+/).filter(Boolean).map(x=>x[0]).slice(0,2).join('').toUpperCase();
+const surname=p=>(p.name||'').trim().split(/\s+/).pop().toLowerCase();
+const inBranch=(p,b)=>b==='metcalfe'?/^(metcalfe?|medcalf)$/.test(surname(p)):surname(p)==='kavanagh';
+const mediaUrl=m=>m?`${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name||'family-media'}/${m.storage_path}`:'';
 
-  function relativeBox(el,ancestor){
-    let left=0,top=0,node=el;
-    while(node&&node!==ancestor){left+=node.offsetLeft;top+=node.offsetTop;node=node.offsetParent;}
-    return {left,top,width:el.offsetWidth,height:el.offsetHeight,x:left+el.offsetWidth/2,bottom:top+el.offsetHeight};
-  }
+function box(el,ancestor){let left=0,top=0,node=el;while(node&&node!==ancestor){left+=node.offsetLeft;top+=node.offsetTop;node=node.offsetParent}return{left,top,right:left+el.offsetWidth,bottom:top+el.offsetHeight,x:left+el.offsetWidth/2,y:top+el.offsetHeight/2}}
+function draw(canvas,links,couples){canvas.querySelector('.t2-lines')?.remove();const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('t2-lines');svg.setAttribute('viewBox',`0 0 ${canvas.offsetWidth} ${canvas.offsetHeight}`);svg.setAttribute('width',canvas.offsetWidth);svg.setAttribute('height',canvas.offsetHeight);const get=id=>{const el=canvas.querySelector(`[data-person-id="${CSS.escape(String(id))}"]`);return el?box(el,canvas):null};const path=(d,cls)=>{const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);p.setAttribute('class',cls);svg.appendChild(p)};couples.forEach(c=>{const a=get(c.person1_id),b=get(c.person2_id);if(!a||!b||Math.abs(a.y-b.y)>90)return;const first=a.left<b.left?a:b,second=first===a?b:a;path(`M ${first.right} ${first.y} H ${second.left}`,'t2-path t2-partner-path')});links.forEach(l=>{const a=get(l.parent_id),b=get(l.child_id);if(!a||!b||a.bottom>=b.top)return;const mid=a.bottom+Math.max(24,(b.top-a.bottom)/2);path(`M ${a.x} ${a.bottom} V ${mid} H ${b.x} V ${b.top}`,'t2-path t2-child-path')});canvas.prepend(svg)}
 
-  function drawConnectors(canvas,rel,peopleById,william,mary,children){
-    canvas.querySelector('.t2-lines')?.remove();
-    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-    svg.setAttribute('class','t2-lines');
-    svg.setAttribute('width',canvas.offsetWidth);
-    svg.setAttribute('height',canvas.offsetHeight);
-    svg.setAttribute('viewBox',`0 0 ${canvas.offsetWidth} ${canvas.offsetHeight}`);
-    const cardBox=id=>{const el=canvas.querySelector(`[data-person-id="${id}"]`);return el?relativeBox(el,canvas):null};
-    const path=(x1,y1,x2,y2,cls='t2-path')=>{const p=document.createElementNS('http://www.w3.org/2000/svg','path');const mid=(y1+y2)/2;p.setAttribute('d',`M ${x1} ${y1} V ${mid} H ${x2} V ${y2}`);p.setAttribute('class',cls);svg.appendChild(p);};
-    const childIds=new Set(children.map(c=>c.id));
-    rel.forEach(link=>{
-      if(childIds.has(link.child_id)&&(link.parent_id===william.id||link.parent_id===mary.id))return;
-      const a=cardBox(link.parent_id),b=cardBox(link.child_id);
-      if(!a||!b||a.bottom>=b.top)return;
-      path(a.x,a.bottom,b.x,b.top);
-    });
-    const couple=canvas.querySelector('.t2-couple-card');
-    if(couple){
-      const a=relativeBox(couple,canvas);
-      children.forEach(child=>{const b=cardBox(child.id);if(b)path(a.x,a.bottom,b.x,b.top,'t2-path t2-child-path')});
-    }
-    canvas.prepend(svg);
-  }
+function panZoom(viewport,canvas,getFocus){let scale=1,x=0,y=0,drag=null,pinch=null;const pointers=new Map(),mobile=()=>matchMedia('(max-width:560px)').matches,min=()=>mobile()?.62:.58,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const apply=()=>{canvas.style.transform=`translate(${x}px,${y}px) scale(${scale})`;document.getElementById('zoomLevel').textContent=`${Math.round(scale*100)}%`};const centre=(animate=true)=>{const el=getFocus();if(!el)return;const p=box(el,canvas);scale=clamp(mobile()?.82:.92,min(),1);x=viewport.clientWidth/2-p.x*scale;y=viewport.clientHeight/2-p.y*scale;canvas.classList.toggle('t2-animate',animate);apply();if(animate)setTimeout(()=>canvas.classList.remove('t2-animate'),280)};const fit=()=>{const pad=mobile()?22:42;scale=clamp(Math.min((viewport.clientWidth-pad)/canvas.offsetWidth,(viewport.clientHeight-pad)/canvas.offsetHeight,1),min(),1);x=(viewport.clientWidth-canvas.offsetWidth*scale)/2;y=(viewport.clientHeight-canvas.offsetHeight*scale)/2;apply()};const zoomAt=(next,cx=viewport.clientWidth/2,cy=viewport.clientHeight/2)=>{next=clamp(next,min(),2);const px=(cx-x)/scale,py=(cy-y)/scale;x=cx-px*next;y=cy-py*next;scale=next;apply()};document.getElementById('zoomIn').onclick=()=>zoomAt(scale+.12);document.getElementById('zoomOut').onclick=()=>zoomAt(scale-.12);document.getElementById('zoomFit').onclick=fit;document.getElementById('zoomCentre').onclick=()=>centre();viewport.addEventListener('wheel',e=>{e.preventDefault();const r=viewport.getBoundingClientRect();zoomAt(scale*(e.deltaY<0?1.1:.9),e.clientX-r.left,e.clientY-r.top)},{passive:false});viewport.addEventListener('pointerdown',e=>{pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===1){if(e.target.closest('.t2-person-card,button,a'))return;drag={id:e.pointerId,sx:e.clientX,sy:e.clientY,x,y};viewport.setPointerCapture(e.pointerId);viewport.classList.add('is-panning')}else if(pointers.size===2){const p=[...pointers.values()],r=viewport.getBoundingClientRect(),mx=(p[0].x+p[1].x)/2-r.left,my=(p[0].y+p[1].y)/2-r.top;pinch={dist:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y),scale,cx:(mx-x)/scale,cy:(my-y)/scale};drag=null}});viewport.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===1&&drag?.id===e.pointerId){x=drag.x+e.clientX-drag.sx;y=drag.y+e.clientY-drag.sy;apply()}else if(pointers.size===2&&pinch){const p=[...pointers.values()],r=viewport.getBoundingClientRect(),mx=(p[0].x+p[1].x)/2-r.left,my=(p[0].y+p[1].y)/2-r.top;scale=clamp(pinch.scale*Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)/pinch.dist,min(),2);x=mx-pinch.cx*scale;y=my-pinch.cy*scale;apply()}});const end=e=>{pointers.delete(e.pointerId);if(pointers.size<2)pinch=null;if(drag?.id===e.pointerId)drag=null;viewport.classList.remove('is-panning')};viewport.addEventListener('pointerup',end);viewport.addEventListener('pointercancel',end);return{centre,fit}}
 
-  function setupZoom(viewport,canvas){
-    let scale=1,x=0,y=0,moved=false;
-    const pointers=new Map();
-    let dragStart=null,pinchStart=null;
-    const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
-    const apply=()=>{canvas.style.transform=`translate(${x}px,${y}px) scale(${scale})`;const zl=document.getElementById('zoomLevel');if(zl)zl.textContent=`${Math.round(scale*100)}%`;};
-    const fit=()=>{
-      const pad=28;
-      const sx=(viewport.clientWidth-pad)/canvas.offsetWidth;
-      const sy=(viewport.clientHeight-pad)/canvas.offsetHeight;
-      scale=clamp(Math.min(sx,sy,1),.32,1);
-      x=(viewport.clientWidth-canvas.offsetWidth*scale)/2;
-      y=Math.max(12,(viewport.clientHeight-canvas.offsetHeight*scale)/2);
-      apply();
-    };
-    const zoomAt=(next,cx=viewport.clientWidth/2,cy=viewport.clientHeight/2)=>{
-      next=clamp(next,.3,2.4);
-      const contentX=(cx-x)/scale,contentY=(cy-y)/scale;
-      x=cx-contentX*next;y=cy-contentY*next;scale=next;apply();
-    };
-    document.getElementById('zoomIn').onclick=()=>zoomAt(scale+.15);
-    document.getElementById('zoomOut').onclick=()=>zoomAt(scale-.15);
-    document.getElementById('zoomFit').onclick=fit;
-    viewport.addEventListener('wheel',e=>{e.preventDefault();const r=viewport.getBoundingClientRect();zoomAt(scale*(e.deltaY<0?1.12:.89),e.clientX-r.left,e.clientY-r.top)},{passive:false});
-    viewport.addEventListener('pointerdown',e=>{
-      pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});viewport.setPointerCapture(e.pointerId);moved=false;
-      if(pointers.size===1)dragStart={px:e.clientX,py:e.clientY,x,y};
-      if(pointers.size===2){const pts=[...pointers.values()],dx=pts[0].x-pts[1].x,dy=pts[0].y-pts[1].y;const r=viewport.getBoundingClientRect();const mx=(pts[0].x+pts[1].x)/2-r.left,my=(pts[0].y+pts[1].y)/2-r.top;pinchStart={dist:Math.hypot(dx,dy),scale,cx:(mx-x)/scale,cy:(my-y)/scale};dragStart=null;}
-    });
-    viewport.addEventListener('pointermove',e=>{
-      if(!pointers.has(e.pointerId))return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
-      if(pointers.size===1&&dragStart){const dx=e.clientX-dragStart.px,dy=e.clientY-dragStart.py;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;x=dragStart.x+dx;y=dragStart.y+dy;apply();}
-      else if(pointers.size===2&&pinchStart){moved=true;const pts=[...pointers.values()],dx=pts[0].x-pts[1].x,dy=pts[0].y-pts[1].y;const r=viewport.getBoundingClientRect();const mx=(pts[0].x+pts[1].x)/2-r.left,my=(pts[0].y+pts[1].y)/2-r.top;scale=clamp(pinchStart.scale*Math.hypot(dx,dy)/pinchStart.dist,.3,2.4);x=mx-pinchStart.cx*scale;y=my-pinchStart.cy*scale;apply();}
-    });
-    const endPointer=e=>{pointers.delete(e.pointerId);if(pointers.size===1){const p=[...pointers.values()][0];dragStart={px:p.x,py:p.y,x,y};pinchStart=null}else if(!pointers.size){dragStart=null;pinchStart=null}};
-    viewport.addEventListener('pointerup',endPointer);viewport.addEventListener('pointercancel',endPointer);
-    viewport.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
-    window.addEventListener('resize',fit,{passive:true});
-    requestAnimationFrame(fit);
-    return {fit};
-  }
-
-  async function render(){
-    const [{data:people,error:pe},{data:links,error:le},{data:media,error:me},{data:couples,error:ce}]=await Promise.all([
-      db.from('people').select('*'),
-      db.from('parent_child').select('*'),
-      db.from('media').select('*').eq('media_type','photo').order('created_at',{ascending:false}),
-      db.from('couples').select('*')
-    ]);
-    if(pe||le||me||ce)throw pe||le||me||ce;
-    const ps=people||[],rel=links||[],photos=media||[],pairRows=couples||[];
-    const byId=Object.fromEntries(ps.map(p=>[p.id,p]));
-    const byName=Object.fromEntries(ps.map(p=>[p.name,p]));
-    const profileFor=id=>photos.find(m=>m.person_id===id&&m.is_profile_photo);
-    const parentsOf=id=>unique(rel.filter(r=>r.child_id===id).map(r=>byId[r.parent_id]));
-    const childrenOf=id=>unique(rel.filter(r=>r.parent_id===id).map(r=>byId[r.child_id]));
-    const william=byName['William Metcalfe'],mary=byName['Mary Kavanagh'];
-    if(!william||!mary)throw new Error('William Metcalfe or Mary Kavanagh is missing from the family database.');
-    const couple=pairRows.find(c=>(c.person1_id===william.id&&c.person2_id===mary.id)||(c.person1_id===mary.id&&c.person2_id===william.id));
-    function generationsAbove(person,maxDepth=7){const rows=[];let current=parentsOf(person.id);for(let depth=0;depth<maxDepth&&current.length;depth++){rows.push(current);current=unique(current.flatMap(p=>parentsOf(p.id)));}return rows.reverse();}
-    const trees={metcalfe:{label:'Metcalfe / Medcalf',subtitle:'William’s ancestry',rows:generationsAbove(william)},kavanagh:{label:'Kavanagh',subtitle:'Mary’s ancestry',rows:generationsAbove(mary)}};
-    const children=unique([...childrenOf(william.id),...childrenOf(mary.id)]).sort((a,b)=>(year(a.birth_date_text)||'9999').localeCompare(year(b.birth_date_text)||'9999'));
-
-    const portrait=p=>{const m=profileFor(p.id);return m?`<img class="t2-photo" src="${mediaUrl(m)}" alt="${escapeHtml(p.name)}">`:`<div class="t2-photo t2-photo-placeholder"><span>${escapeHtml(initials(p))}</span></div>`};
-    const card=(p,cls='')=>p?`<a class="t2-person-card ${cls}" data-person-id="${p.id}" href="/?view=profile&id=${encodeURIComponent(p.id)}">${portrait(p)}<strong>${escapeHtml(p.name)}</strong><small>${escapeHtml(years(p)||'Dates not recorded')}</small><span class="t2-view-profile">View Profile</span></a>`:'';
-    const ancestry=t=>`<section class="t2-branch t2-single-branch"><div class="t2-side-label">${escapeHtml(t.subtitle)}</div>${t.rows.map(row=>`<div class="t2-generation">${row.map(p=>card(p)).join('')}</div>`).join('')||'<div class="t2-empty-ancestry">No earlier ancestors recorded yet.</div>'}</section>`;
-    const marriageBits=[couple?.marriage_date_text,couple?.marriage_place].filter(Boolean);
-    const marriage=`<div class="t2-marriage"><div class="t2-rings">◯◯</div><strong>Married</strong>${marriageBits.length?`<small>${marriageBits.map(escapeHtml).join('<br>')}</small>`:`<small>Family</small>`}</div>`;
-    const central=`<div class="t2-couple-card"><div class="t2-central-person">${card(william,'t2-primary')}</div>${marriage}<div class="t2-central-person">${card(mary,'t2-primary')}</div></div>`;
-
-    root.innerHTML=`<section class="heritage"><div class="wrap"><h1>Family Tree</h1><p>Explore each family line separately, with William and Mary at the centre.</p></div></section>
-    <section class="section t2-section"><div class="wrap">
-      <div class="t2-family-tabs" role="tablist" aria-label="Choose family line">
-        <button type="button" class="t2-family-tab active" data-tree="metcalfe" role="tab" aria-selected="true"><strong>Metcalfe / Medcalf</strong><span>William’s family</span></button>
-        <button type="button" class="t2-family-tab" data-tree="kavanagh" role="tab" aria-selected="false"><strong>Kavanagh</strong><span>Mary’s family</span></button>
-      </div>
-      <div class="t2-toolbar" aria-label="Family tree zoom controls"><button id="zoomOut" type="button" aria-label="Zoom out">−</button><span id="zoomLevel">100%</span><button id="zoomIn" type="button" aria-label="Zoom in">+</button><button id="zoomFit" type="button" class="t2-fit">Fit tree</button><span class="t2-zoom-help">Drag to move • pinch to zoom</span></div>
-      <div id="treeViewport" class="t2-viewport">
-        <div id="treeCanvas" class="t2-canvas t2-one-line">
-          <div class="t2-chart-title" id="treeTitle">Metcalfe / Medcalf Family</div>
-          <div id="ancestryBranch" class="t2-branches t2-one-branch">${ancestry(trees.metcalfe)}</div>
-          ${central}
-          <div class="t2-children-label"><span>Their Children</span></div>
-          <div class="t2-children">${children.map(p=>`<div class="t2-child-wrap">${card(p,p.name==='Catherine Metcalfe'?'t2-highlight':'')}</div>`).join('')}</div>
-          <div class="t2-tree-footer">Rooted in family history <span>•</span> William Metcalfe &amp; Mary Kavanagh <span>•</span> Connected for generations</div>
-        </div>
-      </div>
-      <div class="card surname-note"><strong>Surname note:</strong> Medcalf, Metcalf and Metcalfe are historical spelling variants of the same family surname in these records.</div>
-      <p class="muted t2-note">Switch between the two family lines above. William and Mary remain together at the centre of both trees.</p>
-    </div></section>`;
-
-    const canvas=document.getElementById('treeCanvas'),viewport=document.getElementById('treeViewport'),branchHost=document.getElementById('ancestryBranch'),title=document.getElementById('treeTitle');
-    const zoom=setupZoom(viewport,canvas);
-    const redraw=()=>drawConnectors(canvas,rel,byId,william,mary,children);
-    const refresh=()=>requestAnimationFrame(()=>{redraw();setTimeout(()=>{redraw();zoom.fit();},80)});
-    document.querySelectorAll('.t2-family-tab').forEach(btn=>btn.addEventListener('click',()=>{
-      const key=btn.dataset.tree,t=trees[key];
-      document.querySelectorAll('.t2-family-tab').forEach(b=>{const on=b===btn;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));});
-      title.textContent=`${t.label} Family`;
-      branchHost.innerHTML=ancestry(t);
-      refresh();
-    }));
-    refresh();
-  }
-
-  render().catch(e=>{console.error(e);root.innerHTML=`<section class="heritage"><div class="wrap"><h1>Family Tree</h1><p>Explore the generations that came before us.</p></div></section><section class="section"><div class="wrap"><div class="status error">${escapeHtml(e.message||e)}</div></div></section>`});
-}
+async function render(){const [{data:people,error:pe},{data:links,error:le},{data:media,error:me},{data:couples,error:ce}]=await Promise.all([db.from('people').select('*'),db.from('parent_child').select('*'),db.from('media').select('*').eq('media_type','photo').order('created_at',{ascending:false}),db.from('couples').select('*')]);if(pe||le||me||ce)throw pe||le||me||ce;const all=people||[],rels=links||[],pairs=couples||[],byId=new Map(all.map(p=>[String(p.id),p]));const parents=id=>unique(rels.filter(r=>String(r.child_id)===String(id)).map(r=>byId.get(String(r.parent_id)))),children=id=>unique(rels.filter(r=>String(r.parent_id)===String(id)).map(r=>byId.get(String(r.child_id)))),partners=id=>unique(pairs.flatMap(c=>String(c.person1_id)===String(id)?[byId.get(String(c.person2_id))]:String(c.person2_id)===String(id)?[byId.get(String(c.person1_id))]:[])),siblings=id=>unique(parents(id).flatMap(p=>children(p.id)).filter(p=>String(p.id)!==String(id))),score=p=>parents(p.id).length+children(p.id).length+partners(p.id).length,anchor=b=>all.filter(p=>inBranch(p,b)).sort((a,b)=>score(b)-score(a))[0]||all[0],photo=id=>(media||[]).find(m=>String(m.person_id)===String(id)&&m.is_profile_photo);let branch=params.get('family')==='kavanagh'?'kavanagh':'metcalfe',focused=byId.get(String(params.get('focus')||params.get('person')||''))||anchor(branch);
+root.innerHTML=`<section class="heritage"><div class="wrap"><h1>Family Tree</h1><p>Follow each family line and focus on any person to explore their place in the family.</p></div></section><section class="section t2-section"><div class="wrap"><div class="t2-family-tabs" role="tablist" aria-label="Choose family line"><button type="button" class="t2-family-tab" data-tree="metcalfe" role="tab"><strong>Metcalfe / Medcalf</strong><span>Family line</span></button><button type="button" class="t2-family-tab" data-tree="kavanagh" role="tab"><strong>Kavanagh</strong><span>Family line</span></button></div><div class="t2-toolbar" aria-label="Family tree controls"><button id="zoomOut" type="button" aria-label="Zoom out">−</button><output id="zoomLevel" aria-live="polite">100%</output><button id="zoomIn" type="button" aria-label="Zoom in">+</button><button id="zoomFit" type="button" class="t2-text-control">Fit tree</button><button id="zoomCentre" type="button" class="t2-text-control">Centre on person</button><span class="t2-zoom-help">Drag the background to move · scroll or pinch to zoom</span></div><div id="treeViewport" class="t2-viewport" aria-label="Interactive family tree"><div id="treeCanvas" class="t2-canvas"></div></div><div class="card surname-note"><strong>Surname note:</strong> Medcalf, Metcalf and Metcalfe are historical spelling variants of the same family surname in these records.</div><p class="muted t2-note">Select a name to open that profile. Use “Focus tree here” to redraw the nearby family around that person.</p></div></section>`;
+const viewport=document.getElementById('treeViewport'),canvas=document.getElementById('treeCanvas');const portrait=p=>{const m=photo(p.id);return m?`<img class="t2-photo" src="${mediaUrl(m)}" alt="" loading="lazy">`:`<span class="t2-photo t2-photo-placeholder" aria-hidden="true">${esc(initials(p))}</span>`};const card=p=>`<article class="t2-person-card${String(p.id)===String(focused.id)?' t2-focused':''}" data-person-id="${esc(p.id)}"><a class="t2-profile-link" href="/?view=profile&id=${encodeURIComponent(p.id)}">${portrait(p)}<span class="t2-card-copy"><strong>${esc(p.name)}</strong><small>${esc(life(p))}</small><span class="t2-view-profile">View profile</span></span></a><button type="button" class="t2-focus-person" data-focus-id="${esc(p.id)}" aria-label="Focus tree on ${esc(p.name)}">Focus tree here</button></article>`;
+function context(person){const levels=new Map([[String(person.id),0]]),add=(p,l)=>{if(!p)return;const k=String(p.id),old=levels.get(k);if(old===undefined||Math.abs(l)<Math.abs(old))levels.set(k,l)};let row=[person];for(let d=1;d<=3;d++){row=unique(row.flatMap(p=>parents(p.id)));row.forEach(p=>add(p,-d))}row=[person];for(let d=1;d<=2;d++){row=unique(row.flatMap(p=>children(p.id)));row.forEach(p=>add(p,d))}siblings(person.id).forEach(p=>add(p,0));[...levels].forEach(([id,l])=>partners(id).forEach(p=>add(p,l)));return levels}
+let zoom;function paint(recenter=true){const levels=context(focused),visible=new Set(levels.keys()),rows=[...new Set(levels.values())].sort((a,b)=>a-b).map(level=>({level,people:[...levels].filter(([,l])=>l===level).map(([id])=>byId.get(id)).filter(Boolean).sort((a,b)=>(yr(a.birth_date_text)||'9999').localeCompare(yr(b.birth_date_text)||'9999')||a.name.localeCompare(b.name))})),max=Math.max(1,...rows.map(r=>r.people.length)),cw=matchMedia('(max-width:560px)').matches?184:214;canvas.style.width=`${Math.max(940,Math.min(2380,max*(cw+30)+150))}px`;const label=l=>l===-1?'Parents':l===-2?'Grandparents':l<0?'Earlier generation':l===0?'Their generation':l===1?'Children':'Grandchildren';canvas.innerHTML=`<div class="t2-chart-title"><span>${esc(focused.name)}</span><small>Focused family</small></div>${rows.map(r=>`<section class="t2-generation"><h2>${label(r.level)}</h2><div class="t2-generation-row">${r.people.map(card).join('')}</div></section>`).join('')}<div class="t2-tree-footer">Explore one life, then follow the family outward</div>`;requestAnimationFrame(()=>{draw(canvas,rels.filter(l=>visible.has(String(l.parent_id))&&visible.has(String(l.child_id))),pairs.filter(c=>visible.has(String(c.person1_id))&&visible.has(String(c.person2_id))));if(recenter)zoom.centre(false)});document.querySelectorAll('.t2-family-tab').forEach(b=>{const on=b.dataset.tree===branch;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on))});history.replaceState(null,'',`/?view=tree&family=${branch}&focus=${encodeURIComponent(focused.id)}`)}
+zoom=panZoom(viewport,canvas,()=>canvas.querySelector('.t2-focused'));viewport.addEventListener('click',e=>{const b=e.target.closest('.t2-focus-person');if(!b)return;const p=byId.get(String(b.dataset.focusId));if(!p)return;focused=p;branch=inBranch(p,'kavanagh')?'kavanagh':inBranch(p,'metcalfe')?'metcalfe':branch;paint()});document.querySelectorAll('.t2-family-tab').forEach(b=>b.onclick=()=>{branch=b.dataset.tree;focused=anchor(branch);paint()});window.addEventListener('resize',()=>paint(false),{passive:true});paint()}
+render().catch(e=>{console.error(e);root.innerHTML=`<section class="heritage"><div class="wrap"><h1>Family Tree</h1><p>Explore the generations that came before us.</p></div></section><section class="section"><div class="wrap"><div class="status error">${esc(e.message||e)}</div></div></section>`})}
