@@ -4,7 +4,7 @@ import path from 'node:path';
 const out = path.resolve('dist');
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-for (const file of ['index.html','styles.css','hills.css','tree-v2.css','tree-tabs.css','timeline-tabs.css','gallery.css','archive.css','visitors.css','layout-fixes.css','admin.css','person-management.css','change-history.css','date-fields.css','relationships.css','analytics.css','sources.css','research-tools.js','gedcom-import.js','person-management.js','change-history.js','date-fields.js','relationships.js','analytics.js','app.js','people.js','tree-v2.js','gallery.js','visitors.js','admin.js','surname-note.js','favicon.svg','family-crest.png','admin-share.png','admin-preview-v2.jpg','family-preview-v2.jpg']) {
+for (const file of ['index.html','styles.css','profile-v1.css','hills.css','tree-v2.css','tree-tabs.css','timeline-tabs.css','gallery.css','archive.css','visitors.css','layout-fixes.css','admin.css','person-management.css','change-history.css','date-fields.css','relationships.css','analytics.css','sources.css','research-tools.js','gedcom-import.js','person-management.js','change-history.js','date-fields.js','relationships.js','analytics.js','app.js','people.js','tree-v2.js','gallery.js','visitors.js','admin.js','surname-note.js','favicon.svg','family-crest.png','admin-share.png','admin-preview-v2.jpg','family-preview-v2.jpg']) {
   fs.copyFileSync(path.resolve('src',file),path.join(out,file));
 }
 fs.mkdirSync(path.join(out,'admin'),{recursive:true});

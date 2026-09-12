@@ -1,5 +1,10 @@
 # Website recovery points
 
+## Pre-Family-Profile-v1 — 12 September 2026
+
+Known-good site immediately before the individual profile presentation upgrade: `a1b23aa`
+Backup branch: `Pre-Family-Profile-v1`
+
 ## Stable Restore v1 — 11 September 2026
 
 Stable production baseline: `3a079b843436ab3f8ffae6a24d02540a47fd2ffb`

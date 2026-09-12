@@ -16,10 +16,11 @@ function insertNote(){
   }
 
   if(currentView==='profile'){
-    const heading=app.querySelector('.profile-hero h1');
+    const heading=app.querySelector('.profile-v1-copy h1, .profile-hero h1');
     if(heading && /\b(Medcalf|Metcalf|Metcalfe)\b/i.test(heading.textContent||'')){
-      const hero=app.querySelector('.profile-hero');
-      hero?.insertAdjacentHTML('afterend',noteHtml);
+      const overview=app.querySelector('.profile-overview');
+      const hero=app.querySelector('.profile-v1-hero, .profile-hero');
+      (overview||hero)?.insertAdjacentHTML('afterend',noteHtml);
       return true;
     }
   }
