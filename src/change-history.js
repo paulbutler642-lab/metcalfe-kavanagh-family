@@ -1,4 +1,4 @@
-const labels={name:'Name',given_names:'Given names',surname:'Surname',relation_label:'Relationship',family_line:'Family line',featured:'Featured person',birth_date_text:'Birth date',birth_place:'Birth place',death_date_text:'Death date',death_place:'Death place',biography:'Biography',notes:'Research notes',gedcom_xref:'GEDCOM reference',initials:'Initials'};
+const labels={name:'Name',given_names:'Given names',surname:'Surname',relation_label:'Relationship',relationships:'Relationships',family_line:'Family line',featured:'Featured person',birth_date_text:'Birth date',birth_place:'Birth place',death_date_text:'Death date',death_place:'Death place',biography:'Biography',notes:'Research notes',gedcom_xref:'GEDCOM reference',initials:'Initials'};
 
 export function mountChangeHistory(container,{changes}){
   container.className='card change-history';
