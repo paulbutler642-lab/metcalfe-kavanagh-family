@@ -160,6 +160,8 @@ const archive = {
 const verifiedRecords = {
   'william-metcalfe': [
     { title: 'Birth', detail: '6 May 1896 · Dublin South registration district', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-3084449' },
+    { title: '1901 Census', detail: 'William Medcalf · age 4 · son and scholar · 6 Galloping Green, Stillorgan', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=5536925&c20_year=1901', linkLabel: 'View 1901 census — National Archives' },
+    { title: '1911 Census', detail: 'William Medcalf · age 14 · son and apprentice grocer · 33 Stillorgan Road', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=454242&c20_year=1911', linkLabel: 'View 1911 census — National Archives' },
   ],
   'mary-kavanagh': [
     { title: 'Birth', detail: '10 June 1897 · Sallynoggin · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-2979498' },
@@ -175,10 +177,16 @@ const verifiedRecords = {
     { title: 'Birth', detail: 'Enoch Metcalf · 8 September 1874 · Rathdrum', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802' },
     { title: 'Marriage', detail: 'Enoch Medcalf and Mary King · 23 July 1895 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-2226913' },
     { title: 'Death', detail: 'Enoch Medcalf · 5 December 1939 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cide-2102615' },
+    { title: '1901 Census', detail: 'Enock Medcalf · age 26 · domestic servant coachman and head of family · 6 Galloping Green, Stillorgan · with Mary and sons William, John and Edward', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=5536924&c20_year=1901', linkLabel: 'View 1901 census — National Archives' },
+    { title: '1911 Census', detail: 'Enoch Medcalf · age 36 · domestic gardener and head of family · 33 Stillorgan Road · with Mary and children William, John, Edward, Mary and Hannah', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=454237&c20_year=1911', linkLabel: 'View 1911 census — National Archives' },
+    { title: '1926 Census', detail: 'Enoch Medcalf · age 51 · married head of household · Kilmacud Road, Stillorgan · with Mary and daughters Mary and Hannah', url: 'https://nationalarchives.ie/collections/search-the-1926-census/census-record/#a_id=467572', linkLabel: 'View 1926 census — National Archives' },
   ],
   'mary-king': [
     { title: 'Birth', detail: '24 March 1871 · George’s Avenue, Blackrock · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-6205937' },
     { title: 'Marriage', detail: 'Mary King and Enoch Medcalf · 23 July 1895 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-2226913' },
+    { title: '1901 Census', detail: 'Mary Medcalf · age 30 · wife · 6 Galloping Green, Stillorgan', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=5536928&c20_year=1901', linkLabel: 'View 1901 census — National Archives' },
+    { title: '1911 Census', detail: 'Mary Medcalf · age 40 · wife · married 15 years, with five children born and five living · 33 Stillorgan Road', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=454241&c20_year=1911', linkLabel: 'View 1911 census — National Archives' },
+    { title: '1926 Census', detail: 'Mary Medcalf · age 53 · wife · Kilmacud Road, Stillorgan', url: 'https://nationalarchives.ie/collections/search-the-1926-census/census-record/#a_id=467573', linkLabel: 'View 1926 census — National Archives' },
   ],
   'thomas-kavanagh': [
     { title: 'Marriage', detail: 'Thomas Kavanagh and Anne Carroll · 15 September 1889 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-2508907' },
