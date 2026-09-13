@@ -192,3 +192,31 @@
     font-size: 12px;
   }
 }
+
+/* One continuous desktop artwork: no visible joins between title and scene. */
+@media (min-width: 801px) {
+  .altadore-approved {
+    background: #f7f2e7 url('/altadore-unified-hero.jpg?v=20260913-1') center / cover no-repeat !important;
+  }
+
+  .altadore-approved-left {
+    background: transparent !important;
+  }
+
+  .altadore-approved-left::after,
+  .altadore-approved-scene::before {
+    display: none !important;
+  }
+
+  .altadore-approved-scene {
+    background: transparent !important;
+  }
+
+  .altadore-hero-photo {
+    display: none !important;
+  }
+
+  .altadore-approved-scene::after {
+    background: linear-gradient(90deg, transparent 0%, transparent 57%, rgba(3, 39, 25, .25) 74%, rgba(3, 39, 25, .72) 100%) !important;
+  }
+}
