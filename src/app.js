@@ -316,9 +316,9 @@ async function profile() {
           .join('')}</div></section>`
       : ''
   }<section id="story" class="card profile-panel"><span class="section-kicker">Their story</span><h2>Life Story</h2><p>${esc(p.biography || 'No personal life story has been added yet.').replace(/\n/g, '<br>')}</p></section>${personSources.length ? `<section id="sources" class="card profile-panel"><div class="profile-section-head"><h2>Research &amp; Sources <span>${personSources.length}</span></h2><a href="/?view=sources">Search all records</a></div><div class="profile-source-list">${personSources.map((s) => sourceCard(s, by)).join('')}</div></section>` : ''}${photos.length ? `<section id="photos" class="card profile-panel"><div class="profile-section-head"><h2>Photos <span>${photos.length}</span></h2><a href="/?view=gallery&person=${encodeURIComponent(p.id)}&type=photo">View all</a></div><div class="profile-media-grid">${cards(photos)}</div></section>` : ''}${documents.length ? `<section class="card profile-panel"><div class="profile-section-head"><h2>Documents <span>${documents.length}</span></h2></div><div class="profile-media-grid">${cards(documents)}</div></section>` : ''}<section class="profile-shortcuts"><a class="card" href="#story"><span>✦</span><strong>Read Life Story</strong><small>Memories and information about ${esc(p.name)}</small></a>${photos.length ? `<a class="card" href="#photos"><span>▧</span><strong>Browse Photos</strong><small>Photographs linked to this profile</small></a>` : ''}<a class="card" href="/?view=tree&amp;focus=${encodeURIComponent(p.id)}"><span>♧</span><strong>Explore Family Tree</strong><small>See the wider family across generations</small></a><a id="timeline" class="card" href="/?view=timeline"><span>◷</span><strong>View Timeline</strong><small>Explore the family story in date order</small></a></section></div></div></section>`
-  const storyPanel = document.getElementById('story')
-  if (storyPanel && (verifiedRecordsSection || historySection || archiveSection)) {
-    storyPanel.insertAdjacentHTML('beforebegin', verifiedRecordsSection + historySection + archiveSection)
+  const overviewPanel = document.querySelector('.profile-overview')
+  if (overviewPanel && (verifiedRecordsSection || historySection || archiveSection)) {
+    overviewPanel.insertAdjacentHTML('afterend', verifiedRecordsSection + historySection + archiveSection)
   }
 }
 async function treeView() {
