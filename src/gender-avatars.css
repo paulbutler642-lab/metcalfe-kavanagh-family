@@ -1,0 +1,11 @@
+.avatar-silhouette{--avatar-ink:#8b743d;--avatar-bg:#f5f0df;--avatar-border:#d9c99b;position:relative;display:inline-block;overflow:hidden;box-sizing:border-box;background:var(--avatar-bg);border-color:var(--avatar-border)!important;color:transparent!important}
+.avatar-silhouette.avatar-male{--avatar-ink:#426f98;--avatar-bg:#e9f1f8;--avatar-border:#b9ccdd}
+.avatar-silhouette.avatar-female{--avatar-ink:#aa596d;--avatar-bg:#f8eaee;--avatar-border:#dfbac4}
+.avatar-silhouette .avatar-head{position:absolute;width:29%;aspect-ratio:1;left:35.5%;top:18%;border-radius:50%;background:var(--avatar-ink)}
+.avatar-silhouette .avatar-body{position:absolute;width:68%;height:45%;left:16%;bottom:-8%;border-radius:52% 52% 20% 20%;background:var(--avatar-ink)}
+.profile-v1-photo.avatar-silhouette{display:block;min-height:360px;border-radius:20px}
+.profile-v1-photo.avatar-silhouette .avatar-head{width:22%;left:39%;top:22%}
+.profile-v1-photo.avatar-silhouette .avatar-body{width:58%;left:21%;height:43%}
+.t2-photo-placeholder.avatar-silhouette{flex:0 0 auto}
+.centered-avatar{display:block;margin:auto}
+@media(max-width:640px){.profile-v1-photo.avatar-silhouette{min-height:280px}}

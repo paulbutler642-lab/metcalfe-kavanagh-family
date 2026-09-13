@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="/relationships.css?v=20260912-1">
 <link rel="stylesheet" href="/analytics.css?v=20260912-1">
 <link rel="stylesheet" href="/sources.css?v=20260912-1">
+<link rel="stylesheet" href="/gender-avatars.css?v=20260913-1">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/config.js?v=20260911-24"></script>
 </head>
@@ -50,11 +51,11 @@
 <script type="module">
 const currentView=new URLSearchParams(location.search).get('view')||'home';
 if(currentView==='tree') await import('/tree-v2.js?v=20260912-3');
-else if(currentView==='people') await import('/people.js?v=20260913-family-history-archive-v1');
+else if(currentView==='people') await import('/people.js?v=20260913-gender-avatars-1');
 else if(currentView==='gallery'||currentView==='archive'||currentView==='records') await import('/gallery.js?v=20260912-media-storage-v1');
 else if(currentView==='visitors'||currentView==='guestbook') await import('/visitors.js?v=20260912-2');
 else if(currentView==='admin'){await import('/admin.js?v=20260912-media-storage-v1');await import('/profile-photo-editor.js?v=20260912-1')}
-else await import('/app.js?v=20260913-profile-evidence-first-1');
+else await import('/app.js?v=20260913-gender-avatars-1');
 const {trackVisit}=await import('/analytics.js?v=20260912-1');trackVisit();
 </script>
 <script type="module" src="/altadore-heritage.js?v=20260913-photo-layout-1"></script>

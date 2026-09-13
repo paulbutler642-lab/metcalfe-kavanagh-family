@@ -1,4 +1,5 @@
 import { evidenceLabels, familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260913-census-records-1'
+import { avatarMarkup } from '/avatar.js?v=20260913-gender-avatars-1'
 const cfg = window.__APP_CONFIG__ || {}
 const app = document.getElementById('app')
 const qs = new URLSearchParams(location.search)
@@ -50,7 +51,7 @@ async function profileRelationships() {
   return data || []
 }
 function personCard(p) {
-  return `<a class="card person" href="/?view=profile&id=${p.id}"><div class="avatar">${esc(initials(p))}</div><div><strong>${esc(p.name)}</strong><div class="muted">${esc(years(p) || p.relation_label || 'Family member')}</div>${p.birth_place ? `<small>${esc(p.birth_place)}</small>` : ''}</div></a>`
+  return `<a class="card person" href="/?view=profile&id=${p.id}">${avatarMarkup(p)}<div><strong>${esc(p.name)}</strong><div class="muted">${esc(years(p) || p.relation_label || 'Family member')}</div>${p.birth_place ? `<small>${esc(p.birth_place)}</small>` : ''}</div></a>`
 }
 async function home() {
   const ps = await people()
@@ -285,8 +286,8 @@ async function profile() {
     personSources = (sourceLinks || []).map((x) => ({ ...x.research_sources, research_source_people: [x] })).filter((x) => x.id),
     profileImages = new Map((allMedia || []).filter((m) => m.is_profile_photo && m.media_type === 'photo' && m.person_id).map((m) => [m.person_id, thumbUrl(m)]))
   const cards = (list) => list.map((m) => `<a class="profile-media-card" target="_blank" rel="noopener" href="${mediaUrl(m)}">${m.media_type === 'photo' ? `<img src="${m.thumbnail_path ? `${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name || 'family-media'}/${m.thumbnail_path}` : mediaUrl(m)}" alt="${esc(m.title || 'Family photograph')}" loading="lazy">` : '<span class="profile-doc-icon">📜</span>'}<div><strong>${esc(m.title || m.original_filename || (m.media_type === 'photo' ? 'Family photograph' : 'Family document'))}</strong><small>${esc([m.category, m.event_date_text].filter(Boolean).join(' • '))}</small></div></a>`).join('')
-  const personTile = (person, label = '') => `<a class="kin-card" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : `<span class="avatar">${esc(initials(person))}</span>`}<span><strong>${esc(person.name)}</strong><small>${esc(label || years(person) || 'Family member')}</small></span></a>`
-  const treeNode = (person, kind = '') => (person ? `<a class="focus-node ${kind}" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : `<span class="avatar">${esc(initials(person))}</span>`}<strong>${esc(person.name)}</strong><small>${esc(years(person))}</small></a>` : '')
+  const personTile = (person, label = '') => `<a class="kin-card" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : avatarMarkup(person)}<span><strong>${esc(person.name)}</strong><small>${esc(label || years(person) || 'Family member')}</small></span></a>`
+  const treeNode = (person, kind = '') => (person ? `<a class="focus-node ${kind}" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : avatarMarkup(person)}<strong>${esc(person.name)}</strong><small>${esc(years(person))}</small></a>` : '')
   const historyBadge = (type) => `<span class="evidence-badge evidence-${esc(type)}">${esc(evidenceLabels[type] || 'Historical evidence')}</span>`
   const verifiedRecordsSection = verifiedRecords.length ? `<section id="verified-records" class="card profile-panel verified-records"><div class="profile-section-head"><div><span class="section-kicker">Official historical sources</span><h2>Verified Records</h2></div></div><div class="verified-record-grid">${verifiedRecords.map((record) => `<article>${historyBadge('verified_primary')}<h3>${esc(record.title)}</h3><p>${esc(record.detail)}</p><a class="chapter-record-link" href="${esc(record.url)}" target="_blank" rel="noopener">${esc(record.linkLabel || 'View record — Irish Genealogy')} ↗</a></article>`).join('')}</div></section>` : ''
   const historySection = history ? `<section id="verified-history" class="card profile-panel verified-history"><div class="profile-section-head"><div><span class="section-kicker">Verified family archive</span><h2>${esc(history.heading)}</h2></div></div><p class="history-summary">${esc(history.summary)}</p><div class="history-chapters">${history.chapters.map((chapter) => `<article>${historyBadge(chapter.evidence)}<h3>${esc(chapter.title)}</h3><p>${esc(chapter.text)}</p>${chapter.recordUrl ? `<a class="chapter-record-link" href="${esc(chapter.recordUrl)}" target="_blank" rel="noopener">${esc(chapter.recordLabel || 'View verified record')} ↗</a>` : ''}</article>`).join('')}</div>${history.notes?.length ? `<details class="research-notes"><summary>Research notes and unresolved questions</summary><ul>${history.notes.map((note) => `<li>${esc(note)}</li>`).join('')}</ul></details>` : ''}</section>` : ''
@@ -325,7 +326,7 @@ async function treeView() {
   const ps = await people(),
     rr = await rels(),
     by = Object.fromEntries(ps.map((p) => [p.name, p]))
-  const node = (p, cl = '') => (p ? `<a class="node ${cl}" href="/?view=profile&id=${p.id}"><div class="avatar" style="margin:auto">${esc(initials(p))}</div><strong>${esc(p.name)}</strong><small class="muted">${esc(years(p))}</small></a>` : '')
+  const node = (p, cl = '') => (p ? `<a class="node ${cl}" href="/?view=profile&id=${p.id}">${avatarMarkup(p, 'avatar centered-avatar')}<strong>${esc(p.name)}</strong><small class="muted">${esc(years(p))}</small></a>` : '')
   const wm = by['William Metcalfe'],
     mk = by['Mary Kavanagh'],
     children = wm
