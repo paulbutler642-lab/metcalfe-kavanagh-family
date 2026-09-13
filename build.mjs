@@ -4,17 +4,12 @@ import path from 'node:path';
 const out = path.resolve('dist');
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-for (const file of ['index.html','styles.css','altadore-heritage.css','landing-fix.css','profile-v1.css','profile-story-prominent.css','hills.css','tree-v2.css','tree-tabs.css','timeline-tabs.css','gallery.css','archive.css','visitors.css','layout-fixes.css','admin.css','profile-photo-editor.css','person-management.css','change-history.css','date-fields.css','relationships.css','analytics.css','sources.css','gender-avatars.css','about.css','research-tools.js','family-history-archive.js','avatar.js','gedcom-import.js','person-management.js','change-history.js','date-fields.js','relationships.js','analytics.js','media-optimizer.js','profile-photo-editor.js','profile-story-prominent.js','altadore-heritage.js','about.js','app.js','people.js','tree-v2.js','gallery.js','visitors.js','admin.js','surname-note.js','favicon.svg','family-crest.png','family-shield.svg','altadore-hero.jpg','altadore-photo.jpeg','altadore-garden.jpeg','botanical-panel.png','altadore-unified-hero.jpg','admin-share.png','admin-preview-v2.jpg','family-preview-v2.jpg','landing-hero-image.b64']) {
+for (const file of ['index.html','styles.css','altadore-heritage.css','landing-fix.css','profile-v1.css','profile-story-prominent.css','hills.css','tree-v2.css','tree-tabs.css','timeline-tabs.css','gallery.css','archive.css','visitors.css','layout-fixes.css','admin.css','profile-photo-editor.css','person-management.css','change-history.css','date-fields.css','relationships.css','analytics.css','sources.css','gender-avatars.css','about.css','research-tools.js','auto-records.js','family-history-archive.js','avatar.js','gedcom-import.js','person-management.js','change-history.js','date-fields.js','relationships.js','analytics.js','media-optimizer.js','profile-photo-editor.js','profile-story-prominent.js','altadore-heritage.js','about.js','app.js','people.js','tree-v2.js','gallery.js','visitors.js','admin.js','surname-note.js','favicon.svg','family-crest.png','family-shield.svg','altadore-hero.jpg','altadore-photo.jpeg','altadore-garden.jpeg','botanical-panel.png','altadore-unified-hero.jpg','admin-share.png','admin-preview-v2.jpg','family-preview-v2.jpg','landing-hero-image.b64']) {
   fs.copyFileSync(path.resolve('src',file),path.join(out,file));
 }
-// landing-hero-image.b64 is stored as a small JSON object with the actual JPEG base64 in `content`.
-// Parse it before decoding; decoding the whole JSON text produces a corrupt/blank image.
 const heroSource=fs.readFileSync(path.resolve('src','landing-hero-image.b64'),'utf8').trim();
 let heroB64=heroSource;
-try {
-  const parsed=JSON.parse(heroSource);
-  if(parsed && typeof parsed.content==='string') heroB64=parsed.content;
-} catch {}
+try { const parsed=JSON.parse(heroSource); if(parsed && typeof parsed.content==='string') heroB64=parsed.content; } catch {}
 heroB64=heroB64.replace(/\s+/g,'');
 if(!heroB64.startsWith('/9j/')) throw new Error('Landing hero source is not a valid JPEG base64 payload');
 fs.writeFileSync(path.join(out,'landing-hero.jpg'),Buffer.from(heroB64,'base64'));
