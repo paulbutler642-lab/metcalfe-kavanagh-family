@@ -1,0 +1,46 @@
+.altadore-approved-scene {
+  background-image:
+    linear-gradient(90deg, rgba(247, 242, 231, .08) 0%, rgba(13, 60, 43, .02) 48%, rgba(5, 50, 32, .42) 76%, rgba(3, 45, 29, .86) 100%),
+    url('/altadore-hero.jpg') !important;
+  background-position: center !important;
+}
+
+.altadore-monogram {
+  width: 112px;
+  height: 112px;
+  border: 1px solid #9b8750;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  color: #0d4a36;
+  background: #fbf7ec;
+  font: 700 34px/1 'Cormorant Garamond', serif;
+  letter-spacing: .04em;
+  box-shadow: inset 0 0 0 6px #f4eedf;
+}
+
+.altadore-monogram span { color: #9b8750; margin: 0 2px; }
+
+.brand-monogram {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border: 1px solid #9b8750;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--forest);
+  background: #fbf7ec;
+  font: 700 14px 'Cormorant Garamond', serif;
+  letter-spacing: .03em;
+}
+
+@media (max-width: 800px) {
+  .altadore-monogram { width: 76px; height: 76px; margin-bottom: 9px; font-size: 24px; }
+  .altadore-approved-scene { background-position: center !important; }
+}
+
+@media (max-width: 560px) {
+  .brand-monogram { width: 38px; height: 38px; flex-basis: 38px; font-size: 13px; }
+}
