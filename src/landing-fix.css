@@ -15,6 +15,25 @@
   background: linear-gradient(90deg, #f7f2e7 0%, #f7f2e7 78%, rgba(247,242,231,.96) 90%, rgba(247,242,231,.1) 100%) !important;
 }
 
+.altadore-approved-left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -150px;
+  bottom: 0;
+  z-index: 5;
+  width: 190px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #f7f2e7 0%,
+    rgba(247, 242, 231, .98) 18%,
+    rgba(247, 242, 231, .84) 42%,
+    rgba(247, 242, 231, .5) 68%,
+    rgba(247, 242, 231, 0) 100%
+  );
+}
+
 .altadore-simple-mark {
   width: 76px;
   height: 2px;
@@ -125,6 +144,10 @@
     height: 330px;
     padding: 32px 18px 24px !important;
     background: #f7f2e7 !important;
+  }
+
+  .altadore-approved-left::after {
+    display: none;
   }
 
   .altadore-simple-mark {
