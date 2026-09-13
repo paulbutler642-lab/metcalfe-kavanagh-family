@@ -4,25 +4,61 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#173b32">
-<meta name="robots" content="noindex,nofollow">
-<title>Website Under Construction | The Metcalfe &amp; Kavanagh Family</title>
-<style>
-  *{box-sizing:border-box}
-  html,body{margin:0;min-height:100%;font-family:Georgia,'Times New Roman',serif;background:#f5f0e4;color:#173b32}
-  body{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at top,#fffdf7 0,#f5f0e4 58%,#e8dfcb 100%)}
-  main{width:min(680px,100%);text-align:center;padding:54px 32px;border:1px solid rgba(23,59,50,.22);border-radius:18px;background:rgba(255,253,247,.9);box-shadow:0 18px 55px rgba(23,59,50,.10)}
-  .mark{width:58px;height:58px;margin:0 auto 22px;border:2px solid #173b32;border-radius:50%;display:grid;place-items:center;font-size:29px}
-  h1{font-size:clamp(34px,7vw,56px);line-height:1.02;margin:0 0 20px;font-weight:700}
-  p{font-family:Arial,Helvetica,sans-serif;font-size:clamp(17px,3vw,20px);line-height:1.6;margin:0 auto;max-width:520px;color:#40594f}
-  .family{margin-top:32px;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:#6a796f}
-</style>
+<title>The Metcalfe &amp; Kavanagh Family</title>
+<meta name="description" content="Our Family History • Our Stories • Our Heritage">
+<meta property="og:title" content="The Metcalfe &amp; Kavanagh Family">
+<meta property="og:description" content="Our Family History • Our Stories • Our Heritage">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://metcalfe-kavanagh-family-site.vercel.app/?preview=2">
+<meta property="og:image" content="https://metcalfe-kavanagh-family-site.vercel.app/family-preview-v2.jpg">
+<meta property="og:image:secure_url" content="https://metcalfe-kavanagh-family-site.vercel.app/family-preview-v2.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Metcalfe and Kavanagh Family heritage shield">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Metcalfe &amp; Kavanagh Family">
+<meta name="twitter:description" content="Our Family History • Our Stories • Our Heritage">
+<meta name="twitter:image" content="https://metcalfe-kavanagh-family-site.vercel.app/family-preview-v2.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=20260912-archive">
+<link rel="stylesheet" href="/profile-v1.css?v=20260912-1">
+<link rel="stylesheet" href="/hills.css?v=20260911-24">
+<link rel="stylesheet" href="/tree-v2.css?v=20260912-1">
+<link rel="stylesheet" href="/tree-tabs.css?v=20260911-24">
+<link rel="stylesheet" href="/timeline-tabs.css?v=20260912-1">
+<link rel="stylesheet" href="/gallery.css?v=20260912-archive">
+<link rel="stylesheet" href="/archive.css?v=20260912-photo-layout">
+<link rel="stylesheet" href="/visitors.css?v=20260912-2">
+<link rel="stylesheet" href="/layout-fixes.css?v=20260912-repair">
+<link rel="stylesheet" href="/admin.css?v=20260912-sources">
+<link rel="stylesheet" href="/profile-photo-editor.css?v=20260912-1">
+<link rel="stylesheet" href="/person-management.css?v=20260912-1">
+<link rel="stylesheet" href="/change-history.css?v=20260912-1">
+<link rel="stylesheet" href="/date-fields.css?v=20260912-1">
+<link rel="stylesheet" href="/relationships.css?v=20260912-1">
+<link rel="stylesheet" href="/analytics.css?v=20260912-1">
+<link rel="stylesheet" href="/sources.css?v=20260912-1">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/config.js?v=20260911-24"></script>
 </head>
 <body>
-<main>
-  <div class="mark" aria-hidden="true">⌛</div>
-  <h1>Website Under Construction</h1>
-  <p>Come back later for exciting updates.</p>
-  <div class="family">The Metcalfe &amp; Kavanagh Family</div>
-</main>
+<header class="top"><div class="wrap topin"><a class="brand" href="/"><img src="/family-crest.png?v=20260912-1" alt="" aria-hidden="true"><strong>The Metcalfe &amp; Kavanagh Family</strong></a><button id="menuButton" class="hamb" aria-label="Open menu">☰</button><nav class="nav"><a href="/?view=tree">Tree</a><a href="/?view=people">People</a><a href="/?view=sources">Research</a><a href="/?view=visitors">Visitors’ Book</a><a href="/?view=gallery">Archive</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a></nav></div><div id="mobileMenu" class="mobilemenu"><a href="/?view=tree">Family Tree</a><a href="/?view=people">People</a><a href="/?view=sources">Research &amp; Sources</a><a href="/?view=visitors">Visitors’ Book</a><a href="/?view=gallery">Photos &amp; Documents</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a></div></header>
+<main id="app"></main>
+<nav class="bottom"><a href="/">⌂<span>Home</span></a><a href="/?view=tree">♧<span>Tree</span></a><a href="/?view=people">●●<span>People</span></a><a href="#" id="bottomMenu">☰<span>Menu</span></a></nav>
+<script type="module">
+const currentView=new URLSearchParams(location.search).get('view')||'home';
+if(currentView==='tree') await import('/tree-v2.js?v=20260912-3');
+else if(currentView==='people') await import('/people.js?v=20260913-family-history-archive-v1');
+else if(currentView==='gallery'||currentView==='archive'||currentView==='records') await import('/gallery.js?v=20260912-media-storage-v1');
+else if(currentView==='visitors'||currentView==='guestbook') await import('/visitors.js?v=20260912-2');
+else if(currentView==='admin'){await import('/admin.js?v=20260912-media-storage-v1');await import('/profile-photo-editor.js?v=20260912-1')}
+else await import('/app.js?v=20260913-william-mary-marriage-record-2');
+const {trackVisit}=await import('/analytics.js?v=20260912-1');trackVisit();
+</script>
+<script type="module" src="/surname-note.js?v=20260912-family-profile-v1"></script>
 </body>
 </html>
