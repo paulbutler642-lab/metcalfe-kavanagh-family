@@ -80,6 +80,11 @@
 }
 .chapter-record-link { display: inline-flex; margin-top: 13px; padding: 9px 11px; border: 1px solid #9db3a4; border-radius: 8px; background: #fff; color: #245239; font-size: .82rem; font-weight: 800; text-decoration: none; }
 .chapter-record-link:hover { background: #eaf2ec; border-color: #789582; }
+.verified-records { border-top: 4px solid #476b55; }
+.verified-record-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.verified-record-grid article { padding: 18px; border: 1px solid #d7e0d9; border-radius: 12px; background: #f8faf8; }
+.verified-record-grid h3 { margin: 9px 0 5px; font-size: 1.08rem; }
+.verified-record-grid p { margin: 0; line-height: 1.55; color: #486055; }
 .historical-document {
   display: grid;
   grid-template-columns: minmax(250px, 0.78fr) minmax(0, 1.22fr);
@@ -150,6 +155,7 @@
 }
 @media (max-width: 760px) {
   .history-chapters,
+  .verified-record-grid,
   .historical-document {
     grid-template-columns: 1fr;
   }

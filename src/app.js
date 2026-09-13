@@ -1,4 +1,4 @@
-import { evidenceLabels, familyHistoryFor } from '/family-history-archive.js?v=20260913-marriage-record-2'
+import { evidenceLabels, familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260913-irish-records-1'
 const cfg = window.__APP_CONFIG__ || {}
 const app = document.getElementById('app')
 const qs = new URLSearchParams(location.search)
@@ -245,6 +245,7 @@ async function profile() {
     return
   }
   const history = familyHistoryFor(p)
+  const verifiedRecords = verifiedRecordsFor(p)
   const [rr, relationshipRows] = await Promise.all([rels(), profileRelationships()]),
     by = Object.fromEntries(ps.map((x) => [x.id, x]))
   const related = relationshipRows
@@ -287,10 +288,12 @@ async function profile() {
   const personTile = (person, label = '') => `<a class="kin-card" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : `<span class="avatar">${esc(initials(person))}</span>`}<span><strong>${esc(person.name)}</strong><small>${esc(label || years(person) || 'Family member')}</small></span></a>`
   const treeNode = (person, kind = '') => (person ? `<a class="focus-node ${kind}" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : `<span class="avatar">${esc(initials(person))}</span>`}<strong>${esc(person.name)}</strong><small>${esc(years(person))}</small></a>` : '')
   const historyBadge = (type) => `<span class="evidence-badge evidence-${esc(type)}">${esc(evidenceLabels[type] || 'Historical evidence')}</span>`
+  const verifiedRecordsSection = verifiedRecords.length ? `<section id="verified-records" class="card profile-panel verified-records"><div class="profile-section-head"><div><span class="section-kicker">Official civil registrations</span><h2>Verified Records</h2></div></div><div class="verified-record-grid">${verifiedRecords.map((record) => `<article>${historyBadge('verified_primary')}<h3>${esc(record.title)}</h3><p>${esc(record.detail)}</p><a class="chapter-record-link" href="${esc(record.url)}" target="_blank" rel="noopener">View record — Irish Genealogy ↗</a></article>`).join('')}</div></section>` : ''
   const historySection = history ? `<section id="verified-history" class="card profile-panel verified-history"><div class="profile-section-head"><div><span class="section-kicker">Verified family archive</span><h2>${esc(history.heading)}</h2></div></div><p class="history-summary">${esc(history.summary)}</p><div class="history-chapters">${history.chapters.map((chapter) => `<article>${historyBadge(chapter.evidence)}<h3>${esc(chapter.title)}</h3><p>${esc(chapter.text)}</p>${chapter.recordUrl ? `<a class="chapter-record-link" href="${esc(chapter.recordUrl)}" target="_blank" rel="noopener">${esc(chapter.recordLabel || 'View verified record')} ↗</a>` : ''}</article>`).join('')}</div>${history.notes?.length ? `<details class="research-notes"><summary>Research notes and unresolved questions</summary><ul>${history.notes.map((note) => `<li>${esc(note)}</li>`).join('')}</ul></details>` : ''}</section>` : ''
   const archiveSection = history?.documents?.length ? `<section id="historical-documents" class="card profile-panel historical-documents"><div class="profile-section-head"><div><span class="section-kicker">Original material</span><h2>Historical Documents</h2></div></div>${history.documents.map((item) => `<article class="historical-document"><a class="historical-document-preview" href="${esc(item.original)}" target="_blank" rel="noopener" aria-label="View original ${esc(item.title)}"><img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy"><span>Tap to enlarge and view the original</span></a><div class="historical-document-copy">${historyBadge(item.evidence)}<h3>${esc(item.title)}</h3><p class="source-meta">${esc([item.date, item.publication].filter(Boolean).join(' • '))}</p><p>${esc(item.caption)}</p><h4>Historical context</h4><p>${esc(item.context)}</p><h4>Provenance ${historyBadge(item.provenanceEvidence)}</h4><p>${esc(item.provenance)}</p><div class="document-actions"><a href="${esc(item.original)}" target="_blank" rel="noopener">View original image ↗</a></div></div></article>`).join('')}</section>` : ''
   const nav = [
     ['overview', 'Overview', true],
+    ['verified-records', 'Verified Records', verifiedRecords.length],
     ['verified-history', 'Verified History', !!history],
     ['historical-documents', 'Archive', history?.documents?.length],
     ['story', 'Life Story', !!p.biography],
@@ -314,8 +317,8 @@ async function profile() {
       : ''
   }<section id="story" class="card profile-panel"><span class="section-kicker">Their story</span><h2>Life Story</h2><p>${esc(p.biography || 'No personal life story has been added yet.').replace(/\n/g, '<br>')}</p></section>${personSources.length ? `<section id="sources" class="card profile-panel"><div class="profile-section-head"><h2>Research &amp; Sources <span>${personSources.length}</span></h2><a href="/?view=sources">Search all records</a></div><div class="profile-source-list">${personSources.map((s) => sourceCard(s, by)).join('')}</div></section>` : ''}${photos.length ? `<section id="photos" class="card profile-panel"><div class="profile-section-head"><h2>Photos <span>${photos.length}</span></h2><a href="/?view=gallery&person=${encodeURIComponent(p.id)}&type=photo">View all</a></div><div class="profile-media-grid">${cards(photos)}</div></section>` : ''}${documents.length ? `<section class="card profile-panel"><div class="profile-section-head"><h2>Documents <span>${documents.length}</span></h2></div><div class="profile-media-grid">${cards(documents)}</div></section>` : ''}<section class="profile-shortcuts"><a class="card" href="#story"><span>✦</span><strong>Read Life Story</strong><small>Memories and information about ${esc(p.name)}</small></a>${photos.length ? `<a class="card" href="#photos"><span>▧</span><strong>Browse Photos</strong><small>Photographs linked to this profile</small></a>` : ''}<a class="card" href="/?view=tree&amp;focus=${encodeURIComponent(p.id)}"><span>♧</span><strong>Explore Family Tree</strong><small>See the wider family across generations</small></a><a id="timeline" class="card" href="/?view=timeline"><span>◷</span><strong>View Timeline</strong><small>Explore the family story in date order</small></a></section></div></div></section>`
   const storyPanel = document.getElementById('story')
-  if (storyPanel && (historySection || archiveSection)) {
-    storyPanel.insertAdjacentHTML('beforebegin', historySection + archiveSection)
+  if (storyPanel && (verifiedRecordsSection || historySection || archiveSection)) {
+    storyPanel.insertAdjacentHTML('beforebegin', verifiedRecordsSection + historySection + archiveSection)
   }
 }
 async function treeView() {

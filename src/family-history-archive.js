@@ -104,7 +104,7 @@ const archive = {
     notes: [],
   },
   'enoch medcalf': {
-    aliases: ['Enoch Metcalf', 'Enoch Metcalfe'],
+    aliases: ['Enoch Metcalf', 'Enoch Metcalfe', 'Enock Medcalf', 'Enock Metcalf', 'Enock Metcalfe', 'Anthony Medcalf', 'Anthony Metcalf', 'Anthony Metcalfe'],
     heading: 'From Altadore to Stillorgan',
     summary: 'Enoch Medcalf was born at Altadore in 1874 and worked over his lifetime as a groom, railway porter, coachman and gardener.',
     chapters: [
@@ -112,11 +112,15 @@ const archive = {
         title: 'Birth and parents',
         text: 'Enoch was born on 8 September 1874 at Altadore, County Wicklow, the known son of Anthony Metcalf or Medcalf and Sara Jane Byrnes.',
         evidence: 'verified_primary',
+        recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802',
+        recordLabel: 'View 1874 birth record — Irish Genealogy',
       },
       {
         title: 'Marriage',
         text: 'On 23 July 1895 he married Mary King at Christ Church, Carysfort/Blackrock. The marriage transcription records Enoch as a groom and names his father Anthony, a gardener. Mary’s father William King was a carpenter.',
         evidence: 'verified_primary',
+        recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=cima-2226913',
+        recordLabel: 'View 1895 marriage record — Irish Genealogy',
       },
       {
         title: 'Working life',
@@ -127,6 +131,8 @@ const archive = {
         title: 'The accident at Stillorgan',
         text: 'The circumstances of Enoch’s death remained part of the family’s oral history for generations. His granddaughter Catherine Metcalfe recalled that her grandfather had been knocked from his bicycle in Stillorgan while travelling home from work, and passed that account to her family decades before modern research began. Later research independently located material describing the same event. A contemporary Evening Herald report is known to exist, but its complete contents await examination.',
         evidence: 'family_oral_history',
+        recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=cide-2102615',
+        recordLabel: 'View 1939 death record — Irish Genealogy',
       },
     ],
     notes: ['Evening Herald, circa late 1939: report concerning Enoch Medcalf’s accident or death. Article known to exist; original awaiting examination.', 'The marriage residence has been transcribed as “Straw House, Clontarf”. It has not been silently changed to “Strand House”.'],
@@ -149,6 +155,50 @@ const archive = {
     ],
     notes: ['A possible later John and Mary Metcalf household at Kilquade remains a research lead only. Mary is not shown as Anthony’s stepmother and their children are not shown as his half-siblings.', 'Other Wicklow Metcalf families remain unconnected until evidence establishes a relationship.'],
   },
+}
+
+const verifiedRecords = {
+  'william-metcalfe': [
+    { title: 'Birth', detail: '6 May 1896 · Dublin South registration district', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-3084449' },
+  ],
+  'mary-kavanagh': [
+    { title: 'Birth', detail: '10 June 1897 · Sallynoggin · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-2979498' },
+  ],
+  'annie-teresa-metcalfe': [
+    { title: 'Birth', detail: '15 October 1923 · Rathdown · mother: Kavanagh', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-136016' },
+  ],
+  'john-metcalfe': [
+    { title: 'Birth', detail: '24 September 1925 · Rathdown · mother: Kavanagh', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-14451' },
+    { title: 'Death', detail: '2 October 1930 · Rathdown · aged 5', url: 'https://www.irishgenealogy.ie/view/?record_id=cide-1710270' },
+  ],
+  'anthony-medcalf': [
+    { title: 'Birth', detail: 'Enoch Metcalf · 8 September 1874 · Rathdrum', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802' },
+    { title: 'Marriage', detail: 'Enoch Medcalf and Mary King · 23 July 1895 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-2226913' },
+    { title: 'Death', detail: 'Enoch Medcalf · 5 December 1939 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cide-2102615' },
+  ],
+  'mary-king': [
+    { title: 'Birth', detail: '24 March 1871 · George’s Avenue, Blackrock · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-6205937' },
+    { title: 'Marriage', detail: 'Mary King and Enoch Medcalf · 23 July 1895 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-2226913' },
+  ],
+  'thomas-kavanagh': [
+    { title: 'Marriage', detail: 'Thomas Kavanagh and Anne Carroll · 15 September 1889 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-2508907' },
+  ],
+  'anne-carroll': [
+    { title: 'Marriage', detail: 'Anne Carroll and Thomas Kavanagh · 15 September 1889 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-2508907' },
+  ],
+  'owen-kavanagh': [
+    { title: 'Death', detail: '4 July 1903 · Thomastown · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cide-4645743' },
+  ],
+  'elizabeth-kavanagh': [
+    { title: 'Death', detail: '31 October 1907 · Thomastown · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cide-4938662' },
+  ],
+  'william-king-jr': [
+    { title: 'Death', detail: '29 May 1890 · George’s Place, Blackrock · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cide-6248076' },
+  ],
+}
+
+export function verifiedRecordsFor(person) {
+  return verifiedRecords[person?.id] || []
 }
 
 export function familyHistoryFor(person) {
