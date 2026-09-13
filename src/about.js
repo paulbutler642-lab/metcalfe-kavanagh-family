@@ -29,6 +29,7 @@ app.innerHTML = `
 
     <article class="about-card about-dedication">
       <span class="dedication-mark">❧</span>
+      <div class="dedication-flowers" aria-hidden="true"><span>❀</span><span>✿</span><span>❀</span><span>✾</span><span>❀</span></div>
       <h2>In Memory of My Mum</h2>
       <p>Lastly, I would like to dedicate this site to my beloved mum, <strong>Catherine Metcalfe</strong>.</p>
       <p>Mum was always proud to call herself a <strong>Metcalfe</strong>, and it feels fitting that the history of the family she was so proud of can now be preserved and shared here for generations to come.</p>
