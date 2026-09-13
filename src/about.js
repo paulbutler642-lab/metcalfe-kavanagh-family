@@ -41,8 +41,10 @@ app.innerHTML = `
         <span class="about-kicker">Get in touch</span>
         <h2>Have something to share?</h2>
         <p>Have a family connection, story, correction, photograph, document or information to share? I’d love to hear from you.</p>
+        <p><small>Please also feel free to contact me with suggestions, improvements or edits for the site. If you spot something that could be corrected or made better, I’d be very happy to hear from you.</small></p>
       </div>
       <div class="contact-actions">
+        <a class="contact-button" href="https://wa.me/353871275548?text=Hi%20Paul%2C%20I%27m%20contacting%20you%20about%20the%20Metcalfe%20%26%20Kavanagh%20family%20history%20website." target="_blank" rel="noopener">WhatsApp Paul</a>
         <a class="contact-button" href="mailto:paul.butler642@hotmail.com?subject=Metcalfe%20%26%20Kavanagh%20Family%20History">✉ Email Paul</a>
       </div>
     </section>
