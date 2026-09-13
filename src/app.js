@@ -1,4 +1,4 @@
-import { evidenceLabels, familyHistoryFor } from '/family-history-archive.js?v=20260913-1'
+import { evidenceLabels, familyHistoryFor } from '/family-history-archive.js?v=20260913-marriage-record-1'
 const cfg = window.__APP_CONFIG__ || {}
 const app = document.getElementById('app')
 const qs = new URLSearchParams(location.search)
@@ -316,6 +316,18 @@ async function profile() {
   const storyPanel = document.getElementById('story')
   if (storyPanel && (historySection || archiveSection)) {
     storyPanel.insertAdjacentHTML('beforebegin', historySection + archiveSection)
+  }
+  if (history?.records?.length) {
+    const verifiedPanel = document.getElementById('verified-history')
+    verifiedPanel?.insertAdjacentHTML(
+      'beforeend',
+      `<div class="linked-records"><h3>Linked records</h3>${history.records
+        .map(
+          (record) =>
+            `<a class="linked-record" href="${esc(record.url)}" target="_blank" rel="noopener"><span>${historyBadge(record.evidence)}</span><strong>${esc(record.title)}</strong><small>${esc([record.date, record.repository].filter(Boolean).join(' • '))}</small><p>${esc(record.note)}</p><b>View verified record ↗</b></a>`,
+        )
+        .join('')}</div>`,
+    )
   }
 }
 async function treeView() {

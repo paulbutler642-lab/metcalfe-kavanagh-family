@@ -84,7 +84,40 @@ const archive = {
         provenanceEvidence: 'family_archive',
       },
     ],
+    records: [
+      {
+        title: 'Marriage of William Metcalfe and Mary Kavanagh',
+        date: '1922',
+        repository: 'Irish Genealogy',
+        url: 'https://www.irishgenealogy.ie/view/?record_id=cima-1270171',
+        note: 'Civil marriage record confirming the 1922 marriage of William Metcalfe and Mary Kavanagh.',
+        evidence: 'verified_primary',
+      },
+    ],
     notes: ['The 1922 marriage record uses or records the name Anthony. It is not yet established whether Anthony was a formal middle name, an alternative given name or another usage.'],
+  },
+  'mary kavanagh': {
+    aliases: ['Mary Metcalfe'],
+    heading: 'Marriage to William Metcalfe',
+    summary: 'The Irish civil registration record confirms that Mary Kavanagh married William Metcalfe in 1922.',
+    chapters: [
+      {
+        title: 'Marriage',
+        text: 'Mary Kavanagh married William Metcalfe in 1922. This marriage is part of the family’s direct ancestral line and is supported by the linked Irish Genealogy civil record.',
+        evidence: 'verified_primary',
+      },
+    ],
+    records: [
+      {
+        title: 'Marriage of William Metcalfe and Mary Kavanagh',
+        date: '1922',
+        repository: 'Irish Genealogy',
+        url: 'https://www.irishgenealogy.ie/view/?record_id=cima-1270171',
+        note: 'Civil marriage record confirming the 1922 marriage of William Metcalfe and Mary Kavanagh.',
+        evidence: 'verified_primary',
+      },
+    ],
+    notes: [],
   },
   'enoch medcalf': {
     aliases: ['Enoch Metcalf', 'Enoch Metcalfe'],
