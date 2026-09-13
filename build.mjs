@@ -4,10 +4,9 @@ import path from 'node:path';
 const out = path.resolve('dist');
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-for (const file of ['index.html','styles.css','altadore-heritage.css','profile-v1.css','profile-story-prominent.css','hills.css','tree-v2.css','tree-tabs.css','timeline-tabs.css','gallery.css','archive.css','visitors.css','layout-fixes.css','admin.css','profile-photo-editor.css','person-management.css','change-history.css','date-fields.css','relationships.css','analytics.css','sources.css','research-tools.js','family-history-archive.js','gedcom-import.js','person-management.js','change-history.js','date-fields.js','relationships.js','analytics.js','media-optimizer.js','profile-photo-editor.js','profile-story-prominent.js','altadore-heritage.js','app.js','people.js','tree-v2.js','gallery.js','visitors.js','admin.js','surname-note.js','favicon.svg','family-crest.png','admin-share.png','admin-preview-v2.jpg','family-preview-v2.jpg']) {
+for (const file of ['index.html','styles.css','altadore-heritage.css','profile-v1.css','profile-story-prominent.css','hills.css','tree-v2.css','tree-tabs.css','timeline-tabs.css','gallery.css','archive.css','visitors.css','layout-fixes.css','admin.css','profile-photo-editor.css','person-management.css','change-history.css','date-fields.css','relationships.css','analytics.css','sources.css','research-tools.js','family-history-archive.js','gedcom-import.js','person-management.js','change-history.js','date-fields.js','relationships.js','analytics.js','media-optimizer.js','profile-photo-editor.js','profile-story-prominent.js','altadore-heritage.js','app.js','people.js','tree-v2.js','gallery.js','visitors.js','admin.js','surname-note.js','favicon.svg','family-crest.png','admin-share.png','admin-preview-v2.jpg','family-preview-v2.jpg','landing-hero-image.b64']) {
   fs.copyFileSync(path.resolve('src',file),path.join(out,file));
 }
-// The generated landing artwork is stored as base64 text so it can be versioned reliably through the repo connector.
 const heroB64=fs.readFileSync(path.resolve('src','landing-hero-image.b64'),'utf8').trim();
 fs.writeFileSync(path.join(out,'landing-hero.jpg'),Buffer.from(heroB64,'base64'));
 fs.cpSync(path.resolve('src','family-archive'),path.join(out,'family-archive'),{recursive:true});
