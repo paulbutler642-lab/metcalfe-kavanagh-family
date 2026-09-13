@@ -1,4 +1,4 @@
-import { evidenceLabels, familyHistoryFor } from '/family-history-archive.js?v=20260913-marriage-record-1'
+import { evidenceLabels, familyHistoryFor } from '/family-history-archive.js?v=20260913-marriage-record-2'
 const cfg = window.__APP_CONFIG__ || {}
 const app = document.getElementById('app')
 const qs = new URLSearchParams(location.search)
@@ -287,7 +287,7 @@ async function profile() {
   const personTile = (person, label = '') => `<a class="kin-card" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : `<span class="avatar">${esc(initials(person))}</span>`}<span><strong>${esc(person.name)}</strong><small>${esc(label || years(person) || 'Family member')}</small></span></a>`
   const treeNode = (person, kind = '') => (person ? `<a class="focus-node ${kind}" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : `<span class="avatar">${esc(initials(person))}</span>`}<strong>${esc(person.name)}</strong><small>${esc(years(person))}</small></a>` : '')
   const historyBadge = (type) => `<span class="evidence-badge evidence-${esc(type)}">${esc(evidenceLabels[type] || 'Historical evidence')}</span>`
-  const historySection = history ? `<section id="verified-history" class="card profile-panel verified-history"><div class="profile-section-head"><div><span class="section-kicker">Verified family archive</span><h2>${esc(history.heading)}</h2></div></div><p class="history-summary">${esc(history.summary)}</p><div class="history-chapters">${history.chapters.map((chapter) => `<article>${historyBadge(chapter.evidence)}<h3>${esc(chapter.title)}</h3><p>${esc(chapter.text)}</p></article>`).join('')}</div>${history.notes?.length ? `<details class="research-notes"><summary>Research notes and unresolved questions</summary><ul>${history.notes.map((note) => `<li>${esc(note)}</li>`).join('')}</ul></details>` : ''}</section>` : ''
+  const historySection = history ? `<section id="verified-history" class="card profile-panel verified-history"><div class="profile-section-head"><div><span class="section-kicker">Verified family archive</span><h2>${esc(history.heading)}</h2></div></div><p class="history-summary">${esc(history.summary)}</p><div class="history-chapters">${history.chapters.map((chapter) => `<article>${historyBadge(chapter.evidence)}<h3>${esc(chapter.title)}</h3><p>${esc(chapter.text)}</p>${chapter.recordUrl ? `<a class="chapter-record-link" href="${esc(chapter.recordUrl)}" target="_blank" rel="noopener">${esc(chapter.recordLabel || 'View verified record')} ↗</a>` : ''}</article>`).join('')}</div>${history.notes?.length ? `<details class="research-notes"><summary>Research notes and unresolved questions</summary><ul>${history.notes.map((note) => `<li>${esc(note)}</li>`).join('')}</ul></details>` : ''}</section>` : ''
   const archiveSection = history?.documents?.length ? `<section id="historical-documents" class="card profile-panel historical-documents"><div class="profile-section-head"><div><span class="section-kicker">Original material</span><h2>Historical Documents</h2></div></div>${history.documents.map((item) => `<article class="historical-document"><a class="historical-document-preview" href="${esc(item.original)}" target="_blank" rel="noopener" aria-label="View original ${esc(item.title)}"><img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy"><span>Tap to enlarge and view the original</span></a><div class="historical-document-copy">${historyBadge(item.evidence)}<h3>${esc(item.title)}</h3><p class="source-meta">${esc([item.date, item.publication].filter(Boolean).join(' • '))}</p><p>${esc(item.caption)}</p><h4>Historical context</h4><p>${esc(item.context)}</p><h4>Provenance ${historyBadge(item.provenanceEvidence)}</h4><p>${esc(item.provenance)}</p><div class="document-actions"><a href="${esc(item.original)}" target="_blank" rel="noopener">View original image ↗</a></div></div></article>`).join('')}</section>` : ''
   const nav = [
     ['overview', 'Overview', true],
@@ -316,18 +316,6 @@ async function profile() {
   const storyPanel = document.getElementById('story')
   if (storyPanel && (historySection || archiveSection)) {
     storyPanel.insertAdjacentHTML('beforebegin', historySection + archiveSection)
-  }
-  if (history?.records?.length) {
-    const verifiedPanel = document.getElementById('verified-history')
-    verifiedPanel?.insertAdjacentHTML(
-      'beforeend',
-      `<div class="linked-records"><h3>Linked records</h3>${history.records
-        .map(
-          (record) =>
-            `<a class="linked-record" href="${esc(record.url)}" target="_blank" rel="noopener"><span>${historyBadge(record.evidence)}</span><strong>${esc(record.title)}</strong><small>${esc([record.date, record.repository].filter(Boolean).join(' • '))}</small><p>${esc(record.note)}</p><b>View verified record ↗</b></a>`,
-        )
-        .join('')}</div>`,
-    )
   }
 }
 async function treeView() {

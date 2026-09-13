@@ -38,7 +38,9 @@ const archive = {
       {
         title: 'Marriage and family',
         text: 'William married Mary Kavanagh in 1922. His brother John later married Mary’s sister Catherine Kavanagh, creating an unusual double connection between the Metcalfe and Kavanagh families.',
-        evidence: 'family_archive',
+        evidence: 'verified_primary',
+        recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=cima-1270171',
+        recordLabel: 'View 1922 marriage record — Irish Genealogy',
       },
       {
         title: 'London and death',
@@ -84,16 +86,6 @@ const archive = {
         provenanceEvidence: 'family_archive',
       },
     ],
-    records: [
-      {
-        title: 'Marriage of William Metcalfe and Mary Kavanagh',
-        date: '1922',
-        repository: 'Irish Genealogy',
-        url: 'https://www.irishgenealogy.ie/view/?record_id=cima-1270171',
-        note: 'Civil marriage record confirming the 1922 marriage of William Metcalfe and Mary Kavanagh.',
-        evidence: 'verified_primary',
-      },
-    ],
     notes: ['The 1922 marriage record uses or records the name Anthony. It is not yet established whether Anthony was a formal middle name, an alternative given name or another usage.'],
   },
   'mary kavanagh': {
@@ -105,16 +97,8 @@ const archive = {
         title: 'Marriage',
         text: 'Mary Kavanagh married William Metcalfe in 1922. This marriage is part of the family’s direct ancestral line and is supported by the linked Irish Genealogy civil record.',
         evidence: 'verified_primary',
-      },
-    ],
-    records: [
-      {
-        title: 'Marriage of William Metcalfe and Mary Kavanagh',
-        date: '1922',
-        repository: 'Irish Genealogy',
-        url: 'https://www.irishgenealogy.ie/view/?record_id=cima-1270171',
-        note: 'Civil marriage record confirming the 1922 marriage of William Metcalfe and Mary Kavanagh.',
-        evidence: 'verified_primary',
+        recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=cima-1270171',
+        recordLabel: 'View 1922 marriage record — Irish Genealogy',
       },
     ],
     notes: [],
