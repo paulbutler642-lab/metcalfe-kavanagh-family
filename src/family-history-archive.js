@@ -18,7 +18,7 @@ const archive = {
   'william metcalfe': {
     aliases: ['Anthony Metcalfe', 'William Anthony Metcalfe'],
     heading: 'Soldier, boxer and family man',
-    summary: 'Born at Templeville in 1896, William Metcalfe became a prominent Army and amateur boxer who represented the 27th Battalion and Army Athletic Association in the 1920s.',
+    summary: 'Born at Templeville in 1896, William Metcalfe served with the 5th Royal Inniskilling Fusiliers at Gallipoli and later became a prominent Army and amateur boxer.',
     chapters: [
       {
         title: 'Early life',
@@ -27,8 +27,8 @@ const archive = {
       },
       {
         title: 'Military service',
-        text: 'Family and historical research establishes a military connection, including the Royal Inniskilling Fusiliers. Existing family research also associates William with First World War service, including Gallipoli; the full Army record is awaited before further details are published.',
-        evidence: 'corroborated_family_history',
+        text: 'A contemporary Irish Independent report published on 18 September 1915 identifies Private W. Medcalf of the 5th Inniskillings and says that he had written to his mother in Stillorgan from the Gallipoli campaign. William reported that the battalion had lost half its men and nearly all its officers since reaching the peninsula. He described several narrow escapes: shrapnel passed through his haversack, and a bullet went through the heel of his boot while he was fetching water. He wrote that the Turkish troops were good fighters and their snipers accurate, adding with grim humour that large shells sometimes added flavour to the food. This independently confirms William’s Gallipoli service and his connection to the Stillorgan Medcalf household. His complete Army service record is still awaited before further military details are published.',
+        evidence: 'contemporary_newspaper',
       },
       {
         title: 'Boxing',
@@ -49,6 +49,18 @@ const archive = {
       },
     ],
     documents: [
+      {
+        title: 'Private W. Medcalf’s letter from Gallipoli',
+        date: '18 September 1915',
+        publication: 'Irish Independent',
+        image: '/family-archive/william-medcalf-gallipoli-letter-irish-independent-1915.webp',
+        original: '/family-archive/william-medcalf-gallipoli-letter-irish-independent-1915.jpg',
+        caption: 'A contemporary newspaper report summarising William Medcalf’s wartime letter to his mother in Stillorgan.',
+        context: 'The Irish Independent identifies him as Private W. Medcalf of the 5th Inniskillings. Writing from the Gallipoli campaign, he described severe battalion losses and several narrow escapes, including shrapnel passing through his haversack and a bullet piercing the heel of his boot while he fetched water. He also commented on the fighting ability of the Turkish troops and the accuracy of their snipers.',
+        provenance: 'Newspaper image kindly supplied directly to Paul Butler by YouWho.ie following a family-history enquiry. This is a newspaper account of William’s letter, rather than an image of the original handwritten letter.',
+        evidence: 'contemporary_newspaper',
+        provenanceEvidence: 'family_archive',
+      },
       {
         title: 'Prominent Amateur Boxers — Private W. Metcalfe',
         date: 'Date not yet established',

@@ -32,7 +32,7 @@ app.innerHTML = `
       <span class="about-kicker">Acknowledgements</span>
       <h2>With Thanks</h2>
       <p>This archive has also benefited from the generosity of people and organisations who have helped locate or share historical material.</p>
-      <p><strong><a href="https://www.youwho.ie/medcalf.html" target="_blank" rel="noopener">YouWho.ie — The Medcalfs of Stillorgan</a></strong><br>With sincere thanks to YouWho.ie, whose local-history information was a great help in tracing and verifying the Medcalf family’s connections in the Stillorgan area. They also responded generously to a direct family-history enquiry and supplied the image of Edward Medcalf’s baptismal-register entry preserved on this site.</p>
+      <p><strong><a href="https://www.youwho.ie/medcalf.html" target="_blank" rel="noopener">YouWho.ie — The Medcalfs of Stillorgan</a></strong><br>With sincere thanks to YouWho.ie, whose local-history information was a great help in tracing and verifying the Medcalf family’s connections in the Stillorgan area. They also responded generously to a direct family-history enquiry and supplied the image of Edward Medcalf’s baptismal-register entry and the 1915 Irish Independent report of William Medcalf’s wartime letter from Gallipoli, both preserved on this site.</p>
       <p class="muted"><small>Further acknowledgements will be added as new material and assistance are received.</small></p>
     </article>
 
