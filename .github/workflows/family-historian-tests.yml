@@ -1,0 +1,48 @@
+name: Family Historian regression tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/family-historian.js'
+      - 'src/family-historian.js'
+      - 'tests/**'
+      - 'package.json'
+      - '.github/workflows/family-historian-tests.yml'
+  pull_request:
+    paths:
+      - 'api/family-historian.js'
+      - 'src/family-historian.js'
+      - 'tests/**'
+      - 'package.json'
+      - '.github/workflows/family-historian-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Family Historian safety and regression suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run Family Historian tests
+        run: npm test
+
+      - name: Verify Historian remains read-only
+        shell: bash
+        run: |
+          if grep -Eiq "(method:[[:space:]]*['\"](POST|PUT|PATCH|DELETE)['\"]|\.insert\(|\.update\(|\.delete\(|\.upsert\()" api/family-historian.js; then
+            echo "Potential database write operation detected in Family Historian API."
+            exit 1
+          fi
+          echo "Read-only guard passed."
