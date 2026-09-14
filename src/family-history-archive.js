@@ -31,6 +31,13 @@ const archive = {
         evidence: 'contemporary_newspaper',
       },
       {
+        title: 'Gallipoli and the 5th Inniskillings',
+        text: 'William served at Gallipoli with the 5th (Service) Battalion, Royal Inniskilling Fusiliers, part of the Ulster-based 31st Brigade of the 10th (Irish) Division. The division was an all-Ireland volunteer formation composed of battalions drawn from Irish regiments across all four provinces. The 5th Inniskillings landed at Suvla Bay on 7 August 1915 and initially occupied trenches on the Kiretch Tepe Sirt ridge overlooking the Gulf of Saros. On 15 August the battalion was ordered to attack the strongly defended Kidney Hill position. Advancing across exposed ground under concentrated Turkish rifle, machine-gun and artillery fire, it suffered catastrophic casualties. Its commanding officer and five other named officers were killed, both majors and numerous junior officers were wounded, and the battalion’s organisation was temporarily shattered. William’s report that the battalion had lost approximately half its men and nearly all its officers is closely supported by the surviving divisional history. Although William’s company has not yet been identified and it cannot presently be proven that he took part in the Kidney Hill charge itself, the contemporary newspaper report confirms his presence with the battalion at Gallipoli and provides a rare personal account of the conditions he experienced.',
+        evidence: 'secondary_historical',
+        recordUrl: 'https://readingroo.ms/7/4/1/6/74163/74163-h/74163-h.htm',
+        recordLabel: 'Read The Tenth (Irish) Division in Gallipoli',
+      },
+      {
         title: 'Boxing',
         text: 'William became a prominent Army and amateur boxer associated with the 27th Battalion, the Army Athletic Association and Portobello. Contemporary reports place him in bantamweight and flyweight competition. They record a points victory over Volunteer J. Ryan at the Irish Amateur Championships and Olympic Trials in Portobello Barracks, a first-round knockout of Private Shelley of Waterford at the Curragh, and other Army tournament appearances. One 27th Battalion column called Metcalfe the battalion’s boxing “idol”, while another looked forward to seeing its boxers compete once his injured hand had recovered. On 26 April 1924 he was named in a photograph of Army boxers training at Portobello before their team departed for Glasgow. These reports add firm contemporary detail to the surviving profile of his boxing career, which began around 1914. Where a clipping is cropped or its date is not visible, no missing result or date has been reconstructed.',
         evidence: 'contemporary_newspaper',
