@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="/styles.css?v=20260913-live">
 <link rel="stylesheet" href="/altadore-heritage.css?v=20260913-crest-2">
 <link rel="stylesheet" href="/landing-fix.css?v=20260914-mobile-unified-2">
-<link rel="stylesheet" href="/profile-v1.css?v=20260912-1">
+<link rel="stylesheet" href="/profile-v1.css?v=20260914-contributions-1">
 <link rel="stylesheet" href="/profile-story-prominent.css?v=20260913-1">
 <link rel="stylesheet" href="/hills.css?v=20260911-24">
 <link rel="stylesheet" href="/tree-v2.css?v=20260912-1">
@@ -67,7 +67,7 @@ else if(currentView==='admin'){await import('/admin.js?v=20260912-media-storage-
 else if(currentView==='stories') await import('/raid-story.js?v=20260914-stories-1');
 else if(currentView==='evidence') await import('/evidence-guide.js?v=20260914-1');
 else await import('/app.js?v=20260914-william-war-letter-1');
-if(currentView==='profile') await import('/auto-records.js?v=20260913-high-confidence-v2');
+if(currentView==='profile') { await import('/auto-records.js?v=20260913-high-confidence-v2'); await import('/profile-contributions.js?v=20260914-1'); }
 const {trackVisit}=await import('/analytics.js?v=20260912-1');trackVisit();
 </script>
 <script type="module" src="/altadore-heritage.js?v=20260913-photo-layout-1"></script>
