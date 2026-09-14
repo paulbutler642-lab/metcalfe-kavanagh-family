@@ -32,7 +32,7 @@ app.innerHTML = `
       <span class="about-kicker">Acknowledgements</span>
       <h2>With Thanks</h2>
       <p>This archive has also benefited from the generosity of people and organisations who have helped locate or share historical material.</p>
-      <p><strong><a href="https://www.youwho.ie/" target="_blank" rel="noopener">YouWho.ie — Stillorgan History</a></strong><br>With sincere thanks for responding to a family-history enquiry and supplying the image of Edward Medcalf’s baptismal-register entry.</p>
+      <p><strong><a href="https://www.youwho.ie/" target="_blank" rel="noopener">YouWho.ie — Stillorgan History</a></strong><br>With sincere thanks to YouWho.ie, whose local-history information was a great help in tracing and verifying the Medcalf family’s connections in the Stillorgan area. They also responded generously to a direct family-history enquiry and supplied the image of Edward Medcalf’s baptismal-register entry preserved on this site.</p>
       <p class="muted"><small>Further acknowledgements will be added as new material and assistance are received.</small></p>
     </article>
 
