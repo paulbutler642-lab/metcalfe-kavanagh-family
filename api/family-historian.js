@@ -28,6 +28,10 @@ function fallback(evidence){
   }
   return {title:'What the family archive shows',summary:'I found relevant family records, but the AI interpretation service is temporarily unavailable. The verified archive evidence below is still available to review. No family record has been changed.',verifiedFacts:facts,interpretations:[],unknowns:['A historical interpretation could not be generated on this request.'],sourceIds:take(evidence.sources,12).map(s=>String(s.id))};
 }
+function runtimeOidc(req){
+  const header=req.headers?.['x-vercel-oidc-token'];
+  return clean(Array.isArray(header)?header[0]:header)||clean(process.env.VERCEL_OIDC_TOKEN);
+}
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store');if(req.method!=='POST')return res.status(405).json({error:'Method not allowed'});
   const ip=String(req.headers['x-forwarded-for']||'visitor').split(',')[0],now=Date.now(),recent=(requests.get(ip)||[]).filter(t=>now-t<3600000);if(recent.length>=10)return res.status(429).json({error:'This device has reached the hourly question limit. Please try again later.'});recent.push(now);requests.set(ip,recent);
@@ -35,7 +39,9 @@ export default async function handler(req,res){
   try{
     const [people,sources,links,parentChild,couples,relationships]=await Promise.all([table('people'),table('research_sources'),table('research_source_people'),table('parent_child'),table('couples'),table('person_relationships')]);
     const evidence=relevant(question,people,sources,links,parentChild,couples,relationships),recordCount=evidence.people.length+evidence.sources.length;
-    const gatewayToken=process.env.AI_GATEWAY_API_KEY||process.env.VERCEL_OIDC_TOKEN;
+    // Vercel Functions receive a short-lived OIDC token on each request. Prefer it over
+    // any long-lived key so production needs no manually managed AI Gateway secret.
+    const gatewayToken=runtimeOidc(req)||clean(process.env.AI_GATEWAY_API_KEY);
     let out;
     if(gatewayToken){
       try{
@@ -44,7 +50,7 @@ export default async function handler(req,res){
         const completion=await ai.json(),text=completion.choices?.[0]?.message?.content||'';
         const raw=text.replace(/^```json\s*|\s*```$/g,'').trim();out=JSON.parse(raw);
       }catch(aiError){console.error('family-historian-ai',aiError);out=fallback(evidence)}
-    }else{console.error('family-historian-ai','AI Gateway credentials are not configured');out=fallback(evidence)}
+    }else{console.error('family-historian-ai','No Vercel runtime OIDC token or AI Gateway key was available');out=fallback(evidence)}
     const used=new Set(take(out.sourceIds,20).map(String)),usedSources=evidence.sources.filter(s=>used.has(String(s.id))).slice(0,12).map(s=>({title:clean(s.title)||'Historical record',detail:clean([s.event_date_text,s.place_text,s.repository].filter(Boolean).join(' • ')),url:/^https?:\/\//i.test(s.external_url||'')?s.external_url:''}));
     return res.status(200).json({title:clean(out.title),summary:clean(out.summary),verifiedFacts:take(out.verifiedFacts,10).map(clean),interpretations:take(out.interpretations,8).map(clean),unknowns:take(out.unknowns,8).map(clean),sources:usedSources,recordCount});
   }catch(error){console.error('family-historian',error);return res.status(503).json({error:'The family historian is temporarily unavailable. No family records have been changed.'})}
