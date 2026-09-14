@@ -1,72 +1,35 @@
 /* Landing page matched to the approved Altadore reference. */
-.altadore-approved {
-  height: 620px !important;
-  min-height: 620px !important;
-  grid-template-columns: minmax(340px, 30%) minmax(0, 70%) !important;
-  place-items: stretch !important;
-}
+.altadore-approved{height:620px!important;min-height:620px!important;grid-template-columns:minmax(340px,30%) minmax(0,70%)!important;place-items:stretch!important}
+.altadore-approved-left{width:100%;height:100%;align-self:stretch;justify-self:stretch;padding:42px 24px 38px!important;background:#f7f2e7 url('/botanical-panel.png?v=20260913-1') center/cover no-repeat!important}
+.altadore-approved-left::after{content:'';position:absolute;top:0;right:-150px;bottom:0;z-index:5;width:190px;pointer-events:none;background:linear-gradient(90deg,#f7f2e7 0%,rgba(247,242,231,.98) 18%,rgba(247,242,231,.84) 42%,rgba(247,242,231,.5) 68%,rgba(247,242,231,0) 100%)}
+.altadore-simple-mark{width:76px;height:2px;margin:0 auto 24px;background:#a58a45;position:relative}.altadore-simple-mark::after{content:'';position:absolute;width:8px;height:8px;border:1px solid #a58a45;background:#f7f2e7;transform:rotate(45deg);left:33px;top:-4px}.altadore-approved-title strong{font-size:clamp(50px,3.9vw,74px)!important}
+.altadore-approved-scene{position:relative;width:100%;height:100%;min-width:0;align-self:stretch;justify-self:stretch;overflow:hidden;background:#173b32 url('/altadore-garden.jpeg?v=20260913-1') center/cover no-repeat!important}.altadore-approved-scene::before{content:'';position:absolute;inset:-28px;z-index:0;background:linear-gradient(90deg,rgba(10,45,31,.08),rgba(7,42,28,.22) 68%,rgba(3,35,23,.7))}.altadore-hero-photo{position:absolute;top:0;bottom:0;left:25%;z-index:1;width:48%;height:100%;display:block;object-fit:contain;object-position:center;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 7%,#000 93%,transparent 100%)}.altadore-approved-scene::after{content:'';position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(247,242,231,.08) 0%,rgba(8,45,31,.02) 42%,rgba(5,45,30,.28) 70%,rgba(3,39,25,.84) 100%);pointer-events:none}.altadore-approved-right{z-index:3!important;right:4%!important;top:8%!important;width:min(290px,28%)!important;min-width:230px!important}.altadore-approved-right p{margin-top:48px!important}.altadore-approved-btn{z-index:4!important;left:45%!important}.brand-monogram{width:40px;height:40px;flex:0 0 40px;border:1px solid #a58a45;border-radius:50%;display:grid;place-items:center;color:var(--forest);background:#fbf7ec;font:700 13px 'Cormorant Garamond',serif}
 
-.altadore-approved-left {
-  width: 100%;
-  height: 100%;
-  align-self: stretch;
-  justify-self: stretch;
-  padding: 42px 24px 38px !important;
-  background: #f7f2e7 url('/botanical-panel.png?v=20260913-1') center / cover no-repeat !important;
+/* Phone: use the same unified artwork as desktop, composed as one hero rather than two stacked panels. */
+@media(max-width:800px){
+ .altadore-approved{position:relative!important;display:block!important;height:620px!important;min-height:620px!important;overflow:hidden!important;background:#173b32 url('/altadore-unified-hero.jpg?v=20260913-1') center/cover no-repeat!important}
+ .altadore-approved-left{position:absolute!important;z-index:5!important;left:0!important;top:0!important;width:64%!important;height:auto!important;min-height:0!important;box-sizing:border-box!important;padding:30px 14px 28px 18px!important;align-items:flex-start!important;text-align:left!important;background:linear-gradient(90deg,rgba(247,242,231,.98) 0%,rgba(247,242,231,.93) 72%,rgba(247,242,231,0) 100%)!important}
+ .altadore-approved-left::before,.altadore-approved-left::after{display:none!important}
+ .altadore-simple-mark{width:54px!important;margin:0 0 16px 2px!important}
+ .altadore-simple-mark::after{left:23px!important}
+ .altadore-approved-title{line-height:.9!important;text-align:left!important}
+ .altadore-approved-title span{font-size:22px!important}
+ .altadore-approved-title strong{font-size:clamp(38px,10.5vw,47px)!important;line-height:.9!important}
+ .altadore-approved-tag{margin-top:16px!important;font-size:9px!important;line-height:1.55!important;letter-spacing:.14em!important;text-align:left!important}
+ .altadore-approved-scene{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;padding:0!important;background:transparent!important;overflow:hidden!important}
+ .altadore-approved-scene::before{display:none!important}
+ .altadore-hero-photo{display:none!important}
+ .altadore-approved-scene::after{background:linear-gradient(180deg,rgba(3,39,25,.02) 35%,rgba(3,39,25,.35) 66%,rgba(3,39,25,.9) 100%)!important}
+ .altadore-approved-right{position:absolute!important;z-index:4!important;left:20px!important;right:20px!important;top:auto!important;bottom:82px!important;width:auto!important;min-width:0!important;color:#fff!important;text-align:left!important;text-shadow:0 2px 7px rgba(0,0,0,.5)!important}
+ .altadore-approved-right blockquote{display:none!important}
+ .altadore-approved-place{border-top:0!important;padding:0!important;margin-bottom:7px!important;font-size:12px!important;letter-spacing:.1em!important}
+ .altadore-approved-right p{margin:0!important;border-top:1px solid rgba(255,255,255,.45)!important;padding-top:8px!important;font-size:11px!important;line-height:1.38!important;letter-spacing:0!important}
+ .altadore-approved-btn{z-index:6!important;left:18px!important;right:18px!important;bottom:20px!important;transform:none!important;box-sizing:border-box!important;text-align:center!important;max-width:none!important;padding:13px 18px!important;font-size:17px!important}
+ .altadore-heritage{padding-top:30px!important;padding-bottom:110px!important}
+ .altadore-gallery{grid-template-columns:1fr!important}
 }
+@media(max-width:430px){.altadore-approved{height:590px!important;min-height:590px!important;background-position:center center!important}.altadore-approved-left{width:68%!important;padding-top:24px!important}.altadore-approved-title strong{font-size:39px!important}.altadore-approved-right{left:16px!important;right:16px!important}.altadore-approved-btn{left:16px!important;right:16px!important}}
+@media(max-width:560px){.brand-monogram{width:36px;height:36px;flex-basis:36px;font-size:12px}}
 
-.altadore-approved-left::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -150px;
-  bottom: 0;
-  z-index: 5;
-  width: 190px;
-  pointer-events: none;
-  background: linear-gradient(90deg,#f7f2e7 0%,rgba(247,242,231,.98) 18%,rgba(247,242,231,.84) 42%,rgba(247,242,231,.5) 68%,rgba(247,242,231,0) 100%);
-}
-
-.altadore-simple-mark {width:76px;height:2px;margin:0 auto 24px;background:#a58a45;position:relative}
-.altadore-simple-mark::after {content:'';position:absolute;width:8px;height:8px;border:1px solid #a58a45;background:#f7f2e7;transform:rotate(45deg);left:33px;top:-4px}
-.altadore-approved-title strong {font-size:clamp(50px,3.9vw,74px)!important}
-.altadore-approved-scene {position:relative;width:100%;height:100%;min-width:0;align-self:stretch;justify-self:stretch;overflow:hidden;background:#173b32 url('/altadore-garden.jpeg?v=20260913-1') center/cover no-repeat!important}
-.altadore-approved-scene::before {content:'';position:absolute;inset:-28px;z-index:0;background:linear-gradient(90deg,rgba(10,45,31,.08),rgba(7,42,28,.22) 68%,rgba(3,35,23,.7))}
-.altadore-hero-photo {position:absolute;top:0;bottom:0;left:25%;z-index:1;width:48%;height:100%;display:block;object-fit:contain;object-position:center;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 7%,#000 93%,transparent 100%)}
-.altadore-approved-scene::after {content:'';position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(247,242,231,.08) 0%,rgba(8,45,31,.02) 42%,rgba(5,45,30,.28) 70%,rgba(3,39,25,.84) 100%);pointer-events:none}
-.altadore-approved-right {z-index:3!important;right:4%!important;top:8%!important;width:min(290px,28%)!important;min-width:230px!important}
-.altadore-approved-right p {margin-top:48px!important}
-.altadore-approved-btn {z-index:4!important;left:45%!important}
-.brand-monogram {width:40px;height:40px;flex:0 0 40px;border:1px solid #a58a45;border-radius:50%;display:grid;place-items:center;color:var(--forest);background:#fbf7ec;font:700 13px 'Cormorant Garamond',serif}
-
-/* Mobile keeps the same visual story as desktop instead of becoming two oversized panels. */
-@media (max-width:800px) {
-  .altadore-approved {height:auto!important;min-height:0!important;display:flex!important;flex-direction:column!important;background:#f7f2e7!important;overflow:hidden!important}
-  .altadore-approved-left {box-sizing:border-box;height:auto!important;min-height:230px!important;padding:24px 20px 22px!important;background:#f7f2e7 url('/botanical-panel.png?v=20260913-1') center/cover no-repeat!important}
-  .altadore-approved-left::after {display:none}
-  .altadore-simple-mark {width:62px;margin-bottom:14px}
-  .altadore-approved-title strong {font-size:clamp(38px,11vw,48px)!important;line-height:.92!important}
-  .altadore-approved-scene {height:410px!important;min-height:410px!important;background:#173b32 url('/altadore-unified-hero.jpg?v=20260913-1') center/cover no-repeat!important}
-  .altadore-approved-scene::before {inset:0!important;background:linear-gradient(180deg,rgba(5,36,25,.03) 0%,rgba(4,39,26,.16) 45%,rgba(3,35,23,.82) 100%)!important}
-  .altadore-hero-photo {display:none!important}
-  .altadore-approved-scene::after {background:linear-gradient(180deg,transparent 0%,rgba(3,39,25,.06) 35%,rgba(3,39,25,.78) 100%)!important}
-  .altadore-approved-right {box-sizing:border-box;left:20px!important;right:20px!important;top:auto!important;bottom:72px!important;width:auto!important;min-width:0!important;text-align:left!important}
-  .altadore-approved-right p {margin:0!important;max-width:100%!important;font-size:15px!important;line-height:1.5!important;text-shadow:0 1px 3px rgba(0,0,0,.4)}
-  .altadore-approved-btn {left:20px!important;right:20px!important;bottom:18px!important;transform:none!important;width:auto!important;text-align:center!important;box-sizing:border-box}
-}
-
-@media (max-width:560px) {
-  .brand-monogram {width:36px;height:36px;flex-basis:36px;font-size:12px}
-  .altadore-approved-left {min-height:210px!important;padding:20px 18px!important}
-  .altadore-approved-scene {height:390px!important;min-height:390px!important;background-position:center center!important}
-}
-
-/* One continuous desktop artwork: no visible joins between title and scene. */
-@media (min-width:801px) {
-  .altadore-approved {background:#f7f2e7 url('/altadore-unified-hero.jpg?v=20260913-1') center/cover no-repeat!important}
-  .altadore-approved-left {background:transparent!important}
-  .altadore-approved-left::after,.altadore-approved-scene::before {display:none!important}
-  .altadore-approved-scene {background:transparent!important}
-  .altadore-hero-photo {display:none!important}
-  .altadore-approved-scene::after {background:linear-gradient(90deg,transparent 0%,transparent 57%,rgba(3,39,25,.25) 74%,rgba(3,39,25,.72) 100%)!important}
-}
+/* Desktop stays exactly on the approved unified artwork. */
+@media(min-width:801px){.altadore-approved{background:#f7f2e7 url('/altadore-unified-hero.jpg?v=20260913-1') center/cover no-repeat!important}.altadore-approved-left{background:transparent!important}.altadore-approved-left::after,.altadore-approved-scene::before{display:none!important}.altadore-approved-scene{background:transparent!important}.altadore-hero-photo{display:none!important}.altadore-approved-scene::after{background:linear-gradient(90deg,transparent 0%,transparent 57%,rgba(3,39,25,.25) 74%,rgba(3,39,25,.72) 100%)!important}}
