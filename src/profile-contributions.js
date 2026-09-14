@@ -22,15 +22,13 @@ if(params.get('view')==='profile'){
   if(!person) return false
   const mediaIds=new Set([...(directMedia||[]).map(x=>x.id),...(linkedMedia||[]).map(x=>x.media_id)])
   const personalArchiveCount=mediaIds.size+(stories||[]).length
-  // Sparse means there is no substantial personal narrative and only a very small family archive.
-  // Historical sources/relationships do not suppress this invitation: the aim is to collect memories, photos and documents.
   if(meaningfulStory(person.biography)||personalArchiveCount>=4) return false
   const first=String(person.name||'this family member').trim().split(/\s+/)[0]
   const section=document.createElement('section')
   section.className='card profile-panel profile-contribution-invite'
   section.innerHTML=`<span class="section-kicker">Family memories</span><h2>Help us tell ${esc(first)}'s story</h2><p>We have only a small amount of personal information about ${esc(first)} at the moment. If you knew ${esc(first)}, your memories can help preserve their story for the family.</p><p class="contribution-note">You don't need to know official dates or records. A photograph, document, short memory or family story can be something future generations would otherwise never know.</p><div class="contribution-prompts"><span>What was ${esc(first)} like?</span><span>What work did they do?</span><span>What did they enjoy?</span><span>What do you remember most?</span></div><div class="contribution-actions"><a class="btn" href="/?view=about#contact">Share a memory or story</a><a class="chapter-record-link" href="/?view=about#contact">Add photos or documents</a></div>`
-  const overview=host.querySelector('.profile-overview')
-  if(overview) overview.insertAdjacentElement('afterend',section); else host.prepend(section)
+  // Sparse profiles need the invitation before the factual/profile panels so family see it immediately.
+  host.prepend(section)
   return true
  }
  install().catch(console.error)
