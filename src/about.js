@@ -28,6 +28,14 @@ app.innerHTML = `
       <p>I already have many more discoveries and updates waiting to be added over the coming weeks, so please check back regularly for new records, photographs and stories.</p>
     </article>
 
+    <article class="about-card about-credits">
+      <span class="about-kicker">Acknowledgements</span>
+      <h2>With Thanks</h2>
+      <p>This archive has also benefited from the generosity of people and organisations who have helped locate or share historical material.</p>
+      <p><strong><a href="https://www.youwho.ie/" target="_blank" rel="noopener">YouWho.ie — Stillorgan History</a></strong><br>With sincere thanks for responding to a family-history enquiry and supplying the image of Edward Medcalf’s baptismal-register entry.</p>
+      <p class="muted"><small>Further acknowledgements will be added as new material and assistance are received.</small></p>
+    </article>
+
     <article class="about-card about-dedication">
       <div class="dedication-copy">
         <h2>In Memory of My Mum</h2>

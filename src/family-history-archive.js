@@ -172,6 +172,38 @@ const archive = {
     ],
     notes: ['The 1922 marriage record uses or records the name Anthony. It is not yet established whether Anthony was a formal middle name, an alternative given name or another usage.'],
   },
+  'edward medcalf': {
+    aliases: ['Edward Metcalf', 'Edward Metcalfe'],
+    heading: 'Born at Galloping Green',
+    summary: 'Edward Medcalf was born at Galloping Green, Stillorgan, in 1900, the son of Enoch Medcalf and Mary King.',
+    chapters: [
+      {
+        title: 'Birth and baptism',
+        text: 'Edward was born on 24 October 1900 at Galloping Green, Stillorgan. He was the son of Enoch Medcalf and Mary King. A surviving image of his baptismal-register entry was supplied directly to the family by YouWho.ie, the Stillorgan local-history website.',
+        evidence: 'verified_primary',
+      },
+      {
+        title: 'Childhood household',
+        text: 'Edward appears with his parents and siblings in the family’s verified 1901 and 1911 Census evidence, connecting the baptism entry with the established Medcalf household in Stillorgan.',
+        evidence: 'corroborated_family_history',
+      },
+    ],
+    documents: [
+      {
+        title: 'Baptismal register entry — Edward Medcalf',
+        date: '1900',
+        publication: 'Historical baptismal register image',
+        image: '/family-archive/edward-medcalf-baptism-register-youwho.webp',
+        original: '/family-archive/edward-medcalf-baptism-register-youwho.jpg',
+        caption: 'The baptismal-register entry for Edward Medcalf, son of Enoch Medcalf and Mary King of Galloping Green, Stillorgan.',
+        context: 'The register image supports Edward’s existing family record and his connection to the Medcalf household documented at Galloping Green. Faint or cropped wording has not been reconstructed.',
+        provenance: 'Image kindly supplied directly to Paul Butler by YouWho.ie, the Stillorgan local-history website, following a family-history enquiry.',
+        evidence: 'verified_primary',
+        provenanceEvidence: 'family_archive',
+      },
+    ],
+    notes: ['Credit: YouWho.ie supplied the surviving baptismal-register image used on this profile.'],
+  },
   'mary kavanagh': {
     aliases: ['Mary Metcalfe'],
     heading: 'Marriage to William Metcalfe',
@@ -246,6 +278,11 @@ const verifiedRecords = {
     { title: 'Birth', detail: '6 May 1896 · Dublin South registration district', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-3084449' },
     { title: '1901 Census', detail: 'William Medcalf · age 4 · son and scholar · 6 Galloping Green, Stillorgan', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=5536925&c20_year=1901', linkLabel: 'View 1901 census — National Archives' },
     { title: '1911 Census', detail: 'William Medcalf · age 14 · son and apprentice grocer · 33 Stillorgan Road', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=454242&c20_year=1911', linkLabel: 'View 1911 census — National Archives' },
+  ],
+  'edward-medcalf': [
+    { title: 'Baptism', detail: 'Edward Medcalf · 1900 · Galloping Green, Stillorgan', url: '/family-archive/edward-medcalf-baptism-register-youwho.jpg', linkLabel: 'View baptismal register image' },
+    { title: '1901 Census', detail: 'Edward Medcalf · infant son · 6 Galloping Green, Stillorgan', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=5536924&c20_year=1901', linkLabel: 'View family household — National Archives' },
+    { title: '1911 Census', detail: 'Edward Medcalf · son · 33 Stillorgan Road', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=454237&c20_year=1911', linkLabel: 'View family household — National Archives' },
   ],
   'mary-kavanagh': [
     { title: 'Birth', detail: '10 June 1897 · Sallynoggin · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-2979498' },

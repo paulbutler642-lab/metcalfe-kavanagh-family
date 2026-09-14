@@ -1,4 +1,4 @@
-import { familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260914-william-boxing-1';
+import { familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260914-edward-baptism-1';
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const TABLES=['people','parent_child','couples','person_relationships','media','media_people','research_sources','research_source_people','stories','guestbook_entries','guestbook_contacts','profile_change_log','site_stats'];
