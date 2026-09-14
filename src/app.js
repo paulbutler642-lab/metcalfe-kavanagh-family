@@ -246,7 +246,7 @@ async function profile() {
     return
   }
   const history = familyHistoryFor(p)
-  const verifiedRecords = verifiedRecordsFor(p)
+  const staticVerifiedRecords = verifiedRecordsFor(p)
   const [rr, relationshipRows] = await Promise.all([rels(), profileRelationships()]),
     by = Object.fromEntries(ps.map((x) => [x.id, x]))
   const related = relationshipRows
@@ -285,6 +285,15 @@ async function profile() {
     documents = med.filter((m) => m.media_type === 'document'),
     personSources = (sourceLinks || []).map((x) => ({ ...x.research_sources, research_source_people: [x] })).filter((x) => x.id),
     profileImages = new Map((allMedia || []).filter((m) => m.is_profile_photo && m.media_type === 'photo' && m.person_id).map((m) => [m.person_id, thumbUrl(m)]))
+  const databaseVerifiedRecords = personSources
+    .filter((source) => source.evidence_status === 'verified' && /^https?:\/\//i.test(source.external_url || ''))
+    .map((source) => ({
+      title: source.title,
+      detail: source.summary || [source.event_date_text, source.place_text, source.repository].filter(Boolean).join(' • '),
+      url: source.external_url,
+      linkLabel: `View record — ${source.repository || 'original source'}`,
+    }))
+  const verifiedRecords = [...new Map([...staticVerifiedRecords, ...databaseVerifiedRecords].map((record) => [record.url || record.title, record])).values()]
   const cards = (list) => list.map((m) => `<a class="profile-media-card" target="_blank" rel="noopener" href="${mediaUrl(m)}">${m.media_type === 'photo' ? `<img src="${m.thumbnail_path ? `${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name || 'family-media'}/${m.thumbnail_path}` : mediaUrl(m)}" alt="${esc(m.title || 'Family photograph')}" loading="lazy">` : '<span class="profile-doc-icon">📜</span>'}<div><strong>${esc(m.title || m.original_filename || (m.media_type === 'photo' ? 'Family photograph' : 'Family document'))}</strong><small>${esc([m.category, m.event_date_text].filter(Boolean).join(' • '))}</small></div></a>`).join('')
   const personTile = (person, label = '') => `<a class="kin-card" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : avatarMarkup(person)}<span><strong>${esc(person.name)}</strong><small>${esc(label || years(person) || 'Family member')}</small></span></a>`
   const treeNode = (person, kind = '') => (person ? `<a class="focus-node ${kind}" href="/?view=profile&id=${encodeURIComponent(person.id)}">${profileImages.has(person.id) ? `<img src="${profileImages.get(person.id)}" alt="">` : avatarMarkup(person)}<strong>${esc(person.name)}</strong><small>${esc(years(person))}</small></a>` : '')
