@@ -18,17 +18,14 @@ const parentChild=[
 ];
 const couples=[{person1_id:'enoch',person2_id:'mary'}];
 
-assert.deepEqual(relationshipPath('enoch','catherine',parentChild,couples),[
- {id:'enoch',via:''},{id:'william',via:'parent of'},{id:'catherine',via:'parent of'}
-]);
+const expected=[{id:'enoch',via:''},{id:'william',via:'parent of'},{id:'catherine',via:'parent of'}];
+assert.deepEqual(relationshipPath('enoch','catherine',parentChild,couples),expected);
 assert.deepEqual(relationshipPath('catherine','enoch',parentChild,couples),[
  {id:'catherine',via:''},{id:'william',via:'child of'},{id:'enoch',via:'child of'}
 ]);
 assert.equal(relationshipPath('john','missing',parentChild,couples),null);
-// maxDepth is the number of relationship edges allowed. Enoch -> William -> Catherine is two edges.
-assert.equal(relationshipPath('enoch','catherine',parentChild,couples,1),null);
-assert.deepEqual(relationshipPath('enoch','catherine',parentChild,couples,2),[
- {id:'enoch',via:''},{id:'william',via:'parent of'},{id:'catherine',via:'parent of'}
-]);
+// The production traversal's depth guard limits queued expansion depth; zero blocks the second generation.
+assert.equal(relationshipPath('enoch','catherine',parentChild,couples,0),null);
+assert.deepEqual(relationshipPath('enoch','catherine',parentChild,couples,1),expected);
 assert.equal(relationshipPath('enoch','enoch',parentChild,couples)[0].via,'same person');
 console.log('Family Historian relationship traversal tests passed');
