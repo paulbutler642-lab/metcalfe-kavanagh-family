@@ -8,14 +8,22 @@ async function table(name,select='*'){
   if(!r.ok)throw new Error(`Could not read ${name} (${r.status})`);return r.json();
 }
 function relevant(question,people,sources,links,parentChild,couples,relationships){
-  const words=new Set(question.toLowerCase().match(/[a-zà-ž0-9]+/g)?.filter(x=>x.length>2&&!['the','why','were','what','where','when','which','family','children','born','different','places','about','show','tell'].includes(x))||[]);
-  const score=o=>{const text=JSON.stringify(o).toLowerCase();let n=0;for(const w of words)if(text.includes(w))n+=w.length>5?3:1;return n};
-  let selected=people.map(p=>({p,s:score(p)})).filter(x=>x.s).sort((a,b)=>b.s-a.s).slice(0,12).map(x=>x.p);
-  if(!selected.length)selected=people.slice(0,12);const ids=new Set(selected.map(p=>p.id));
+  const stop=new Set(['the','why','were','what','where','when','which','family','children','child','born','different','places','place','about','show','tell','does','did','have','from','with','their','there','this','that']);
+  const words=[...new Set(question.toLowerCase().match(/[a-zà-ž0-9]+/g)?.filter(x=>x.length>2&&!stop.has(x))||[])];
+  const score=o=>{const text=JSON.stringify(o).toLowerCase();let n=0;for(const w of words)if(text.includes(w))n+=w.length>5?4:2;return n};
+  const nameScore=p=>{const name=clean(p.name||p.full_name||[p.first_name,p.last_name].filter(Boolean).join(' ')).toLowerCase();let n=0;for(const w of words)if(name.split(/\s+/).some(part=>part===w||part.startsWith(w)||w.startsWith(part)))n+=8;return n};
+  const ranked=people.map(p=>({p,s:nameScore(p)+score(p)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s);
+  // Never substitute arbitrary family members when the question does not match a person.
+  // That previously made a question about one ancestor look as if unrelated people were evidence.
+  let selected=ranked.slice(0,8).map(x=>x.p);
+  const ids=new Set(selected.map(p=>p.id));
+  // Expand only from genuinely matched people, so their parents, children, partners and explicit
+  // relationships can help answer questions such as birthplace patterns or kinship.
   for(const row of parentChild){if(ids.has(row.parent_id))ids.add(row.child_id);if(ids.has(row.child_id))ids.add(row.parent_id)}
   for(const row of couples){if(ids.has(row.person1_id))ids.add(row.person2_id);if(ids.has(row.person2_id))ids.add(row.person1_id)}
   for(const row of relationships){if(ids.has(row.person_id))ids.add(row.related_person_id);if(ids.has(row.related_person_id))ids.add(row.person_id)}
-  selected=people.filter(p=>ids.has(p.id)).slice(0,30);const sourceIds=new Set(links.filter(l=>ids.has(l.person_id)).map(l=>l.research_source_id));
+  selected=people.filter(p=>ids.has(p.id)).slice(0,30);
+  const sourceIds=new Set(links.filter(l=>ids.has(l.person_id)).map(l=>l.research_source_id));
   const selectedSources=sources.filter(s=>sourceIds.has(s.id)||score(s)>0).sort((a,b)=>score(b)-score(a)).slice(0,30);
   return {people:selected,sources:selectedSources,sourceLinks:links.filter(l=>sourceIds.has(l.research_source_id)).slice(0,80),parentChild:parentChild.filter(r=>ids.has(r.parent_id)||ids.has(r.child_id)),couples:couples.filter(r=>ids.has(r.person1_id)||ids.has(r.person2_id)),relationships:relationships.filter(r=>ids.has(r.person_id)||ids.has(r.related_person_id))};
 }
@@ -26,7 +34,8 @@ function fallback(evidence){
     const bits=[p.birth_date||p.birth_date_text,p.birth_place||p.birth_place_text,p.death_date||p.death_date_text,p.death_place||p.death_place_text].filter(Boolean).map(clean);
     if(name&&bits.length)facts.push(`${name}: ${bits.join(' • ')}`);
   }
-  return {title:'What the family archive shows',summary:'I found relevant family records, but the AI interpretation service is temporarily unavailable. The verified archive evidence below is still available to review. No family record has been changed.',verifiedFacts:facts,interpretations:[],unknowns:['A historical interpretation could not be generated on this request.'],sourceIds:take(evidence.sources,12).map(s=>String(s.id))};
+  if(!facts.length)return {title:'Not enough matching archive evidence',summary:'The family archive does not currently contain enough clearly matching evidence to answer this question safely. I will not substitute unrelated family records or guess. No family record has been changed.',verifiedFacts:[],interpretations:[],unknowns:['A historical interpretation could not be generated on this request.'],sourceIds:[]};
+  return {title:'What the matching family records show',summary:'The AI interpretation service is temporarily unavailable, so I am showing only the matching archive evidence rather than guessing an explanation. No family record has been changed.',verifiedFacts:facts,interpretations:[],unknowns:['A historical interpretation could not be generated on this request.'],sourceIds:take(evidence.sources,12).map(s=>String(s.id))};
 }
 function runtimeOidc(req){
   const header=req.headers?.['x-vercel-oidc-token'];
@@ -39,8 +48,6 @@ export default async function handler(req,res){
   try{
     const [people,sources,links,parentChild,couples,relationships]=await Promise.all([table('people'),table('research_sources'),table('research_source_people'),table('parent_child'),table('couples'),table('person_relationships')]);
     const evidence=relevant(question,people,sources,links,parentChild,couples,relationships),recordCount=evidence.people.length+evidence.sources.length;
-    // Vercel Functions receive a short-lived OIDC token on each request. Prefer it over
-    // any long-lived key so production needs no manually managed AI Gateway secret.
     const gatewayToken=runtimeOidc(req)||clean(process.env.AI_GATEWAY_API_KEY);
     let out;
     if(gatewayToken){
