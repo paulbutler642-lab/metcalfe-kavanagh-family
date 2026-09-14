@@ -81,3 +81,19 @@ Reciprocal profile relationships before adding visitor analytics: `347d31bc7f68c
 To restore a named version, move `main` to its backup branch or revert later commits. Vercel deploys `main` automatically.
 
 The Supabase project remains separate from the website source. Schema-changing work must be tested before promotion and recorded in versioned SQL. Restore website code without deleting newer family records or uploaded files unless that data rollback is explicitly approved.
+
+## Database backup and recovery procedure
+
+The Admin page includes **Backup & Recovery** tools. Use **Download full backup** after significant research or media updates and at least monthly. The JSON contains all family tables plus a media manifest with every bucket and storage path.
+
+Use **Validate a backup file** immediately after downloading. A successful validation confirms the file format and reports the people and media counts. Keep at least one recent copy outside GitHub, Vercel and Supabase.
+
+Recovery order:
+
+1. Preserve the current database before making any recovery change.
+2. Validate the selected JSON backup in Admin.
+3. Restore tables in dependency order: people, relationships, research sources, source links, media, media links, stories, visitor records and change history.
+4. Use the media manifest to verify every referenced object still exists in its recorded Supabase Storage bucket.
+5. Check William Metcalfe, Mary Kavanagh and Enoch Medcalf, then verify the family tree and archive before reopening editing.
+
+Database restoration is intentionally not a one-click browser action because it can overwrite newer family research. It should be performed through a reviewed Supabase SQL/import operation using the validated backup while Row Level Security remains enabled.

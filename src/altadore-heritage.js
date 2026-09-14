@@ -1,8 +1,8 @@
 const ALTADORE_IMAGES=[
-'https://irishhistorichouses.com/wp-content/uploads/2021/10/dsc_0659-1.jpeg?w=1600',
-'https://irishhistorichouses.com/wp-content/uploads/2021/10/dsc_0661-1.jpeg?w=1600',
-'https://irishhistorichouses.com/wp-content/uploads/2021/10/dsc_0663-1.jpeg?w=1600',
-'https://irishhistorichouses.com/wp-content/uploads/2021/10/dsc_0668.jpeg?w=1600'
+'/altadore-hero.jpg',
+'/altadore-photo.jpeg',
+'/altadore-garden.jpeg',
+'/altadore-unified-hero.jpg'
 ]
 const sourceUrl='https://irishhistorichouses.com/2020/06/25/altidore-castle-kilpeddar-greystones-county-wicklow/'
 function installAltadore(){

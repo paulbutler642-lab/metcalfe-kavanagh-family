@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /?view=admin
+
+Sitemap: https://metcalfe-kavanagh-family-site.vercel.app/sitemap.xml

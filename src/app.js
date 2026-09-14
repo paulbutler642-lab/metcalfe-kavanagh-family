@@ -217,7 +217,7 @@ async function recordsView() {
       med
         .map((m) => {
           const u = `${cfg.SUPABASE_URL}/storage/v1/object/public/family-media/${m.storage_path}`
-          return `<a class="card record" target="_blank" href="${u}"><div style="font-size:42px">📜</div><h2>${esc(m.title || 'Family record')}</h2><p>${esc(m.description || 'Open document')}</p></a>`
+          return `<a class="card record" target="_blank" rel="noopener" href="${u}"><div style="font-size:42px">📜</div><h2>${esc(m.title || 'Family record')}</h2><p>${esc(m.description || 'Open document')}</p></a>`
         })
         .join('') || '<div class="card record">No records have been added yet.</div>'
     }</div></section>`
@@ -232,7 +232,7 @@ async function galleryView() {
           const base = `${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name || 'family-media'}/`,
             u = base + m.storage_path,
             thumb = base + (m.thumbnail_path || m.storage_path)
-          return `<a class="card" target="_blank" href="${u}"><img src="${thumb}" loading="lazy"><h3>${esc(m.title || 'Family photograph')}</h3><p class="muted">${esc(m.description || '')}</p></a>`
+          return `<a class="card" target="_blank" rel="noopener" href="${u}"><img src="${thumb}" alt="${esc(m.title || 'Family photograph')}" loading="lazy"><h3>${esc(m.title || 'Family photograph')}</h3><p class="muted">${esc(m.description || '')}</p></a>`
         })
         .join('') || '<div class="card">No photographs have been added yet.</div>'
     }</div></section>`
