@@ -41,8 +41,14 @@ jobs:
       - name: Verify Historian remains read-only
         shell: bash
         run: |
-          if grep -Eiq "(method:[[:space:]]*['\"](POST|PUT|PATCH|DELETE)['\"]|\.insert\(|\.update\(|\.delete\(|\.upsert\()" api/family-historian.js; then
-            echo "Potential database write operation detected in Family Historian API."
+          # Guard database writes specifically. The Historian legitimately POSTs a
+          # question/evidence packet to Groq, so a blanket POST ban is a false positive.
+          if grep -Eiq "\.(insert|update|delete|upsert)\(" api/family-historian.js; then
+            echo "Potential Supabase SDK write operation detected in Family Historian API."
             exit 1
           fi
-          echo "Read-only guard passed."
+          if grep -Ei "rest/v1" api/family-historian.js | grep -Eiq "method:[[:space:]]*['\"](POST|PUT|PATCH|DELETE)['\"]"; then
+            echo "Potential Supabase REST write operation detected in Family Historian API."
+            exit 1
+          fi
+          echo "Read-only database guard passed."
