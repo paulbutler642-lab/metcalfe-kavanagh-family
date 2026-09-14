@@ -25,6 +25,10 @@ assert.deepEqual(relationshipPath('catherine','enoch',parentChild,couples),[
  {id:'catherine',via:''},{id:'william',via:'child of'},{id:'enoch',via:'child of'}
 ]);
 assert.equal(relationshipPath('john','missing',parentChild,couples),null);
+// maxDepth is the number of relationship edges allowed. Enoch -> William -> Catherine is two edges.
 assert.equal(relationshipPath('enoch','catherine',parentChild,couples,1),null);
+assert.deepEqual(relationshipPath('enoch','catherine',parentChild,couples,2),[
+ {id:'enoch',via:''},{id:'william',via:'parent of'},{id:'catherine',via:'parent of'}
+]);
 assert.equal(relationshipPath('enoch','enoch',parentChild,couples)[0].via,'same person');
 console.log('Family Historian relationship traversal tests passed');
