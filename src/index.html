@@ -47,16 +47,18 @@
 <link rel="stylesheet" href="/about.css?v=20260913-1">
 <link rel="stylesheet" href="/dedication-mobile.css?v=20260914-1">
 <link rel="stylesheet" href="/quality.css?v=20260914-1">
+<link rel="stylesheet" href="/family-historian.css?v=20260914-1">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/config.js?v=20260911-24"></script>
 </head>
 <body>
-<header class="top"><div class="wrap topin"><a class="brand" href="/"><span class="brand-monogram" aria-hidden="true">M·K</span><strong>The Metcalfe &amp; Kavanagh Family</strong></a><button id="menuButton" class="hamb" aria-label="Open menu">☰</button><nav class="nav"><a href="/?view=about">About &amp; Contact</a><a href="/?view=tree">Tree</a><a href="/?view=people">People</a><a href="/?view=sources">Research</a><a href="/?view=visitors">Visitors’ Book</a><a href="/?view=gallery">Archive</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a></nav></div><div id="mobileMenu" class="mobilemenu"><a href="/?view=about">About &amp; Contact</a><a href="/?view=tree">Family Tree</a><a href="/?view=people">People</a><a href="/?view=sources">Research &amp; Sources</a><a href="/?view=visitors">Visitors’ Book</a><a href="/?view=gallery">Photos &amp; Documents</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a></div></header>
+<header class="top"><div class="wrap topin"><a class="brand" href="/"><span class="brand-monogram" aria-hidden="true">M·K</span><strong>The Metcalfe &amp; Kavanagh Family</strong></a><button id="menuButton" class="hamb" aria-label="Open menu">☰</button><nav class="nav"><a href="/?view=ask">Ask a Question</a><a href="/?view=about">About &amp; Contact</a><a href="/?view=tree">Tree</a><a href="/?view=people">People</a><a href="/?view=sources">Research</a><a href="/?view=visitors">Visitors’ Book</a><a href="/?view=gallery">Archive</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a></nav></div><div id="mobileMenu" class="mobilemenu"><a href="/?view=ask">Ask the Family Historian</a><a href="/?view=about">About &amp; Contact</a><a href="/?view=tree">Family Tree</a><a href="/?view=people">People</a><a href="/?view=sources">Research &amp; Sources</a><a href="/?view=visitors">Visitors’ Book</a><a href="/?view=gallery">Photos &amp; Documents</a><a href="/?view=places">Places</a><a href="/?view=timeline">Timeline</a><a href="/?view=stories">Stories</a></div></header>
 <main id="app"></main>
 <nav class="bottom"><a href="/">⌂<span>Home</span></a><a href="/?view=tree">♧<span>Tree</span></a><a href="/?view=people">●●<span>People</span></a><a href="#" id="bottomMenu">☰<span>Menu</span></a></nav>
 <script type="module">
 const currentView=new URLSearchParams(location.search).get('view')||'home';
 if(currentView==='about') await import('/about.js?v=20260913-1');
+else if(currentView==='ask') await import('/family-historian.js?v=20260914-1');
 else if(currentView==='tree') await import('/tree-v2.js?v=20260913-gender-avatars-2');
 else if(currentView==='people') await import('/people.js?v=20260913-gender-avatars-1');
 else if(currentView==='gallery'||currentView==='archive'||currentView==='records') await import('/gallery.js?v=20260912-media-storage-v1');
