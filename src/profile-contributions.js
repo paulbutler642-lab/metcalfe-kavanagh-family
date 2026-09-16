@@ -1,6 +1,6 @@
 // Invite relatives to contribute memories and archive material when a profile has little personal content.
 const params=new URLSearchParams(location.search)
-const esc=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])
+const esc=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'})[c])
 const meaningfulStory=(text)=>{
   const t=String(text||'').trim()
   return t.length>=220 && !/^no personal life story/i.test(t)
@@ -28,13 +28,11 @@ if(params.get('view')==='profile'){
    const mediaIds=new Set([...(directMedia||[]).map(x=>x.id),...(linkedMedia||[]).map(x=>x.media_id)])
    const personalArchiveCount=mediaIds.size+(stories||[]).length
    if(meaningfulStory(person.biography)||personalArchiveCount>=4) return false
-   // Re-check after async work in case another observer callback completed first.
    if(installed||document.querySelector('.profile-contribution-invite')) return false
    const first=String(person.name||'this family member').trim().split(/\s+/)[0]
    const section=document.createElement('section')
    section.className='card profile-panel profile-contribution-invite profile-contribution-priority'
-   section.innerHTML=`<span class="section-kicker">Family memories</span><h2>Help us tell ${esc(first)}'s story</h2><p>We have only a small amount of personal information about ${esc(first)} at the moment. If you knew ${esc(first)}, your memories can help preserve their story for the family.</p><p class="contribution-note">You don't need to know official dates or records. A photograph, document, short memory or family story can be something future generations would otherwise never know.</p><div class="contribution-prompts"><span>What was ${esc(first)} like?</span><span>What work did they do?</span><span>What did they enjoy?</span><span>What do you remember most?</span></div><div class="contribution-actions"><a class="btn" href="/?view=about#contact">Share a memory or story</a><a class="chapter-record-link" href="/?view=about#contact">Add photos or documents</a></div>`
-   // Place once, directly below the profile tabs and before automated record notices.
+   section.innerHTML=`<span class="section-kicker">Family memories</span><h2>Help us tell ${esc(first)}'s story</h2><p>We have only a small amount of personal information about ${esc(first)} at the moment. If you knew ${esc(first)}, your memories can help preserve their story for the family.</p><p class="contribution-note">You don't need to know official dates or records. A photograph, document, short memory or family story can be something future generations would otherwise never know.</p><div class="contribution-prompts"><span>What was ${esc(first)} like?</span><span>What work did they do?</span><span>What did they enjoy?</span><span>What do you remember most?</span></div><div class="contribution-actions"><a class="btn" href="/?view=about#contact">Share a memory or story</a><a class="chapter-record-link" href="/?view=gallery&person=${encodeURIComponent(id)}#uploadPanel">Add photos or documents</a></div>`
    const body=document.querySelector('.profile-v1-body .profile-v1-layout')
    if(body) body.insertAdjacentElement('afterbegin',section)
    else host.prepend(section)
