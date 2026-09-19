@@ -3,7 +3,7 @@ const params=new URLSearchParams(location.search);
 if((params.get('view')||'home')==='profile'){
   const personId=params.get('id');
   if(personId&&cfg.SUPABASE_URL&&cfg.SUPABASE_PUBLISHABLE_KEY){
-    const db=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY);
+    const db=window.__SUPABASE_CLIENT__;
     const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
     let running=false,done=false;
     const addBirthName=async()=>{
