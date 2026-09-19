@@ -6,8 +6,8 @@ create table if not exists public.guestbook_entries (
     check (family_branch in ('Metcalfe','Kavanagh','Both / not sure')),
   visitor_location text check (visitor_location is null or char_length(visitor_location) <= 120),
   message text not null check (char_length(message) between 2 and 1000),
-  status text not null default 'pending'
-    check (status in ('pending','approved','rejected')),
+  status text not null default 'approved'
+    check (status in ('approved','rejected')),
   created_at timestamptz not null default now(),
   reviewed_at timestamptz
 );
@@ -31,7 +31,7 @@ for select to anon, authenticated using (status='approved' or is_site_admin());
 
 drop policy if exists "public submit guestbook" on public.guestbook_entries;
 create policy "public submit guestbook" on public.guestbook_entries
-for insert to anon, authenticated with check (status='pending' and reviewed_at is null);
+for insert to anon, authenticated with check (status='approved' and reviewed_at is null);
 
 drop policy if exists "admins moderate guestbook" on public.guestbook_entries;
 create policy "admins moderate guestbook" on public.guestbook_entries
