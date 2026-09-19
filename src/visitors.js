@@ -1,7 +1,7 @@
 const cfg=window.__APP_CONFIG__||{};
 const app=document.getElementById('app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const db=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY);
+const db=window.__SUPABASE_CLIENT__;
 const mobileMenu=document.getElementById('mobileMenu');
 document.getElementById('menuButton').onclick=()=>mobileMenu.classList.toggle('open');
 document.getElementById('bottomMenu').onclick=e=>{e.preventDefault();mobileMenu.classList.toggle('open');scrollTo({top:0,behavior:'smooth'})};
