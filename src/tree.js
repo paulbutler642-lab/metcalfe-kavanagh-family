@@ -6,7 +6,7 @@ if((params.get('view')||'home')==='tree'){
   const initials=p=>(p.name||'?').split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase();
   const year=s=>{const m=String(s||'').match(/(18|19|20)\d{2}/);return m?m[0]:''};
   const years=p=>{const a=year(p.birth_date_text),b=year(p.death_date_text);return a||b?`${a||'?'} – ${b||''}`:''};
-  const db=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY);
+  const db=window.__SUPABASE_CLIENT__;
 
   const personNode=(p,cls='')=>`<a class="node ${cls}" href="/?view=profile&id=${p.id}"><div class="avatar" style="margin:auto">${escapeHtml(initials(p))}</div><strong>${escapeHtml(p.name)}</strong><small class="muted">${escapeHtml(years(p))}</small></a>`;
 

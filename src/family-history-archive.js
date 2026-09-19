@@ -240,12 +240,12 @@ const archive = {
   },
   'enoch medcalf': {
     aliases: ['Enoch Metcalf', 'Enoch Metcalfe', 'Enock Medcalf', 'Enock Metcalf', 'Enock Metcalfe', 'Anthony Medcalf', 'Anthony Metcalf', 'Anthony Metcalfe'],
-    heading: 'From Altadore to Stillorgan',
-    summary: 'Enoch Medcalf was born at Altadore in 1874 and worked over his lifetime as a groom, railway porter, coachman and gardener.',
+    heading: 'From Altidore to Stillorgan',
+    summary: 'Enoch Medcalf was born at Altidore in 1874 and worked over his lifetime as a groom, railway porter, coachman and gardener.',
     chapters: [
       {
         title: 'Birth and parents',
-        text: 'Enoch was born on 8 September 1874 at Altadore, County Wicklow, the known son of Anthony Metcalf or Medcalf and Sara Jane Byrnes.',
+        text: 'Enoch was born on 8 September 1874 at Altidore, County Wicklow, the known son of Anthony Metcalf or Medcalf and Sara Jane Byrnes.',
         evidence: 'verified_primary',
         recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802',
         recordLabel: 'View 1874 birth record — Irish Genealogy',
@@ -284,7 +284,7 @@ const archive = {
       },
       {
         title: 'Known family',
-        text: 'Hannah Metcalf, baptised at Kilquade on 30 October 1836 to the same parents, locality and paternal occupation, is Anthony’s confirmed sister. Anthony later worked as a gardener, partnered Sara Jane Byrnes, and was the father of Enoch Medcalf, born at Altadore in 1874.',
+        text: 'Hannah Metcalf, baptised at Kilquade on 30 October 1836 to the same parents, locality and paternal occupation, is Anthony’s confirmed sister. Anthony later worked as a gardener, partnered Sara Jane Byrnes, and was the father of Enoch Medcalf, born at Altidore in 1874.',
         evidence: 'corroborated_family_history',
       },
     ],

@@ -2,9 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/</loc></url>
   <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=about</loc></url>
+  <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=ask</loc></url>
   <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=tree</loc></url>
   <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=people</loc></url>
   <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=sources</loc></url>
+  <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=visitors</loc></url>
   <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=gallery</loc></url>
   <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=places</loc></url>
   <url><loc>https://metcalfe-kavanagh-family-site.vercel.app/?view=timeline</loc></url>

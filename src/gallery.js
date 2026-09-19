@@ -1,7 +1,7 @@
 const cfg=window.__APP_CONFIG__||{};
 const app=document.getElementById('app');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'})[c]);
-const db=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY);
+const db=window.__SUPABASE_CLIENT__;
 const publicUrl=m=>`${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name||'family-media'}/${m.storage_path}`;
 const photoCategories=['Portrait','Family / group photo','House / place','Other photo'];
 const documentCategories=['Birth record','Baptism record','Marriage record','Death record','Census record','Military record','Newspaper clipping','Will / probate','Other document'];

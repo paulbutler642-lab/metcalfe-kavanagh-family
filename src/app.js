@@ -26,7 +26,7 @@ if (!cfg.SUPABASE_URL || !cfg.SUPABASE_PUBLISHABLE_KEY) {
   app.innerHTML = header('Site configuration needed', 'The family archive is ready, but the Supabase connection has not yet been configured in Vercel.') + '<section class="section"><div class="wrap"><div class="status error">Missing SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY.</div></div></section>'
   throw new Error('Missing Supabase config')
 }
-const db = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_PUBLISHABLE_KEY)
+const db = window.__SUPABASE_CLIENT__
 async function people() {
   const { data, error } = await db.from('people').select('*').order('name')
   if (error) throw error

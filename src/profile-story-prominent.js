@@ -18,7 +18,7 @@ if (params.get('view') === 'profile') {
     const cfg = window.__APP_CONFIG__ || {}
     let person = null
     if (id && cfg.SUPABASE_URL && cfg.SUPABASE_PUBLISHABLE_KEY && window.supabase) {
-      const db = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_PUBLISHABLE_KEY)
+      const db = window.__SUPABASE_CLIENT__
       const { data } = await db.from('people').select('*').eq('id', id).maybeSingle()
       person = data || null
     }

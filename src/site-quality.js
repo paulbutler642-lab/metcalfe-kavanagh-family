@@ -30,9 +30,10 @@ const descriptions={
   timeline:'Follow the Metcalfe and Kavanagh family story in chronological order.',
   stories:'Read evidence-based stories from the Metcalfe and Kavanagh family archive.',
   evidence:'Learn how records, newspapers, family archives and oral histories are assessed and labelled.',
-  admin:'Secure administration for the Metcalfe and Kavanagh family archive.'
+  admin:'Secure administration for the Metcalfe and Kavanagh family archive.',
+  ask:'Ask evidence-based questions about people, relationships, places and events in the family archive.'
 };
-const titles={home:'The Metcalfe & Kavanagh Family',about:'About & Contact',tree:'Family Tree',people:'People',sources:'Research & Sources',visitors:'Visitors’ Book',gallery:'Photos & Documents',places:'Family Places',timeline:'Family Timeline',stories:'Family Stories',evidence:'How We Verify Evidence',admin:'Administration'};
+const titles={home:'The Metcalfe & Kavanagh Family',about:'About & Contact',ask:'Ask the Family Historian',tree:'Family Tree',people:'People',sources:'Research & Sources',visitors:'Visitors’ Book',gallery:'Photos & Documents',places:'Family Places',timeline:'Family Timeline',stories:'Family Stories',evidence:'How We Verify Evidence',admin:'Administration'};
 function meta(name,property){let el=document.head.querySelector(property?`meta[property="${name}"]`:`meta[name="${name}"]`);if(!el){el=document.createElement('meta');el.setAttribute(property?'property':'name',name);document.head.append(el)}return el}
 function applyMeta(title,description,url=location.href){document.title=title;meta('description').content=description;meta('og:title',true).content=title;meta('og:description',true).content=description;meta('og:url',true).content=url;meta('twitter:title').content=title;meta('twitter:description').content=description;let c=document.querySelector('link[rel="canonical"]');if(!c){c=document.createElement('link');c.rel='canonical';document.head.append(c)}c.href=url}
 if(view==='profile'){

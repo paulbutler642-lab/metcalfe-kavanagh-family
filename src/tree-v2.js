@@ -1,7 +1,7 @@
 import { avatarMarkup } from '/avatar.js?v=20260913-gender-avatars-2';
 const params=new URLSearchParams(location.search);
 if((params.get('view')||'home')==='tree'){
-const cfg=window.__APP_CONFIG__||{},root=document.getElementById('app'),db=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY);
+const cfg=window.__APP_CONFIG__||{},root=document.getElementById('app'),db=window.__SUPABASE_CLIENT__;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const unique=a=>[...new Map(a.filter(Boolean).map(x=>[String(x.id),x])).values()];
 const yr=v=>String(v||'').match(/(?:17|18|19|20)\d{2}/)?.[0]||'';

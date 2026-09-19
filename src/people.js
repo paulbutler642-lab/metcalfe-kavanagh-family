@@ -19,7 +19,7 @@ const years = (p) => {
     b = year(p.death_date_text)
   return a || b ? `${a || '?'} – ${b || ''}` : ''
 }
-const db = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_PUBLISHABLE_KEY)
+const db = window.__SUPABASE_CLIENT__
 const header = (t, s) => `<section class="heritage"><div class="wrap"><h1>${esc(t)}</h1><p>${esc(s)}</p></div></section>`
 
 const mobileMenu = document.getElementById('mobileMenu')
