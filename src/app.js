@@ -53,10 +53,35 @@ async function profileRelationships() {
 function personCard(p) {
   return `<a class="card person" href="/?view=profile&id=${p.id}">${avatarMarkup(p)}<div><strong>${esc(p.name)}</strong><div class="muted">${esc(years(p) || p.relation_label || 'Family member')}</div>${p.birth_place ? `<small>${esc(p.birth_place)}</small>` : ''}</div></a>`
 }
+const nameKey = (value) => String(value || '').toLowerCase().replace(/metcalfe|medcalf|metcalf/g, 'metcalf').replace(/[^a-z]/g, '')
+const featuredDetails = [
+  { names: ['William Metcalfe', 'William Medcalf'], role: 'Soldier, Army boxer and grandfather at the heart of this archive' },
+  { names: ['Mary Kavanagh', 'Mary Metcalfe'], role: 'Grandmother connecting the Kavanagh and Metcalfe family stories' },
+  { names: ['Enoch Medcalf', 'Enock Medcalf', 'Enoch Metcalfe'], role: 'Born at Altidore; later the subject of a documented 1939 inquest' },
+  { names: ['Anthony Medcalf', 'Anthony Metcalf', 'Anthony Metcalfe'], role: 'Gardener associated with Altidore Estate and Enoch’s father' },
+]
+function featuredAncestorCard(person, role) {
+  return `<a class="card person featured-ancestor" href="/?view=profile&id=${encodeURIComponent(person.id)}">${avatarMarkup(person)}<div><strong>${esc(person.name)}</strong><div class="muted">${esc(years(person) || person.relation_label || 'Family ancestor')}</div><small>${esc(role)}</small></div></a>`
+}
+const recentDate = (value) => {
+  if (!value) return ''
+  const date = new Date(value)
+  return Number.isNaN(date.valueOf()) ? '' : new Intl.DateTimeFormat('en-IE', { day: 'numeric', month: 'short', year: 'numeric' }).format(date)
+}
+function recentCard(item) {
+  const type = item.kind === 'record' ? 'Research record' : item.media_type === 'document' ? 'Document' : 'Photograph'
+  const href = item.kind === 'record' ? '/?view=sources' : '/?view=gallery'
+  const title = item.title || item.description || `New ${type.toLowerCase()}`
+  return `<a class="card recent-item" href="${href}"><span class="recent-type">${esc(type)}</span><strong>${esc(title)}</strong>${item.summary || item.description ? `<p>${esc(item.summary || item.description)}</p>` : ''}<small>${esc(recentDate(item.created_at) || 'Recently added')}</small></a>`
+}
 async function home() {
-  const ps = await people()
-  const featured = ['William Metcalfe', 'Mary Kavanagh', 'Enoch Medcalf', 'Mary King'].map((n) => ps.find((p) => p.name === n)).filter(Boolean)
-  app.innerHTML = `<section class="hero"><div class="wrap"><h1>The Metcalfe & Kavanagh Family</h1><p>Our Family History • Our Stories • Our Heritage</p><a class="btn" href="/?view=tree">Explore Our Family Tree</a></div></section><section class="section"><div class="wrap"><a class="feature historian-home" href="/?view=ask"><span class="ico">🔎</span><span><strong>Ask the Family Historian</strong><small>Ask a question and receive an answer grounded in the family records</small></span><b>Ask a question →</b></a><div class="homegrid"><a class="feature" href="/?view=tree"><span class="ico">🌳</span><strong>Family Tree</strong><small>Explore generations and relationships</small></a><a class="feature" href="/?view=people"><span class="ico">👥</span><strong>People</strong><small>Browse family profiles</small></a><a class="feature" href="/?view=visitors"><span class="ico">✒️</span><strong>Visitors’ Book</strong><small>Sign your name or share a family connection</small></a><a class="feature" href="/?view=gallery"><span class="ico">🗂️</span><strong>Photos &amp; Documents</strong><small>Explore the family archive</small></a></div><div class="subgrid"><a class="feature" href="/?view=sources"><span class="ico">📜</span><strong>Research &amp; Sources</strong><small>Explore census returns and historical records</small></a><a class="feature" href="/?view=places"><span class="ico">📍</span><strong>Places</strong><small>Locations connected to the family</small></a><a class="feature" href="/?view=timeline"><span class="ico">🕰️</span><strong>Timeline</strong><small>The family story in date order</small></a><a class="feature" href="/?view=stories"><span class="ico">✦</span><strong>Stories</strong><small>Lives, memories and family history</small></a></div></div></section><section class="section" style="background:#eef3ee"><div class="wrap"><h2>Featured Ancestors</h2><div class="person-grid">${featured.map(personCard).join('')}</div></div></section>`
+  const [ps, ss, med] = await Promise.all([people(), sources().catch(() => []), media().catch(() => [])])
+  const featured = featuredDetails.map((entry) => ({ entry, person: ps.find((p) => entry.names.some((name) => nameKey(p.name) === nameKey(name))) })).filter((item) => item.person)
+  const recent = [
+    ...ss.map((item) => ({ ...item, kind: 'record' })),
+    ...med.map((item) => ({ ...item, kind: 'media' })),
+  ].filter((item) => item.created_at).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 4)
+  app.innerHTML = `<section class="hero"><div class="wrap"><h1>The Metcalfe & Kavanagh Family</h1><p>Our Family History • Our Stories • Our Heritage</p><a class="btn" href="/?view=tree">Explore Our Family Tree</a></div></section><section class="section"><div class="wrap"><a class="feature historian-home" href="/?view=ask"><span class="ico">🔎</span><span><strong>Ask the Family Historian</strong><small>Ask a question and receive an answer grounded in the family records</small></span><b>Ask a question →</b></a><div class="homegrid"><a class="feature" href="/?view=tree"><span class="ico">🌳</span><strong>Family Tree</strong><small>Explore generations and relationships</small></a><a class="feature" href="/?view=people"><span class="ico">👥</span><strong>People</strong><small>Browse family profiles</small></a><a class="feature" href="/?view=visitors"><span class="ico">✒️</span><strong>Visitors’ Book</strong><small>Sign your name or share a family connection</small></a><a class="feature" href="/?view=gallery"><span class="ico">🗂️</span><strong>Photos &amp; Documents</strong><small>Explore the family archive</small></a></div><div class="subgrid"><a class="feature" href="/?view=sources"><span class="ico">📜</span><strong>Research &amp; Sources</strong><small>Explore census returns and historical records</small></a><a class="feature" href="/?view=places"><span class="ico">📍</span><strong>Places</strong><small>Locations connected to the family</small></a><a class="feature" href="/?view=timeline"><span class="ico">🕰️</span><strong>Timeline</strong><small>The family story in date order</small></a><a class="feature" href="/?view=stories"><span class="ico">✦</span><strong>Stories</strong><small>Lives, memories and family history</small></a></div></div></section><section class="section featured-ancestors-section"><div class="wrap"><div class="home-section-head"><div><span>Central family stories</span><h2>Featured Ancestors</h2></div><a href="/?view=people">View everybody →</a></div><div class="person-grid">${featured.map(({ person, entry }) => featuredAncestorCard(person, entry.role)).join('')}</div></div></section>${recent.length ? `<section class="section recent-section"><div class="wrap"><div class="home-section-head"><div><span>Growing family archive</span><h2>Recently added</h2></div><a href="/?view=gallery">Explore the archive →</a></div><div class="recent-grid">${recent.map(recentCard).join('')}</div></div></section>` : ''}`
 }
 async function peopleView() {
   const ps = await people()
