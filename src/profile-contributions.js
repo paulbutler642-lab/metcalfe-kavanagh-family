@@ -17,7 +17,7 @@ if(params.get('view')==='profile'){
   try {
    const id=params.get('id'),cfg=window.__APP_CONFIG__||{}
    if(!id||!cfg.SUPABASE_URL||!cfg.SUPABASE_PUBLISHABLE_KEY||!window.supabase) return false
-   const db=window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY)
+   const db=window.__SUPABASE_CLIENT__
    const [{data:person},{data:directMedia},{data:linkedMedia},{data:stories}]=await Promise.all([
     db.from('people').select('*').eq('id',id).maybeSingle(),
     db.from('media').select('id,media_type').eq('person_id',id),
