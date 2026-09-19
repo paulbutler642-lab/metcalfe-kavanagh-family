@@ -1,4 +1,4 @@
-// Redeployed after the owner's private email delivery settings were connected.
+// Redeployed after the owner's private email delivery settings were confirmed.
 const requests = new Map()
 const clean = (value, max = 500) => String(value ?? '').replace(/[\u0000-\u001f]+/g, ' ').trim().slice(0, max)
 const escapeHtml = (value) => clean(value).replace(/[&<>"']/g, char => ({
