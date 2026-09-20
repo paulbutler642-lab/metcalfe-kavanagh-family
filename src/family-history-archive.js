@@ -245,7 +245,7 @@ const archive = {
     chapters: [
       {
         title: 'Birth and parents',
-        text: 'Enoch was born on 8 September 1874 at Altidore, County Wicklow, the known son of Anthony Metcalf or Medcalf and Sara Jane Byrnes.',
+        text: 'Enoch was born on 8 September 1874 at Altidore, County Wicklow. His civil birth registration names his father as Anthony Metcalf of Altidore, occupation herd, and his mother as Sarah Jane Metcalf, formerly Burns. Catherine Hughes of Altidore, who was present at the birth, acted as informant. The birth was registered on 25 September 1874.',
         evidence: 'verified_primary',
         recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802',
         recordLabel: 'View 1874 birth record — Irish Genealogy',
@@ -284,7 +284,7 @@ const archive = {
       },
       {
         title: 'Known family',
-        text: 'Hannah Metcalf, baptised at Kilquade on 30 October 1836 to the same parents, locality and paternal occupation, is Anthony’s confirmed sister. Anthony later worked as a gardener, partnered Sara Jane Byrnes, and was the father of Enoch Medcalf, born at Altidore in 1874.',
+        text: 'Hannah Metcalf, baptised at Kilquade on 30 October 1836 to the same parents, locality and paternal occupation, is Anthony’s confirmed sister. Anthony was the father of Enoch Medcalf, born at Altidore in 1874. Enoch’s civil birth registration records Anthony at Altidore working as a herd and names Enoch’s mother as Sarah Jane Metcalf, formerly Burns. Enoch’s 1895 marriage record later describes Anthony as a gardener.',
         evidence: 'corroborated_family_history',
       },
     ],
@@ -322,7 +322,7 @@ const verifiedRecords = {
     { title: 'Death', detail: '2 October 1930 · Rathdown · aged 5', url: 'https://www.irishgenealogy.ie/view/?record_id=cide-1710270' },
   ],
   'anthony-medcalf': [
-    { title: 'Birth', detail: 'Enoch Metcalf · 8 September 1874 · Rathdrum', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802' },
+    { title: 'Birth', detail: 'Enoch Metcalf · 8 September 1874 · Altidore · father Anthony Metcalf, herd · mother Sarah Jane Metcalf, formerly Burns', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802' },
     { title: 'Marriage', detail: 'Enoch Medcalf and Mary King · 23 July 1895 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-2226913' },
     { title: 'Death', detail: 'Enoch Medcalf · 5 December 1939 · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=cide-2102615' },
     { title: '1901 Census', detail: 'Enock Medcalf · age 26 · domestic servant coachman and head of family · 6 Galloping Green, Stillorgan · with Mary and sons William, John and Edward', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=5536924&c20_year=1901', linkLabel: 'View 1901 census — National Archives' },
