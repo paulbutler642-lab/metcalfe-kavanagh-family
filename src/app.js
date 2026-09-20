@@ -1,4 +1,4 @@
-import { evidenceLabels, familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260920-enoch-birth-1'
+import { evidenceLabels, familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260920-anthony-sarah-marriage-1'
 import { avatarMarkup } from '/avatar.js?v=20260913-gender-avatars-1'
 import { displayName } from '/display-name.js?v=20260920-1'
 const cfg = window.__APP_CONFIG__ || {}
@@ -370,7 +370,7 @@ async function treeView() {
           .map((x) => ps.find((p) => p.id === x.child_id))
           .filter(Boolean)
       : [],
-    anc = ['Anthony Medcalf', 'Sarah Jane Byrne', 'Enoch Medcalf', 'Mary King', 'Thomas Kavanagh', 'Anne Carroll', 'Owen Kavanagh', 'Elizabeth Kavanagh'].map((n) => by[n]).filter(Boolean)
+    anc = ['Anthony Metcalf', 'Sarah Jane Metcalf', 'Enoch Medcalf', 'Mary King', 'Thomas Kavanagh', 'Anne Carroll', 'Owen Kavanagh', 'Elizabeth Kavanagh'].map((n) => by[n]).filter(Boolean)
   app.innerHTML =
     header('Family Tree', 'Explore the generations that came before us.') +
     `<section class="section"><div class="wrap"><div class="tree-scroll"><div class="tree-stage"><div class="ancestor-row">${anc

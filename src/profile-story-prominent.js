@@ -1,5 +1,5 @@
 // Makes the richest evidence-backed Life Story the prominent introduction on every family profile.
-import { familyHistoryFor } from '/family-history-archive.js?v=20260914-william-war-letter-1'
+import { familyHistoryFor } from '/family-history-archive.js?v=20260920-anthony-sarah-marriage-1'
 
 const params = new URLSearchParams(location.search)
 const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c])

@@ -275,7 +275,7 @@ const archive = {
   'anthony medcalf': {
     aliases: ['Anthony Metcalf', 'Anthony Metcalfe'],
     heading: 'A gardener from Kilquade',
-    summary: 'The parish register establishes Anthony Metcalf’s baptism at Kilquade in 1838 and identifies his parents as John and Elizabeth.',
+    summary: 'The parish register establishes Anthony Metcalf’s baptism at Kilquade in 1838. His 1862 civil marriage record connects him to Sarah Jane Burns and confirms his father as John Metcalf.',
     chapters: [
       {
         title: 'Baptism',
@@ -283,12 +283,41 @@ const archive = {
         evidence: 'verified_primary',
       },
       {
+        title: 'Marriage to Sarah Jane Burns',
+        text: 'Anthony Metcalf married Sarah Jane Burns on 7 September 1862 at the Registrar’s Office in the City of Cork. Both were recorded as of full age and previously unmarried. Anthony was a servant and named his father as John Metcalf, a farmer. Sarah Jane named her father as Patrick Burns, a soldier in the Royal Artillery. The record’s identification is independently supported by their son Enoch’s 1874 birth registration, which names his mother as Sarah Jane Metcalf, formerly Burns.',
+        evidence: 'verified_primary',
+        recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=cima-3312224',
+        recordLabel: 'View 1862 marriage record — Irish Genealogy',
+      },
+      {
         title: 'Known family',
         text: 'Hannah Metcalf, baptised at Kilquade on 30 October 1836 to the same parents, locality and paternal occupation, is Anthony’s confirmed sister. Anthony was the father of Enoch Medcalf, born at Altidore in 1874. Enoch’s civil birth registration records Anthony at Altidore working as a herd and names Enoch’s mother as Sarah Jane Metcalf, formerly Burns. Enoch’s 1895 marriage record later describes Anthony as a gardener.',
         evidence: 'corroborated_family_history',
       },
     ],
-    notes: ['A possible later John and Mary Metcalf household at Kilquade remains a research lead only. Mary is not shown as Anthony’s stepmother and their children are not shown as his half-siblings.', 'Other Wicklow Metcalf families remain unconnected until evidence establishes a relationship.'],
+    notes: ['The marriage register records both Anthony and Sarah Jane as “full age”, meaning at least 21; it does not provide either person’s exact age or date of birth.', 'The couple’s residence wording is difficult to read in the surviving image and has not been presented as a certain transcription.', 'A possible later John and Mary Metcalf household at Kilquade remains a research lead only. Mary is not shown as Anthony’s stepmother and their children are not shown as his half-siblings.', 'Other Wicklow Metcalf families remain unconnected until evidence establishes a relationship.'],
+  },
+  'sarah jane metcalf': {
+    aliases: ['Sarah Jane Burns', 'Sarah Jane Byrne', 'Sarah Jane Byrnes'],
+    heading: 'Sarah Jane Burns of the Metcalf family',
+    summary: 'Sarah Jane Burns married Anthony Metcalf in Cork in 1862. Their marriage record identifies her father as Patrick Burns, a soldier in the Royal Artillery.',
+    chapters: [
+      {
+        title: 'Marriage to Anthony Metcalf',
+        text: 'Sarah Jane Burns married Anthony Metcalf on 7 September 1862 at the Registrar’s Office in the City of Cork. She was recorded as a spinster of full age. Her father was Patrick Burns, a soldier in the Royal Artillery. Anthony was a bachelor and servant whose father was John Metcalf, a farmer.',
+        evidence: 'verified_primary',
+        recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=cima-3312224',
+        recordLabel: 'View 1862 marriage record — Irish Genealogy',
+      },
+      {
+        title: 'Mother of Enoch',
+        text: 'The couple’s son Enoch was born at Altidore, County Wicklow, on 8 September 1874. His civil birth registration names his mother as Sarah Jane Metcalf, formerly Burns, independently confirming the maiden surname recorded at her marriage.',
+        evidence: 'verified_primary',
+        recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802',
+        recordLabel: 'View Enoch’s 1874 birth record — Irish Genealogy',
+      },
+    ],
+    notes: ['“Full age” establishes only that Sarah Jane was at least 21 when she married on 7 September 1862. It places her birth on or before 7 September 1841 but does not establish an exact birth date.', 'Burns is the surname independently supported by both the 1862 marriage and Enoch’s 1874 birth registration. Byrne and Byrnes remain research variants only.'],
   },
 }
 
@@ -298,6 +327,7 @@ const archiveKeyByPersonId = {
   'mary-kavanagh': 'mary kavanagh',
   'anthony-medcalf': 'enoch medcalf',
   'anthony-metcalf-enoch-father': 'anthony medcalf',
+  'sarah-jane-byrne': 'sarah jane metcalf',
 }
 
 const verifiedRecords = {
@@ -328,6 +358,14 @@ const verifiedRecords = {
     { title: '1901 Census', detail: 'Enock Medcalf · age 26 · domestic servant coachman and head of family · 6 Galloping Green, Stillorgan · with Mary and sons William, John and Edward', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=5536924&c20_year=1901', linkLabel: 'View 1901 census — National Archives' },
     { title: '1911 Census', detail: 'Enoch Medcalf · age 36 · domestic gardener and head of family · 33 Stillorgan Road · with Mary and children William, John, Edward, Mary and Hannah', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=454237&c20_year=1911', linkLabel: 'View 1911 census — National Archives' },
     { title: '1926 Census', detail: 'Enoch Medcalf · age 51 · married head of household · Kilmacud Road, Stillorgan · with Mary and daughters Mary and Hannah', url: 'https://nationalarchives.ie/collections/search-the-1926-census/census-record/#a_id=467572', linkLabel: 'View 1926 census — National Archives' },
+  ],
+  'anthony-metcalf-enoch-father': [
+    { title: 'Marriage', detail: 'Anthony Metcalf and Sarah Jane Burns · 7 September 1862 · Registrar’s Office, City of Cork · father John Metcalf, farmer', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-3312224' },
+    { title: 'Son’s birth', detail: 'Enoch Metcalf · 8 September 1874 · Altidore · father Anthony Metcalf, herd', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802' },
+  ],
+  'sarah-jane-byrne': [
+    { title: 'Marriage', detail: 'Sarah Jane Burns and Anthony Metcalf · 7 September 1862 · Registrar’s Office, City of Cork · father Patrick Burns, soldier, Royal Artillery', url: 'https://www.irishgenealogy.ie/view/?record_id=cima-3312224' },
+    { title: 'Son’s birth', detail: 'Enoch Metcalf · 8 September 1874 · Altidore · mother Sarah Jane Metcalf, formerly Burns', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-5809802' },
   ],
   'mary-king': [
     { title: 'Birth', detail: '24 March 1871 · George’s Avenue, Blackrock · Rathdown', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-6205937' },

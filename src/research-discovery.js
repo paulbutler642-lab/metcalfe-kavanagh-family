@@ -1,4 +1,4 @@
-import { verifiedRecordsFor } from '/family-history-archive.js?v=20260914-william-war-letter-1'
+import { verifiedRecordsFor } from '/family-history-archive.js?v=20260920-anthony-sarah-marriage-1'
 
 const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char])
 const year = (value) => String(value || '').match(/\b(1\d{3}|20\d{2})\b/)?.[0] || ''
