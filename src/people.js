@@ -1,5 +1,6 @@
 import { searchTermsFor } from '/family-history-archive.js?v=20260913-1'
 import { avatarMarkup } from '/avatar.js?v=20260913-gender-avatars-1'
+import { displayName } from '/display-name.js?v=20260920-1'
 const cfg = window.__APP_CONFIG__ || {}
 const app = document.getElementById('app')
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
@@ -48,7 +49,7 @@ async function render() {
 
   const card = (p) => {
     const m = profileFor(p.id)
-    return `<a class="card person people-card" href="/?view=profile&id=${encodeURIComponent(p.id)}">${m ? `<img class="people-avatar-img" src="${mediaUrl(m)}" alt="${esc(p.name)}">` : avatarMarkup(p)}<div class="people-card-copy"><strong>${esc(p.name)}</strong><div class="muted">${esc(years(p) || p.relation_label || 'Family member')}</div>${p.birth_place ? `<small>${esc(p.birth_place)}</small>` : ''}${p.biography ? `<p class="people-snippet">${esc(p.biography)}</p>` : ''}</div></a>`
+    return `<a class="card person people-card" href="/?view=profile&id=${encodeURIComponent(p.id)}">${m ? `<img class="people-avatar-img" src="${mediaUrl(m)}" alt="${esc(displayName(p))}">` : avatarMarkup(p)}<div class="people-card-copy"><strong>${esc(displayName(p))}</strong><div class="muted">${esc(years(p) || p.relation_label || 'Family member')}</div>${p.birth_place ? `<small>${esc(p.birth_place)}</small>` : ''}${p.biography ? `<p class="people-snippet">${esc(p.biography)}</p>` : ''}</div></a>`
   }
 
   app.innerHTML =

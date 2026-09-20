@@ -292,6 +292,14 @@ const archive = {
   },
 }
 
+const archiveKeyByPersonId = {
+  'william-metcalfe': 'william metcalfe',
+  'edward-medcalf': 'edward medcalf',
+  'mary-kavanagh': 'mary kavanagh',
+  'anthony-medcalf': 'enoch medcalf',
+  'anthony-metcalf-enoch-father': 'anthony medcalf',
+}
+
 const verifiedRecords = {
   'william-metcalfe': [
     { title: 'Birth', detail: '6 May 1896 · Dublin South registration district', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-3084449' },
@@ -350,6 +358,8 @@ export function verifiedRecordsFor(person) {
 }
 
 export function familyHistoryFor(person) {
+  const personId = String(person?.id || '')
+  if (personId) return archive[archiveKeyByPersonId[personId]] || null
   const key = normalise(person?.name)
   return archive[key] || Object.values(archive).find((item) => item.aliases.some((alias) => normalise(alias) === key)) || null
 }
