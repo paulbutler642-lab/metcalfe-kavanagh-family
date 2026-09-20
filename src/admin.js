@@ -33,7 +33,7 @@ async function renderAdmin(session){
   const discoveryHost=document.createElement('section');document.querySelector('.source-admin').before(discoveryHost);const {mountResearchDiscovery}=await import('/research-discovery.js?v=20260920-anthony-sarah-marriage-1');mountResearchDiscovery(discoveryHost,{people,researchSources});
   const {mountAdminQuality}=await import('/admin-quality.js?v=20260920-anthony-sarah-marriage-1');await mountAdminQuality(document.querySelector('.source-admin'),{db,people,media,researchSources});
   const historyHost=document.createElement('section');document.querySelector('.source-admin').before(historyHost);mountChangeHistory(historyHost,{changes:profileChanges});
-  const analyticsHost=document.createElement('section');historyHost.before(analyticsHost);const {mountAdminAnalytics}=await import('/analytics.js?v=20260912-1');await mountAdminAnalytics(analyticsHost,{db});
+  const analyticsHost=document.createElement('section');historyHost.before(analyticsHost);const {mountAdminAnalytics}=await import('/analytics.js?v=20260920-visitor-insights-1');await mountAdminAnalytics(analyticsHost,{db,people});
   const list=document.getElementById('adminPeopleList'),editor=document.getElementById('adminEditor'),search=document.getElementById('adminPersonSearch');
   const gedcomHost=document.createElement('div');document.querySelector('.source-admin').before(gedcomHost);const {mountGedcomImporter}=await import('/gedcom-import.js?v=20260912-1');mountGedcomImporter(gedcomHost,{db,people,session});
   document.getElementById('adminSignOut').onclick=async()=>{await db.auth.signOut();location.href='/?view=admin'};
