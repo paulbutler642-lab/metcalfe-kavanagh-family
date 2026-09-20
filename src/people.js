@@ -39,8 +39,9 @@ async function render() {
     photos = media || []
   const profileFor = (id) => photos.find((m) => m.person_id === id && m.is_profile_photo)
   const mediaUrl = (m) => (m ? `${cfg.SUPABASE_URL}/storage/v1/object/public/${m.bucket_name || 'family-media'}/${m.thumbnail_path || m.storage_path}` : '')
-  const isMetcalfe = (p) => /metcalfe/i.test(p.family_line || '') || /children/i.test(p.family_line || '')
-  const isKavanagh = (p) => /^kavanagh$/i.test((p.family_line || '').trim())
+  const familyNames = (p) => [p.family_line, p.name, p.birth_name].filter(Boolean).join(' ')
+  const isMetcalfe = (p) => /metcalfe|medcalf/i.test(familyNames(p)) || /children/i.test(p.family_line || '')
+  const isKavanagh = (p) => /\bkavanagh\b/i.test(familyNames(p))
   const groups = {
     metcalfe: ps.filter(isMetcalfe),
     kavanagh: ps.filter(isKavanagh),
