@@ -1,4 +1,4 @@
-import { evidenceLabels, familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260928-enoch-inquest-1'
+import { evidenceLabels, familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260928-enoch-grouped-2'
 import { avatarMarkup } from '/avatar.js?v=20260913-gender-avatars-1'
 import { displayName } from '/display-name.js?v=20260920-1'
 const cfg = window.__APP_CONFIG__ || {}
@@ -311,7 +311,12 @@ async function profile() {
     documents = med.filter((m) => m.media_type === 'document'),
     personSources = (sourceLinks || []).map((x) => ({ ...x.research_sources, research_source_people: [x] })).filter((x) => x.id),
     profileImages = new Map((allMedia || []).filter((m) => m.is_profile_photo && m.media_type === 'photo' && m.person_id).map((m) => [m.person_id, thumbUrl(m)]))
-  const databaseVerifiedRecords = personSources
+  // Enoch's full inquest account is already beside its transcription in his history.
+  // His son's marriage belongs on John's profile; Enoch's part is noted briefly above.
+  const displaySources = p.id === 'anthony-medcalf'
+    ? personSources.filter((source) => !['a97a680e-a8e8-4891-ada6-de609d91f2cb', '03947149-3905-4e39-a4b1-8e57f95c34fc'].includes(source.id))
+    : personSources
+  const databaseVerifiedRecords = displaySources
     .filter((source) => source.evidence_status === 'verified' && /^https?:\/\//i.test(source.external_url || ''))
     .map((source) => ({
       title: source.title,
@@ -335,7 +340,7 @@ async function profile() {
     ['story', 'Life Story', !!p.biography],
     ['family', 'Family', parents.length + siblings.length + spouses.length + children.length],
     ['photos', 'Photos', photos.length],
-    ['sources', 'Research', personSources.length],
+    ['sources', 'Research', displaySources.length],
     ['places', 'Places', p.birth_place || p.death_place],
     ['timeline', 'Timeline', p.birth_date_text || p.death_date_text],
   ].filter((x) => x[2])
@@ -351,7 +356,7 @@ async function profile() {
           )
           .join('')}</div></section>`
       : ''
-  }<section id="story" class="card profile-panel"><span class="section-kicker">Their story</span><h2>Life Story</h2><p>${esc(p.biography || 'No personal life story has been added yet.').replace(/\n/g, '<br>')}</p></section>${personSources.length ? `<section id="sources" class="card profile-panel"><div class="profile-section-head"><h2>Research &amp; Sources <span>${personSources.length}</span></h2><a href="/?view=sources">Search all records</a></div><div class="profile-source-list">${personSources.map((s) => sourceCard(s, by)).join('')}</div></section>` : ''}${photos.length ? `<section id="photos" class="card profile-panel"><div class="profile-section-head"><h2>Photos <span>${photos.length}</span></h2><a href="/?view=gallery&person=${encodeURIComponent(p.id)}&type=photo">View all</a></div><div class="profile-media-grid">${cards(photos)}</div></section>` : ''}${documents.length ? `<section class="card profile-panel"><div class="profile-section-head"><h2>Documents <span>${documents.length}</span></h2></div><div class="profile-media-grid">${cards(documents)}</div></section>` : ''}<section class="profile-shortcuts"><a class="card" href="#story"><span>✦</span><strong>Read Life Story</strong><small>Memories and information about ${esc(displayName(p))}</small></a>${photos.length ? `<a class="card" href="#photos"><span>▧</span><strong>Browse Photos</strong><small>Photographs linked to this profile</small></a>` : ''}<a class="card" href="/?view=tree&amp;focus=${encodeURIComponent(p.id)}"><span>♧</span><strong>Explore Family Tree</strong><small>See the wider family across generations</small></a><a id="timeline" class="card" href="/?view=timeline"><span>◷</span><strong>View Timeline</strong><small>Explore the family story in date order</small></a></section></div></div></section>`
+  }<section id="story" class="card profile-panel"><span class="section-kicker">Their story</span><h2>Life Story</h2><p>${esc(p.biography || 'No personal life story has been added yet.').replace(/\n/g, '<br>')}</p></section>${displaySources.length ? `<section id="sources" class="card profile-panel"><div class="profile-section-head"><h2>Research &amp; Sources <span>${displaySources.length}</span></h2><a href="/?view=sources">Search all records</a></div><div class="profile-source-list">${displaySources.map((s) => sourceCard(s, by)).join('')}</div></section>` : ''}${photos.length ? `<section id="photos" class="card profile-panel"><div class="profile-section-head"><h2>Photos <span>${photos.length}</span></h2><a href="/?view=gallery&person=${encodeURIComponent(p.id)}&type=photo">View all</a></div><div class="profile-media-grid">${cards(photos)}</div></section>` : ''}${documents.length ? `<section class="card profile-panel"><div class="profile-section-head"><h2>Documents <span>${documents.length}</span></h2></div><div class="profile-media-grid">${cards(documents)}</div></section>` : ''}<section class="profile-shortcuts"><a class="card" href="#story"><span>✦</span><strong>Read Life Story</strong><small>Memories and information about ${esc(displayName(p))}</small></a>${photos.length ? `<a class="card" href="#photos"><span>▧</span><strong>Browse Photos</strong><small>Photographs linked to this profile</small></a>` : ''}<a class="card" href="/?view=tree&amp;focus=${encodeURIComponent(p.id)}"><span>♧</span><strong>Explore Family Tree</strong><small>See the wider family across generations</small></a><a id="timeline" class="card" href="/?view=timeline"><span>◷</span><strong>View Timeline</strong><small>Explore the family story in date order</small></a></section></div></div></section>`
   const overviewPanel = document.querySelector('.profile-overview')
   if (overviewPanel && (verifiedRecordsSection || historySection || archiveSection)) {
     overviewPanel.insertAdjacentHTML('afterend', verifiedRecordsSection + historySection + archiveSection)
