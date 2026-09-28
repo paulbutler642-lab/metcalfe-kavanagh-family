@@ -1,4 +1,4 @@
-import { evidenceLabels, familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260928-enoch-grouped-2'
+import { evidenceLabels, familyHistoryFor, verifiedRecordsFor } from '/family-history-archive.js?v=20260929-edward-hearing-1'
 import { avatarMarkup } from '/avatar.js?v=20260913-gender-avatars-1'
 import { displayName } from '/display-name.js?v=20260920-1'
 const cfg = window.__APP_CONFIG__ || {}
