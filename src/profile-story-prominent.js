@@ -1,1 +1,70 @@
-Ly8gTWFrZXMgdGhlIHJpY2hlc3QgZXZpZGVuY2UtYmFja2VkIExpZmUgU3RvcnkgdGhlIHByb21pbmVudCBpbnRyb2R1Y3Rpb24gb24gZXZlcnkgZmFtaWx5IHByb2ZpbGUuCmltcG9ydCB7IGZhbWlseUhpc3RvcnlGb3IgfSBmcm9tICcvZmFtaWx5LWhpc3RvcnktYXJjaGl2ZS5qcz92PTIwMjYwOTI4LWR1bW15LXBpc3RvbC0xJwoKY29uc3QgcGFyYW1zID0gbmV3IFVSTFNlYXJjaFBhcmFtcyhsb2NhdGlvbi5zZWFyY2gpCmNvbnN0IGVzYyA9ICh2YWx1ZSkgPT4gU3RyaW5nKHZhbHVlID8/ICcnKS5yZXBsYWNlKC9bJjw+IiddL2csIChjKSA9PiAoeyAnJic6JyZhbXA7JywgJzwnOicmbHQ7JywgJz4nOicmZ3Q7JywgJyInOicmcXVvdDsnLCAiJyI6JyYjMzk7JyB9KVtjXSkKY29uc3Qgbm9ybWFsaXNlID0gKHRleHQpID0+IFN0cmluZyh0ZXh0IHx8ICcnKS5yZXBsYWNlKC9cXG4vZywgJ1xuJykudHJpbSgpCmNvbnN0IHN0b3J5SHRtbCA9ICh0ZXh0KSA9PiBub3JtYWxpc2UodGV4dCkuc3BsaXQoL1xuXHMqXG58XG4rLykuZmlsdGVyKEJvb2xlYW4pLm1hcCgocCkgPT4gYDxwPiR7ZXNjKHAudHJpbSgpKX08L3A+YCkuam9pbignJykKCmlmIChwYXJhbXMuZ2V0KCd2aWV3JykgPT09ICdwcm9maWxlJykgewogIGNvbnN0IGVuaGFuY2UgPSBhc3luYyAoKSA9PiB7CiAgICBjb25zdCBhcHAgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnYXBwJykKICAgIGNvbnN0IGhlcm8gPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcucHJvZmlsZS12MS1jb3B5JykKICAgIGNvbnN0IGV4aXN0aW5nSW50cm8gPSBoZXJvPy5xdWVyeVNlbGVjdG9yKCcucHJvZmlsZS1pbnRybywgLnByb21pbmVudC1saWZlLXN0b3J5JykKICAgIGNvbnN0IHN0b3J5UGFuZWwgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcjc3RvcnknKQogICAgaWYgKCFhcHAgfHwgIWhlcm8gfHwgIWV4aXN0aW5nSW50cm8gfHwgIXN0b3J5UGFuZWwgfHwgaGVyby5kYXRhc2V0LnJpY2hTdG9yeUVuaGFuY2VkID09PSAnMScpIHJldHVybiBmYWxzZQoKICAgIGNvbnN0IGlkID0gcGFyYW1zLmdldCgnaWQnKQogICAgY29uc3QgY2ZnID0gd2luZG93Ll9fQVBQX0NPTkZJR19fIHx8IHt9CiAgICBsZXQgcGVyc29uID0gbnVsbAogICAgaWYgKGlkICYmIGNmZy5TVVBBQkFTRV9VUkwgJiYgY2ZnLlNVUEFCQVNFX1BVQkxJU0hBQkxFX0tFWSAmJiB3aW5kb3cuc3VwYWJhc2UpIHsKICAgICAgY29uc3QgZGIgPSB3aW5kb3cuX19TVVBBQkFTRV9DTElFTlRfXwogICAgICBjb25zdCB7IGRhdGEgfSA9IGF3YWl0IGRiLmZyb20oJ3Blb3BsZScpLnNlbGVjdCgnKicpLmVxKCdpZCcsIGlkKS5tYXliZVNpbmdsZSgpCiAgICAgIHBlcnNvbiA9IGRhdGEgfHwgbnVsbAogICAgfQoKICAgIGNvbnN0IGJpb2dyYXBoeSA9IG5vcm1hbGlzZShwZXJzb24/LmJpb2dyYXBoeSkKICAgIGNvbnN0IGhpc3RvcnkgPSBwZXJzb24gPyBmYW1pbHlIaXN0b3J5Rm9yKHBlcnNvbikgOiBudWxsCiAgICBjb25zdCByZXNlYXJjaGVkU3RvcnkgPSBoaXN0b3J5CiAgICAgID8gW2hpc3Rvcnkuc3VtbWFyeSwgLi4uKGhpc3RvcnkuY2hhcHRlcnMgfHwgW10pLm1hcCgoY2hhcHRlcikgPT4gY2hhcHRlci50ZXh0KV0uZmlsdGVyKEJvb2xlYW4pLmpvaW4oJ1xuXG4nKQogICAgICA6ICcnCgogICAgLy8gUHJlZmVyIGEgc3Vic3RhbnRpYWwgYmVzcG9rZSBiaW9ncmFwaHkuIElmIGl0IGlzIG9ubHkgYSBzaG9ydCB0ZWFzZXIsCiAgICAvLyB1c2UgdGhlIHJpY2hlciB2ZXJpZmllZCBhcmNoaXZlIG5hcnJhdGl2ZSAoaW1wb3J0YW50IGZvciBXaWxsaWFtKS4KICAgIGxldCBmdWxsU3RvcnkgPSBiaW9ncmFwaHkubGVuZ3RoID49IDUwMCA/IGJpb2dyYXBoeSA6IChyZXNlYXJjaGVkU3RvcnkgfHwgYmlvZ3JhcGh5KQogICAgaWYgKCFmdWxsU3RvcnkpIHsKICAgICAgZnVsbFN0b3J5ID0gbm9ybWFsaXNlKGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5wcm9maWxlLW92ZXJ2aWV3IHAnKT8udGV4dENvbnRlbnQpCiAgICB9CiAgICBpZiAoIWZ1bGxTdG9yeSB8fCBmdWxsU3RvcnkgPT09ICdObyBwZXJzb25hbCBsaWZlIHN0b3J5IGhhcyBiZWVuIGFkZGVkIHlldC4nKSByZXR1cm4gZmFsc2UKCiAgICBjb25zdCBsaW1pdCA9IDEwNTAKICAgIGNvbnN0IGlzTG9uZyA9IGZ1bGxTdG9yeS5sZW5ndGggPiBsaW1pdAogICAgbGV0IHByZXZpZXcgPSBmdWxsU3RvcnkKICAgIGlmIChpc0xvbmcpIHByZXZpZXcgPSBmdWxsU3Rvcnkuc2xpY2UoMCwgbGltaXQpLnJlcGxhY2UoL1xzK1xTKiQvLCAnJykudHJpbSgpICsgJ+KApicKCiAgICBjb25zdCBibG9jayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpCiAgICBibG9jay5jbGFzc05hbWUgPSAncHJvZmlsZS1pbnRybyBwcm9taW5lbnQtbGlmZS1zdG9yeScKICAgIGJsb2NrLmlubmVySFRNTCA9IHN0b3J5SHRtbChwcmV2aWV3KQogICAgaWYgKGlzTG9uZykgewogICAgICBjb25zdCBtb3JlID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnYScpCiAgICAgIG1vcmUuY2xhc3NOYW1lID0gJ3Byb21pbmVudC1zdG9yeS1tb3JlIGNoYXB0ZXItcmVjb3JkLWxpbmsnCiAgICAgIG1vcmUuaHJlZiA9ICcjc3RvcnknCiAgICAgIG1vcmUudGV4dENvbnRlbnQgPSAnQ29udGludWUgcmVhZGluZyDihpMnCiAgICAgIGJsb2NrLmFwcGVuZENoaWxkKG1vcmUpCiAgICB9CiAgICBleGlzdGluZ0ludHJvLnJlcGxhY2VXaXRoKGJsb2NrKQoKICAgIC8vIEtlZXAgdGhlIGxvd2VyIExpZmUgU3Rvcnkgc2VjdGlvbiBpbiBzeW5jIHdpdGggdGhlIGNvbXBsZXRlIG5hcnJhdGl2ZS4KICAgIGNvbnN0IHN0b3J5VGV4dCA9IHN0b3J5UGFuZWwucXVlcnlTZWxlY3RvcigncCcpCiAgICBpZiAoc3RvcnlUZXh0KSBzdG9yeVRleHQuaW5uZXJIVE1MID0gc3RvcnlIdG1sKGZ1bGxTdG9yeSkKICAgIGVsc2Ugc3RvcnlQYW5lbC5pbnNlcnRBZGphY2VudEhUTUwoJ2JlZm9yZWVuZCcsIGA8ZGl2IGNsYXNzPSJsaWZlLXN0b3J5LWZ1bGwiPiR7c3RvcnlIdG1sKGZ1bGxTdG9yeSl9PC9kaXY+YCkKCiAgICBoZXJvLmRhdGFzZXQucmljaFN0b3J5RW5oYW5jZWQgPSAnMScKICAgIHJldHVybiB0cnVlCiAgfQoKICBlbmhhbmNlKCkKICBjb25zdCBvYnNlcnZlciA9IG5ldyBNdXRhdGlvbk9ic2VydmVyKCgpID0+IHsgZW5oYW5jZSgpIH0pCiAgb2JzZXJ2ZXIub2JzZXJ2ZShkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnYXBwJykgfHwgZG9jdW1lbnQuYm9keSwgeyBjaGlsZExpc3Q6IHRydWUsIHN1YnRyZWU6IHRydWUgfSkKICBzZXRUaW1lb3V0KCgpID0+IG9ic2VydmVyLmRpc2Nvbm5lY3QoKSwgMTAwMDApCn0K
+// Makes the richest evidence-backed Life Story the prominent introduction on every family profile.
+import { familyHistoryFor } from '/family-history-archive.js?v=20260928-enoch-inquest-1'
+
+const params = new URLSearchParams(location.search)
+const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c])
+const normalise = (text) => String(text || '').replace(/\\n/g, '\n').trim()
+const storyHtml = (text) => normalise(text).split(/\n\s*\n|\n+/).filter(Boolean).map((p) => `<p>${esc(p.trim())}</p>`).join('')
+
+if (params.get('view') === 'profile') {
+  const enhance = async () => {
+    const app = document.getElementById('app')
+    const hero = document.querySelector('.profile-v1-copy')
+    const existingIntro = hero?.querySelector('.profile-intro, .prominent-life-story')
+    const storyPanel = document.querySelector('#story')
+    if (!app || !hero || !existingIntro || !storyPanel || hero.dataset.richStoryEnhanced === '1') return false
+
+    const id = params.get('id')
+    const cfg = window.__APP_CONFIG__ || {}
+    let person = null
+    if (id && cfg.SUPABASE_URL && cfg.SUPABASE_PUBLISHABLE_KEY && window.supabase) {
+      const db = window.__SUPABASE_CLIENT__
+      const { data } = await db.from('people').select('*').eq('id', id).maybeSingle()
+      person = data || null
+    }
+
+    const biography = normalise(person?.biography)
+    const history = person ? familyHistoryFor(person) : null
+    const researchedStory = history
+      ? [history.summary, ...(history.chapters || []).map((chapter) => chapter.text)].filter(Boolean).join('\n\n')
+      : ''
+
+    // Prefer a substantial bespoke biography. If it is only a short teaser,
+    // use the richer verified archive narrative (important for William).
+    let fullStory = biography.length >= 500 ? biography : (researchedStory || biography)
+    if (!fullStory) {
+      fullStory = normalise(document.querySelector('.profile-overview p')?.textContent)
+    }
+    if (!fullStory || fullStory === 'No personal life story has been added yet.') return false
+
+    const limit = 1050
+    const isLong = fullStory.length > limit
+    let preview = fullStory
+    if (isLong) preview = fullStory.slice(0, limit).replace(/\s+\S*$/, '').trim() + '…'
+
+    const block = document.createElement('div')
+    block.className = 'profile-intro prominent-life-story'
+    block.innerHTML = storyHtml(preview)
+    if (isLong) {
+      const more = document.createElement('a')
+      more.className = 'prominent-story-more chapter-record-link'
+      more.href = '#story'
+      more.textContent = 'Continue reading ↓'
+      block.appendChild(more)
+    }
+    existingIntro.replaceWith(block)
+
+    // Keep the lower Life Story section in sync with the complete narrative.
+    const storyText = storyPanel.querySelector('p')
+    if (storyText) storyText.innerHTML = storyHtml(fullStory)
+    else storyPanel.insertAdjacentHTML('beforeend', `<div class="life-story-full">${storyHtml(fullStory)}</div>`)
+
+    hero.dataset.richStoryEnhanced = '1'
+    return true
+  }
+
+  enhance()
+  const observer = new MutationObserver(() => { enhance() })
+  observer.observe(document.getElementById('app') || document.body, { childList: true, subtree: true })
+  setTimeout(() => observer.disconnect(), 10000)
+}
