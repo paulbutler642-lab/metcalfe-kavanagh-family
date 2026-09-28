@@ -14,6 +14,19 @@ export const evidenceLabels = {
   research_lead: 'Research Lead',
 }
 
+const seagraveRoadPresentDay = {
+  title: '2B Seagrave Road — present day location',
+  date: 'Google imagery dated July 2025',
+  publication: 'Google Maps / Street View',
+  image: '/family-archive/2b-seagrave-road-fulham-2025.webp',
+  original: '/family-archive/2b-seagrave-road-fulham-2025.jpg',
+  caption: 'Present day view of the frontage identified by Google Maps as 2B Seagrave Road, Fulham, London SW6 1RR.',
+  context: 'The 1939 Register places John Metcalfe at 2B Seagrave Road. A report of William Metcalfe’s fatal accident gives the same address in 1940. This modern image helps locate the address; it does not establish which parts of the building survive from their time.',
+  provenance: 'Google Maps / Street View screenshot dated July 2025, located and supplied by Paul Butler. © Google. Contemporary location reference, not a historical photograph.',
+  evidence: 'family_archive',
+  provenanceEvidence: 'family_archive',
+}
+
 const archive = {
   'john medcalf enoch son': {
     aliases: ['John Medcalf', 'John Metcalfe'],
@@ -27,6 +40,7 @@ const archive = {
       },
     ],
     documents: [
+      seagraveRoadPresentDay,
       {
         title: '1939 Register — John Metcalfe at 2B Seagrave Road',
         date: '29 September 1939',
@@ -94,6 +108,7 @@ const archive = {
       },
     ],
     documents: [
+      seagraveRoadPresentDay,
       {
         title: 'Private W. Medcalf’s letter from Gallipoli',
         date: '18 September 1915',
