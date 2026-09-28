@@ -378,7 +378,7 @@ const archive = {
       },
       {
         title: 'Marriage',
-        text: 'On 23 July 1895 he married Mary King at Christ Church, Carysfort/Blackrock. The marriage transcription records Enoch as a groom and names his father Anthony, a gardener. Mary’s father William King was a carpenter.',
+        text: 'On 23 July 1895 he married Mary King at Christ Church, Carysfort/Blackrock. The marriage transcription records Enoch as a groom and names his father Anthony, a gardener. Mary’s father William King was a carpenter. Enoch later witnessed his son John’s marriage to Catherine Kavanagh in 1925.',
         evidence: 'verified_primary',
         recordUrl: 'https://www.irishgenealogy.ie/view/?record_id=cima-2226913',
         recordLabel: 'View 1895 marriage record — Irish Genealogy',
