@@ -15,6 +15,44 @@ export const evidenceLabels = {
 }
 
 const archive = {
+  'john medcalf enoch son': {
+    aliases: ['John Medcalf', 'John Metcalfe'],
+    heading: 'From Stillorgan to Fulham',
+    summary: 'The 1939 Register places John Metcalfe at 2B Seagrave Road, Fulham, working on the railway.',
+    chapters: [
+      {
+        title: 'In London in 1939',
+        text: 'On 29 September 1939, the England and Wales Register recorded John Metcalfe at 2B Seagrave Road, Fulham. His date of birth is written as 11 February 1898, matching his established Irish birth record. He is marked as married and his occupation is recorded as “Railway Labourer H.W.” A crossed-out entry on the adjoining register page, referring the reader onward, appears to describe him as a railway relayer and heavy worker. The accompanying closed entries cannot be identified from these scans. A later report of his brother William’s fatal accident also placed William at 2B Seagrave Road in 1940; the shared address connects their London records but does not by itself establish who else lived there in September 1939.',
+        evidence: 'verified_primary',
+      },
+    ],
+    documents: [
+      {
+        title: '1939 Register — John Metcalfe at 2B Seagrave Road',
+        date: '29 September 1939',
+        publication: 'England and Wales Register, Fulham, enumeration district AGBU',
+        image: '/family-archive/john-metcalfe-1939-register-entry.webp',
+        original: '/family-archive/john-metcalfe-1939-register-entry.jpg',
+        caption: 'John Metcalfe, born 11 February 1898, appears at 2B Seagrave Road, Fulham; schedule 45, sub-entry 5.',
+        context: 'The register marks him as married and gives his occupation as “Railway Labourer H.W.” Other entries are officially closed in the supplied image.',
+        provenance: 'Image of the 1939 England and Wales Register supplied by Paul Butler. The original archive reference and image provider were not included with the scan.',
+        evidence: 'verified_primary',
+        provenanceEvidence: 'family_archive',
+      },
+      {
+        title: '1939 Register — crossed-out John Metcalfe entry',
+        date: '29 September 1939',
+        publication: 'England and Wales Register, Fulham, enumeration district AGBU',
+        image: '/family-archive/john-metcalfe-1939-register-cross-reference.webp',
+        original: '/family-archive/john-metcalfe-1939-register-cross-reference.jpg',
+        caption: 'The adjoining page contains a crossed-out entry for John, born 11 February 1898, with a direction to another page.',
+        context: 'This appears to be an administrative cross-reference for the same John rather than a second independent household. Its occupation wording appears to read “Railway Relayer Heavy Worker”. The clear entry on the other scan is used for his address and schedule.',
+        provenance: 'Companion image of the 1939 England and Wales Register supplied by Paul Butler; original archive reference and image provider not supplied.',
+        evidence: 'verified_primary',
+        provenanceEvidence: 'family_archive',
+      },
+    ],
+  },
   'william metcalfe': {
     aliases: ['Anthony Metcalfe', 'William Anthony Metcalfe'],
     heading: 'Soldier, boxer and family man',
@@ -322,6 +360,7 @@ const archive = {
 }
 
 const archiveKeyByPersonId = {
+  'john-medcalf-enoch-son': 'john medcalf enoch son',
   'william-metcalfe': 'william metcalfe',
   'edward-medcalf': 'edward medcalf',
   'mary-kavanagh': 'mary kavanagh',
@@ -331,6 +370,9 @@ const archiveKeyByPersonId = {
 }
 
 const verifiedRecords = {
+  'john-medcalf-enoch-son': [
+    { title: '1939 Register', detail: 'John Metcalfe · born 11 February 1898 · married · railway labourer · 2B Seagrave Road, Fulham, London', url: '/family-archive/john-metcalfe-1939-register-entry.jpg', linkLabel: 'View 1939 Register image' },
+  ],
   'william-metcalfe': [
     { title: 'Birth', detail: '6 May 1896 · Dublin South registration district', url: 'https://www.irishgenealogy.ie/view/?record_id=f66be225e5-3084449' },
     { title: '1901 Census', detail: 'William Medcalf · age 4 · son and scholar · 6 Galloping Green, Stillorgan', url: 'https://nationalarchives.ie/collections/search-the-census/census-record/#id=5536925&c20_year=1901', linkLabel: 'View 1901 census — National Archives' },
