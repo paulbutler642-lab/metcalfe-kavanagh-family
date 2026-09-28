@@ -315,6 +315,13 @@ const archive = {
     summary: 'Edward Medcalf was born at Galloping Green, Stillorgan, in 1900, the son of Enoch Medcalf and Mary King.',
     chapters: [
       {
+        title: 'Charged after the Ballsbridge hold-up — 1 March 1922',
+        text: 'An Evening Herald report of a Southern Police Court hearing says Edward Metcalf had been arrested after Michael Gunn was remanded and was now charged in connection with the 23 February hold-up at a public house at 10 Ballsbridge Terrace. The report recounts evidence from the Hickey brothers about Gunn and two other men, and ends with the prisoners being remanded. This was an earlier hearing, not a verdict. The report calls the publican Michael Hickey, whereas the later trial report calls him Thomas; the difference remains unresolved from the supplied crops. The headline says three men were charged, but this crop does not clearly identify the third man.',
+        evidence: 'contemporary_newspaper',
+        transcription: 'Three Men Charged in Police Courts To-day\n\nEdward Metcalf, arrested since Gunn was remanded, was now charged with being concerned in the same affair.\n\nPrisoners were remanded.',
+        transcriptionSource: 'Evening Herald, Dublin, Wednesday 1 March 1922, page 1. Selected legible lines from the supplied screenshot; the full article and its court-name line need a complete page scan before a full transcription.',
+      },
+      {
         title: 'The 1922 Ballsbridge trial',
         text: 'The Evening Herald reported that Edward and his brother John Metcalfe, of Kilmacud Road, Stillorgan, were found guilty in a case concerning a hold-up at Thomas Hickey’s public house on 23 February 1922. Edward had first sent a telegram asking their brother William to meet him in Blackrock; John went in William’s place. The report does not establish William’s knowledge or involvement. It records no sentence.',
         evidence: 'contemporary_newspaper',
