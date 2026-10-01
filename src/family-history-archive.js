@@ -172,11 +172,23 @@ const archive = {
         title: 'Historical significance — William served in Collins’s pro-Treaty Army',
         text: 'This is a documented connection to one of the decisive conflicts in Irish history and to Michael Collins’s National Army. The Civil War began on 28 June 1922. The Defence Forces’ official history identifies the National Army as the pro-Treaty IRA. RTÉ’s account of the Army’s formation records that Collins became Commander-in-Chief on 12 July 1922. William signed his levy paper on 14 July, and his Volunteer Reserve Agreement was accepted at Curragh Camp on 16 July—four days after Collins took command. The British handover of Curragh to Free State forces had taken place on 16 May. The November National Army Census then records William as a Corporal in the Infantry, with his attestation date given as 12 July. Taken together, the contemporary documents verify that William served with the pro-Treaty National Army during the Civil War, under Collins’s overall command. They do not show that he met or corresponded personally with Collins. The agreement offered six months’ service or a shorter period set by the Army Council; later service papers show William’s Army career continued to 1933. The “I.R.A. Record” table on his levy form is blank, so it does not establish that he was a pre-Treaty IRA veteran. The same form records about four and a half years’ previous British Army service.',
         sources: [
+          { label: 'Houses of the Oireachtas — Treaty in Context', url: 'https://www.oireachtas.ie/en/visit-and-learn/centenaries/treaty-debates/the-treaty-in-context/' },
           { label: 'Defence Forces — History of the Army', url: 'https://www.military.ie/en/public-information/defence-forces-museums/defence-forces-history/history-of-the-army/' },
           { label: 'RTÉ — Call to arms: creating the Irish National Army', url: 'https://www.rte.ie/history/2022/0125/1275830-call-to-arms-creating-the-irish-national-army/' },
           { label: 'Military Archives — Michael Collins, Commander in Chief', url: 'https://www.militaryarchives.ie/en/online-collections/military-service-pensions-collection/civil-war/fatalities/collins-michael' },
           { label: 'Military Archives — Curragh takeover, 16 May 1922', url: 'https://www.militaryarchives.ie/en/online-collections/military-archives-image-gallery-20th-century/ie-ma-acps-gpn-027' },
           { label: 'Military Archives — National Army Census history', url: 'https://www.militaryarchives.ie/en/online-collections/irish-army-census-collection-12-november-1922-13-november-1922/history' },
+        ],
+        evidence: 'secondary_historical',
+      },
+
+      {
+        title: 'The two sides in 1922 — and why the name “IRA” can mislead',
+        text: 'After the Dáil approved the Anglo-Irish Treaty in January 1922, the Irish Republican Army split over whether to accept it. Pro-Treaty leaders supported the Treaty and Provisional Government, arguing that the settlement offered a step towards self-government and avoided renewed war with Britain. Anti-Treaty opponents argued that it fell short of the Republic they had fought for, including because of the oath to the British monarch. The Pro-Treaty forces became known as the National Army; the Anti-Treaty forces continued as the IRA. The Provisional Government and pro-government press often called them “Irregulars,” a partisan label. Because both sides came from the pre-split IRA, “IRA” on a 1922 form does not, on its own, identify the side. William’s forms use the title “Irish Republican Army Volunteer Reserve”; read with the National Army Census listing him as a Corporal in the Infantry, with a 12 July 1922 attestation date, they establish that his service was on the pro-Treaty side.',
+        sources: [
+          { label: 'Defence Forces — History of the Army', url: 'https://www.military.ie/en/public-information/defence-forces-museums/defence-forces-history/history-of-the-army/' },
+          { label: 'Military Archives — Irish Army Census history', url: 'https://www.militaryarchives.ie/en/online-collections/irish-army-census-collection-12-november-1922-13-november-1922/history' },
+          { label: 'RTÉ — War of words: censorship and propaganda during the Civil War', url: 'https://www.rte.ie/history/michael-collins/2022/0803/1313771-censorship-and-propaganda-during-the-civil-war/' },
         ],
         evidence: 'secondary_historical',
       },
