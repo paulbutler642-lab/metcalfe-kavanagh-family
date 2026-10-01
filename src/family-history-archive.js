@@ -129,6 +129,11 @@ const archive = {
     aliases: ['Anthony Metcalfe', 'William Anthony Metcalfe'],
     heading: 'Soldier, volunteer, boxer and family man',
     summary: 'Born at Templeville in 1896, William Metcalfe served with the 5th Royal Inniskilling Fusiliers at Gallipoli. His signed and accepted July 1922 Volunteer Reserve papers and National Army Census place him with the pro-Treaty forces during the Irish Civil War; later papers trace his National Forces service and Army boxing career.',
+    signature: {
+      image: '/family-archive/william-metcalfe-signature.jpg',
+      alt: 'William Metcalfe’s handwritten signature on his Army service record.',
+      caption: 'William Metcalfe’s signature, cropped from his signed Army service record.',
+    },
     chapters: [
       {
         title: 'Birth and childhood — 1896 onward',

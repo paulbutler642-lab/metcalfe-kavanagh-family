@@ -1,5 +1,5 @@
 // Makes the richest evidence-backed Life Story the prominent introduction on every family profile.
-import { familyHistoryFor } from '/family-history-archive.js?v=20260929-edward-hearing-1'
+import { familyHistoryFor } from '/family-history-archive.js?v=20261001-william-signature-1'
 
 const params = new URLSearchParams(location.search)
 const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c])
@@ -58,6 +58,22 @@ if (params.get('view') === 'profile') {
     const storyText = storyPanel.querySelector('p')
     if (storyText) storyText.innerHTML = storyHtml(fullStory)
     else storyPanel.insertAdjacentHTML('beforeend', `<div class="life-story-full">${storyHtml(fullStory)}</div>`)
+
+    const signature = history?.signature
+    if (signature && !storyPanel.querySelector('.profile-signature')) {
+      const figure = document.createElement('figure')
+      figure.className = 'profile-signature'
+      const caption = document.createElement('figcaption')
+      caption.textContent = 'William Metcalfe’s signature'
+      const image = document.createElement('img')
+      image.src = signature.image
+      image.alt = signature.alt
+      image.loading = 'lazy'
+      const note = document.createElement('small')
+      note.textContent = signature.caption
+      figure.append(caption, image, note)
+      storyPanel.append(figure)
+    }
 
     hero.dataset.richStoryEnhanced = '1'
     return true
