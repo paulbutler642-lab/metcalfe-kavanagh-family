@@ -169,6 +169,13 @@ const archive = {
         recordLabel: 'Open the complete Army records folder and page guide',
       },
       {
+        title: 'Medical records and physical description — 1922–1933',
+        text: 'William’s Army file records two different heights. The “Description of Soldier on Entry to Army” on page 2 gives 5 feet 4 inches, a 33-inch chest, brown hair and blue eyes; the complexion entry is hard to read and the marks-and-scars field appears blank. A Medical History form on page 12, examined at Portobello on 24 April 1926, gives 5 feet 8 inches, 130 lb, fair hair, blue eyes, a 35-inch chest, 2½-inch chest expansion and “Good” physical development. Its complexion entry is unclear. The two recorded heights conflict, so both are reported without trying to reconcile them. On page 14, before discharge, William signed that as far as he knew he was not suffering from a disability associated with military service. The guide links directly to all three pages.',
+        evidence: 'verified_primary',
+        recordUrl: '/family-archive/william-metcalfe-army-records/#medical-records',
+        recordLabel: 'Read the medical-record page guide',
+      },
+      {
         title: 'Historical significance — William served in Collins’s pro-Treaty Army',
         text: 'This is a documented connection to one of the decisive conflicts in Irish history and to Michael Collins’s National Army. The Civil War began on 28 June 1922. The Defence Forces’ official history identifies the National Army as the pro-Treaty IRA. RTÉ’s account of the Army’s formation records that Collins became Commander-in-Chief on 12 July 1922. William signed his levy paper on 14 July, and his Volunteer Reserve Agreement was accepted at Curragh Camp on 16 July—four days after Collins took command. The British handover of Curragh to Free State forces had taken place on 16 May. The November National Army Census then records William as a Corporal in the Infantry, with his attestation date given as 12 July. Taken together, the contemporary documents verify that William served with the pro-Treaty National Army during the Civil War, under Collins’s overall command. They do not show that he met or corresponded personally with Collins. The agreement offered six months’ service or a shorter period set by the Army Council; later service papers show William’s Army career continued to 1933. The “I.R.A. Record” table on his levy form is blank, so it does not establish that he was a pre-Treaty IRA veteran. The same form records about four and a half years’ previous British Army service.',
         sources: [
