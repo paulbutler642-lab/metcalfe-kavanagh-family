@@ -128,7 +128,7 @@ const archive = {
   'william metcalfe': {
     aliases: ['Anthony Metcalfe', 'William Anthony Metcalfe'],
     heading: 'Soldier, volunteer, boxer and family man',
-    summary: 'Born at Templeville in 1896, William Metcalfe served with the 5th Royal Inniskilling Fusiliers at Gallipoli. His surviving service file documents his signed and accepted enlistment in the Irish Republican Army Volunteer Reserve in July 1922, later National Forces service, and a long Army boxing career.',
+    summary: 'Born at Templeville in 1896, William Metcalfe served with the 5th Royal Inniskilling Fusiliers at Gallipoli. His signed and accepted July 1922 Volunteer Reserve papers and National Army Census place him with the pro-Treaty forces during the Irish Civil War; later papers trace his National Forces service and Army boxing career.',
     chapters: [
       {
         title: 'Birth and childhood — 1896 onward',
@@ -155,18 +155,30 @@ const archive = {
         recordLabel: 'View 1922 marriage record — Irish Genealogy',
       },
       {
-        title: 'National Army Census — 12 July 1922',
-        text: 'The National Army Census records William as a Corporal in the Infantry, attested on 12 July 1922 at Dundalk, with paybook number 19818. This census entry is separate from the surviving 50-page personnel file.',
+        title: 'National Army attestation — 12 July 1922',
+        text: 'The National Army Census, taken on 12–13 November 1922, records William as a Corporal in the Infantry and gives his attestation date as 12 July 1922 at Dundalk, with paybook number 19818. The July date is his recorded attestation date, not the date the census was taken. This census entry is separate from the surviving 50-page personnel file.',
         evidence: 'verified_primary',
         recordUrl: '/family-archive/william-metcalfe-army-records/#national-army-census',
         recordLabel: 'Read the census entry and service-file guide',
       },
       {
         title: 'Signed enrolment in Óglaigh na hÉireann — 14 and 16 July 1922',
-        text: 'Two signed papers in William’s personnel file record his entry into the Irish Republican Army Volunteer Reserve. On 14 July 1922 he signed an Óglaigh na hÉireann voluntary-levy form, giving his name as William Metcalfe, age 26, birthplace Templeogue, and address as 59 Brookfield Buildings, Blackrock, Dublin. He stated that he was married and had about four and a half years’ prior British Army service. On 16 July he signed the Volunteer Reserve Agreement, offering to serve as a soldier of the Irish Republican Army Volunteer Reserve for six months or such shorter period as the Army Council determined. His name is visible in the faint signature, and the form bears the acceptance marking “Accepted. Curragh Camp.” This is direct evidence of signed and accepted enrolment. The July documents do not by themselves establish when he first became a volunteer.',
+        text: 'Two signed papers record William’s entry into the Irish Republican Army Volunteer Reserve. On 14 July 1922 he signed an Óglaigh na hÉireann voluntary-levy form, giving his name as William Metcalfe, age 26, birthplace Templeogue, and an address that reads 59 Brookfield Buildings, Blackrock, Dublin. On 16 July he signed the Volunteer Reserve Agreement, which offers six months’ service or a shorter period set by the Army Council. The address on this second form is faint and appears to read 57 Brookfield Buildings, Blackrock. His name is legible in the faint signature, and the form is marked “Accepted. Curragh Camp.” The printed pay schedule lists 2 shillings and 6 pence per day plus maintenance, but a handwritten insertion above “Two” appears to read “Three”, so the amount actually offered is uncertain. The dependant schedule lists 4 shillings per day for a wife, with higher rates for children; William’s handwritten note appears to direct payment of the allowance to his wife. This records the terms and his request, not proof that payments were made. Together, these papers directly document his signed and accepted enrolment by 16 July. They record an offer of service; they do not alone show that he completed six months or when he first became a volunteer.',
         evidence: 'verified_primary',
         recordUrl: '/family-archive/william-metcalfe-army-records/',
         recordLabel: 'Open the complete Army records folder and page guide',
+      },
+      {
+        title: 'Historical significance — William served in Collins’s pro-Treaty Army',
+        text: 'This is a documented connection to one of the decisive conflicts in Irish history and to Michael Collins’s National Army. The Civil War began on 28 June 1922. The Defence Forces’ official history identifies the National Army as the pro-Treaty IRA. RTÉ’s account of the Army’s formation records that Collins became Commander-in-Chief on 12 July 1922. William signed his levy paper on 14 July, and his Volunteer Reserve Agreement was accepted at Curragh Camp on 16 July—four days after Collins took command. The British handover of Curragh to Free State forces had taken place on 16 May. The November National Army Census then records William as a Corporal in the Infantry, with his attestation date given as 12 July. Taken together, the contemporary documents verify that William served with the pro-Treaty National Army during the Civil War, under Collins’s overall command. They do not show that he met or corresponded personally with Collins. The agreement offered six months’ service or a shorter period set by the Army Council; later service papers show William’s Army career continued to 1933. The “I.R.A. Record” table on his levy form is blank, so it does not establish that he was a pre-Treaty IRA veteran. The same form records about four and a half years’ previous British Army service.',
+        sources: [
+          { label: 'Defence Forces — History of the Army', url: 'https://www.military.ie/en/public-information/defence-forces-museums/defence-forces-history/history-of-the-army/' },
+          { label: 'RTÉ — Call to arms: creating the Irish National Army', url: 'https://www.rte.ie/history/2022/0125/1275830-call-to-arms-creating-the-irish-national-army/' },
+          { label: 'Military Archives — Michael Collins, Commander in Chief', url: 'https://www.militaryarchives.ie/en/online-collections/military-service-pensions-collection/civil-war/fatalities/collins-michael' },
+          { label: 'Military Archives — Curragh takeover, 16 May 1922', url: 'https://www.militaryarchives.ie/en/online-collections/military-archives-image-gallery-20th-century/ie-ma-acps-gpn-027' },
+          { label: 'Military Archives — National Army Census history', url: 'https://www.militaryarchives.ie/en/online-collections/irish-army-census-collection-12-november-1922-13-november-1922/history' },
+        ],
+        evidence: 'secondary_historical',
       },
       {
         title: 'National Forces attestations — 1924 and 1926',
@@ -354,9 +366,9 @@ const archive = {
     ],
     notes: [
       'The 1922 marriage record uses or records the name Anthony. It is not yet established whether Anthony was a formal middle name, an alternative given name or another usage.',
-      'The signed IRA Volunteer Reserve papers dated 14 and 16 July 1922 prove his enrolment by that date. They do not, on their own, prove when he first became a volunteer or his status on 23 February 1922.',
-      'The 1924/1926 attestation papers do not all agree on William’s age or birth year. The civil birth record establishes 6 May 1896; conflicting later service-form entries are retained as record discrepancies.',
-      'The 1933 correspondence and discharge application give 18 November 1933 as the end of his engagement. A faint form date or later re-enlistment should not be read as a 1935 discharge.',
+      'The signed IRA Volunteer Reserve papers dated 14 and 16 July 1922 prove his enrolment by those dates. Read with his National Army Census entry, they place William with the pro-Treaty forces during the Civil War. They do not, on their own, prove when he first became a volunteer or his status on 23 February 1922.',
+      'The 14 July 1922 voluntary-levy form reads 59 Brookfield Buildings; the faint address on the 16 July Agreement appears to read 57 Brookfield Buildings. Both readings are retained as shown rather than silently reconciled. The 1924/1926 attestation papers also contain age or birth-year discrepancies; the civil birth record establishes 6 May 1896.',
+      'The 1933 correspondence and discharge application give 18 November 1933 as the end of his engagement. The six-month term on the July 1922 Agreement is an offer of service, not proof that he served only six months; later service and extension papers document his continued Army career.',
     ],
   },
   'edward medcalf': {
