@@ -146,6 +146,38 @@ const archive = {
         evidence: 'contemporary_newspaper',
       },
       {
+        title: 'The 5th Battalion on campaign — Gallipoli and Macedonia, 1915–1917',
+        text: 'William’s contemporary Gallipoli evidence identifies him as Private W. Medcalf of the 5th Battalion, Royal Inniskilling Fusiliers. The battalion had been raised in 1914 and served in 31st Brigade, 10th (Irish) Division. It landed at Suvla Bay in August 1915; the Division’s August operations included the advance on Chocolate Hill and the fighting around Kiretch Tepe. The battalion’s own experience was severe: the existing Irish Independent report describes William writing home from Gallipoli about heavy losses and his narrow escapes. After the evacuation of Gallipoli, the 10th Division moved to Salonika in October 1915. In December, during the Battle of Kosturino and the retreat from Serbia, the Inniskilling battalions were held in reserve; the Inniskillings Museum records 11 of their men killed. The battalion then served on the Macedonian front, including the Struma Valley sector, through 1916–17. The official regimental heritage account describes the strain of disease and malaria in this area and the Division’s later withdrawal from the valley before it left Salonika. These are movements and actions of William’s battalion and its formations; they do not establish that William personally fought in each named engagement.',
+        sources: [
+          { label: 'Inniskillings Museum — A Forgotten Campaign', url: 'https://inniskillingsmuseum.com/a-forgotten-campaign/' },
+          { label: 'Royal Irish Virtual Military Gallery — 10th Division at Chocolate Hill', url: 'https://royal-irish.org/events/10th-irish-division-chocolate-hill-gallipoli' },
+          { label: 'Royal Irish Virtual Military Gallery — Macedonia, 1915–17', url: 'https://royal-irish.co.uk/events/battle-honour-macedonia-1915-17' },
+          { label: 'Combined Irish Regiments Association — 5th Battalion movements', url: 'https://www.ciroca.org.uk/first-world-war-links/infantry-regiments-1914-18/royal-inniskilling-fusiliers/' },
+        ],
+        evidence: 'secondary_historical',
+      },
+      {
+        title: 'Egypt and Palestine — 1917 to May 1918',
+        text: 'In August 1917 the 10th (Irish) Division assembled at Salonika and moved through Egypt toward Palestine. The 5th Inniskillings remained in the Division’s 31st Brigade until 28 May 1918. During this period the Division took part in the Third Battle of Gaza and the advance that captured Jerusalem in December 1917. In March 1918, while the battalion was still listed with the Division, the 10th Division fought in the Tell ’Asur operation in the Judean Hills. Regimental and divisional accounts record these as campaign actions; William’s individual service evidence currently confirms his 5th Battalion service at Gallipoli, not his presence at any particular Palestinian assault.',
+        sources: [
+          { label: 'Royal Irish Virtual Military Gallery — Battle Honour Gaza', url: 'https://www.royal-irish.org/events/skins-faughs-clear-turkish-strongpoint-gaza' },
+          { label: 'Royal Irish Virtual Military Gallery — Jerusalem', url: 'https://royal-irish.org/events/battle-honour-jerusalem' },
+          { label: 'Royal Irish Virtual Military Gallery — 10th Division at Tell ’Asur', url: 'https://mail.royal-irish.org/explore/timeline' },
+          { label: 'Combined Irish Regiments Association — 10th (Irish) Division order of battle', url: 'https://www.ciroca.org.uk/first-world-war-links/infantry-divisions-1914-18/10th-irish-division/' },
+        ],
+        evidence: 'secondary_historical',
+      },
+      {
+        title: 'France and the Hindenburg Line — 1918',
+        text: 'On 28 May 1918 the 5th Battalion left the 10th (Irish) Division and moved to France. It joined 198th Brigade, 66th (2nd East Lancashire) Division. The Royal Irish Virtual Military Gallery identifies the 5th Inniskillings as one of the battalions whose actions earned the regiment’s Hindenburg Line battle honour. The 66th Division’s later fighting included the Second Battle of Cambrai and the Pursuit to the Selle. This confirms the battalion’s Western Front service in 1918; it does not by itself place William in a particular trench, attack or casualty list. The 5th Battalion’s 198th Brigade war diary is catalogued as WO 95/3140/1 and covers 1 June 1918 to 9 May 1919.',
+        sources: [
+          { label: 'Royal Irish Virtual Military Gallery — Hindenburg Line', url: 'https://royal-irish.net/stories/battle-honour-hindenburg-line' },
+          { label: 'Combined Irish Regiments Association — 5th Battalion transfer to 198th Brigade', url: 'https://www.ciroca.org.uk/first-world-war-links/infantry-regiments-1914-18/royal-inniskilling-fusiliers/' },
+          { label: 'National Archives — British Army war diaries, 1914–1922', url: 'https://www.nationalarchives.gov.uk/help-with-your-research/research-guides/british-army-war-diaries-1914-1922/' },
+        ],
+        evidence: 'secondary_historical',
+      },
+      {
         title: 'The Ballsbridge robbery report — February 1922',
         text: 'An Evening Herald report about the 23 February 1922 hold-up says Edward sent William a telegram asking him to meet at Blackrock. William was unavailable or otherwise engaged, and John went instead. The report does not say William knew of or participated in the robbery. Family recollection places William as a volunteer at the time. The surviving signed IRA Volunteer Reserve papers in this file are dated July 1922, after the robbery, so they establish his later enrolment but do not independently date his volunteer status in February.',
         evidence: 'contemporary_newspaper',
