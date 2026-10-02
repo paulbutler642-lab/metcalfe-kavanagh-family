@@ -269,7 +269,7 @@ const archive = {
         image: '/family-archive/william-medcalf-gallipoli-letter-irish-independent-1915.webp',
         original: '/family-archive/william-medcalf-gallipoli-letter-irish-independent-1915.jpg',
         caption: 'A contemporary newspaper report summarising William Medcalf’s wartime letter to his mother in Stillorgan.',
-        context: 'The Irish Independent identifies him as Private W. Medcalf of the 5th Inniskillings. Writing from Gallipoli, he described severe battalion losses and narrow escapes from shrapnel and rifle fire.',
+        context: 'The Irish Independent identifies him as Private W. Medcalf of the 5th Inniskillings. Writing from Gallipoli, he described severe battalion losses and narrow escapes from shrapnel and rifle fire. The full page places his report beside other Irish soldiers’ accounts of the Suvla fighting. Sergeant Matthew Broderick separately recalled arriving at Suvla Bay at about 5:30 a.m. on 7 August 1915, wading ashore when the landing lighter could go no closer, and men in the first landing party being blown up by concealed land mines. This is Broderick’s account, not evidence that William experienced that specific incident.',
         provenance: 'Newspaper image kindly supplied directly to Paul Butler by YouWho.ie following a family-history enquiry. This is a newspaper account of William’s letter, rather than an image of the original handwritten letter.',
         evidence: 'contemporary_newspaper',
         provenanceEvidence: 'family_archive',
