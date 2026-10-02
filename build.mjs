@@ -22,3 +22,6 @@ const url = process.env.SUPABASE_URL || '';
 const key = process.env.SUPABASE_PUBLISHABLE_KEY || '';
 fs.writeFileSync(path.join(out,'config.js'),`window.__APP_CONFIG__=${JSON.stringify({SUPABASE_URL:url,SUPABASE_PUBLISHABLE_KEY:key})};\n`);
 console.log('Built static family history site to dist/');
+
+fs.copyFileSync('src/history.css','dist/history.css');
+await import('./history-build.mjs');
