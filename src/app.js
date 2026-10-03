@@ -317,7 +317,7 @@ async function profile() {
     ? personSources.filter((source) => !['a97a680e-a8e8-4891-ada6-de609d91f2cb', '03947149-3905-4e39-a4b1-8e57f95c34fc'].includes(source.id))
     : personSources
   const databaseVerifiedRecords = displaySources
-    .filter((source) => source.evidence_status === 'verified' && /^https?:\/\//i.test(source.external_url || ''))
+    .filter((source) => (source.evidence_status === 'verified' || (source.evidence_type === 'verified_primary' && source.evidence_status === 'published')) && /^https?:\/\//i.test(source.external_url || ''))
     .map((source) => ({
       title: source.title,
       detail: source.summary || [source.event_date_text, source.place_text, source.repository].filter(Boolean).join(' • '),

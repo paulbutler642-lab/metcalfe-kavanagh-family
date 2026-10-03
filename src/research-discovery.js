@@ -49,17 +49,18 @@ export function mountResearchDiscovery(host, { people, researchSources }) {
   }
   input.addEventListener('input', render)
   render()
-  mountAutomaticSearch(host,people).catch(console.error)
+  mountAutomaticSearch(host,people,researchSources).catch(console.error)
 }
 
-async function mountAutomaticSearch(host,people){
- const {familyContext,runGenealogySearch,renderSearchResults,providerLinks}=await import('/genealogy-search.js?v=20261003-refined-2');
+async function mountAutomaticSearch(host,people,researchSources){
+ const {familyContext,runGenealogySearch,renderSearchResults,providerLinks}=await import('/genealogy-search.js?v=20261003-review-3');
+ const {attachRecordReview}=await import('/genealogy-review.js?v=20261003-review-1');
  const block=document.createElement('section');block.className='research-discovery-person';block.innerHTML=`<div style="padding:16px"><h3>Search historical records automatically</h3><p>Retrieve candidates from Irish censuses (1821, 1831, 1841, 1851, 1901, 1911 and 1926) and Irish Genealogy civil and church records. Earlier censuses contain surviving fragments. Only census years within the recorded lifetime are searched.</p><label>Family member <select class="automatic-person">${people.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')}</select></label><p><button type="button" class="btn automatic-one">Search this person</button> <button type="button" class="btn automatic-all">Search all people</button> <button type="button" class="btn automatic-stop" hidden>Stop after current person</button></p><p class="automatic-status" role="status"></p><div class="automatic-output"></div></div>`;
  host.querySelector('.research-discovery-head').after(block);
  const select=block.querySelector('select'),one=block.querySelector('.automatic-one'),all=block.querySelector('.automatic-all'),stop=block.querySelector('.automatic-stop'),status=block.querySelector('[role=status]'),output=block.querySelector('.automatic-output');let cancelled=false;
  stop.onclick=()=>{cancelled=true;stop.disabled=true;status.textContent='Stopping after the current person finishes…';};
  async function run(queue){cancelled=false;one.disabled=all.disabled=true;stop.hidden=false;stop.disabled=false;output.innerHTML='';let completed=0;
-  try{for(const person of queue){if(cancelled)break;const context=await familyContext(window.__SUPABASE_CLIENT__,person);const data=await runGenealogySearch(person,context,message=>{if(!cancelled)status.textContent=`${completed+1}/${queue.length} — ${person.name}: ${message}`;});const result=document.createElement('details');result.open=queue.length===1;result.innerHTML=`<summary><strong>${esc(person.name)}</strong> — ${data.results.filter(r=>r.status==='strong').length} candidates</summary>${renderSearchResults(data)}${providerLinks(person)}`;output.append(result);completed++;}status.textContent=`${cancelled?'Search stopped':'Search finished'}. ${completed} of ${queue.length} people checked. Candidate records need review before adding them to the tree.`;}
+  try{for(const person of queue){if(cancelled)break;const context={...await familyContext(window.__SUPABASE_CLIENT__,person),researchSources,archive:verifiedRecordsFor(person)};const data=await runGenealogySearch(person,context,message=>{if(!cancelled)status.textContent=`${completed+1}/${queue.length} — ${person.name}: ${message}`;});const result=document.createElement('details');result.open=queue.length===1;result.innerHTML=`<summary><strong>${esc(person.name)}</strong> — ${data.results.filter(r=>r.status==='strong').length} candidates</summary>${renderSearchResults(data)}${providerLinks(person)}`;output.append(result);attachRecordReview(result,{data,person,db:window.__SUPABASE_CLIENT__,researchSources,onSaved:()=>document.dispatchEvent(new Event('research-source-saved'))});completed++;}status.textContent=`${cancelled?'Search stopped':'Search finished'}. ${completed} of ${queue.length} people checked. Candidate records need review before adding them to the tree.`;}
   catch(e){status.textContent=e.message;}finally{one.disabled=all.disabled=false;stop.hidden=true;}}
  one.onclick=()=>run(people.filter(p=>String(p.id)===select.value));all.onclick=()=>run(people);
 }
