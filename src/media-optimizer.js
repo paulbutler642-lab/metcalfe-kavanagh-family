@@ -1,5 +1,5 @@
 const PHOTO_TYPES=new Set(['image/jpeg','image/png','image/webp','image/heic','image/heif']);
-const DOCUMENT_TYPES=new Set(['application/pdf','image/jpeg','image/png','image/webp']);
+const DOCUMENT_TYPES=new Set(['application/pdf','application/vnd.openxmlformats-officedocument.wordprocessingml.document','image/jpeg','image/png','image/webp']);
 const MAX_INCOMING_BYTES=10*1024*1024;
 const WEB_MAX_EDGE=2000;
 const THUMB_MAX_EDGE=480;
@@ -7,9 +7,10 @@ const TARGET_BYTES=400*1024;
 
 export function validateArchiveFile(file,kind='photo'){
   if(!file||!file.size)throw new Error('This file is empty or could not be read.');
-  if(file.size>MAX_INCOMING_BYTES)throw new Error(`${file.name} is larger than the 10 MB upload limit.`);
+  const limit=kind==='photo'?MAX_INCOMING_BYTES:20*1024*1024;
+  if(file.size>limit)throw new Error(`${file.name} is larger than the ${kind==='photo'?10:20} MB upload limit.`);
   const allowed=kind==='photo'?PHOTO_TYPES:DOCUMENT_TYPES;
-  if(!allowed.has(file.type))throw new Error(kind==='photo'?'Please use a JPG, PNG, WebP or HEIC photograph.':'Please use a PDF, JPG, PNG or WebP document.');
+  if(!allowed.has(file.type))throw new Error(kind==='photo'?'Please use a JPG, PNG, WebP or HEIC photograph.':'Please use a PDF, Word (.docx), JPG, PNG or WebP document.');
 }
 
 function canvasBlob(canvas,type,quality){return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error('The browser could not create an optimised image.')),type,quality))}

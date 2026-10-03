@@ -1,0 +1,2 @@
+update storage.buckets set file_size_limit=20971520, allowed_mime_types=array['image/jpeg','image/png','image/webp','image/heic','image/heif','application/pdf','application/vnd.openxmlformats-officedocument.wordprocessingml.document']::text[] where id='family-contributions';
+alter policy "public upload archive contributions" on storage.objects with check (bucket_id='family-contributions' and (storage.foldername(name))[1]='public-contributions' and lower(storage.extension(name)) in ('jpg','jpeg','png','webp','heic','heif','pdf','docx'));
