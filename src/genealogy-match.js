@@ -20,9 +20,17 @@ export function assessRecord(row,person,context={}){
   if(born&&row.age!==null&&row.age!==undefined&&String(row.age)!==''){
    const difference=Math.abs((eventYear-Number(row.age))-born);if(difference<=2){dateMatch=true;reasons.push('Census age agrees with the birth year (within two years)');}else conflicts.push('Census age conflicts with the recorded birth year');
   }
-  const matches=(context.relatives||[]).filter(rel=>(row.members||[]).some(m=>String(m.id)!==String(row.id)&&compatibleName(m.name,rel.name)));
+  const matches=(context.relatives||[]).filter(rel=>(row.members||[]).some(m=>{
+    if(String(m.id)===String(row.id)||!compatibleName(m.name,rel.name))return false;
+    const relativeBorn=year(rel.birth_date||rel.birth_date_text);
+    return !relativeBorn||m.age===null||m.age===undefined||Math.abs(eventYear-Number(m.age)-relativeBorn)<=2;
+   }));
   if(matches.length){familyMatch=true;reasons.push(`Household includes known relatives: ${matches.map(x=>x.name).join(', ')}`);}
  }else{
+  const recordedBirth=Object.entries(row.fields||{}).find(([key])=>/^(?:date of birth|birth date|date born|born)$/i.test(key))?.[1]||(row.event==='birth'?row.date:'');
+  const profileBirth=person.birth_date||person.birth_date_text;
+  const a=fullDate(recordedBirth),b=fullDate(profileBirth);
+  if(a&&b){if(a===b){dateMatch=true;reasons.push('Exact date of birth matches');}else conflicts.push(`Recorded date of birth (${recordedBirth}) conflicts with ${profileBirth}`);}
   const expected=['birth','baptism'].includes(row.event)?born:['death','burial'].includes(row.event)?died:0;
   if(expected&&eventYear){if(Math.abs(eventYear-expected)<=2){dateMatch=true;reasons.push('Event year agrees with the profile');}else if(row.event==='baptism'&&eventYear>expected)reasons.push('Later baptism: check the recorded birth date');else conflicts.push('Event year conflicts with the profile');}
   if(born&&eventYear&&eventYear<born-2)conflicts.push('Event predates the recorded birth');
@@ -35,9 +43,17 @@ export function assessRecord(row,person,context={}){
   if(row.event==='marriage'&&(context.spouses||[]).some(s=>names.some(n=>compatibleName(n,s.name)))){familyMatch=true;reasons.push('Spouse matches the family tree');}
  }
  const places=[person.birth_place,person.birth_place_text,person.death_place,person.death_place_text].map(norm).filter(Boolean),recordPlace=norm([row.place,...Object.values(row.fields||{})].join(' '));
- if(places.some(place=>recordPlace.includes(place)))reasons.push('Place agrees with the profile');
- return {...row,reasons,conflicts,status:conflicts.length?'conflict':nameMatch&&dateMatch&&familyMatch?'strong':'possible'};
+ const placeMatch=places.some(place=>recordPlace.includes(place)||place.split(' ').filter(w=>w.length>3).some(w=>recordPlace.split(' ').includes(w)));
+ if(placeMatch)reasons.push('Place agrees with the profile');
+ return {...row,reasons,conflicts,status:conflicts.length?'conflict':nameMatch&&dateMatch&&(familyMatch||(!(context.relatives||[]).length&&placeMatch))?'strong':'possible'};
 }
 export function searchPlan(person){const born=year(person.birth_date||person.birth_date_text),died=year(person.death_date||person.death_date_text);return [1821,1831,1841,1851,1901,1911,1926].filter(y=>(!born||y>=born)&&(!died||y<=died)).map(y=>({source:'census',year:y,label:`${y} Census${y<1901?' (surviving fragments)':''}`})).concat([{source:'vital',label:'Births, baptisms, marriages, deaths & burials',start:born?Math.max(1500,born-2):0,end:died?Math.min(2026,died+2):0}]);}
 
 export function nameQueries(person){const p=nameParts(person),names=[p];if(person.birth_name)names.push(nameParts({name:person.birth_name}));const queries=names.flatMap(n=>surnames(n.surname).map(surname=>({first:n.first.split(/\s+/)[0],surname}))).filter(n=>n.first&&n.surname);return [...new Map(queries.map(n=>[`${norm(n.first)}:${norm(n.surname)}`,n])).values()];}
+
+export function fullDate(value){
+ const s=String(value||'').trim();let m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return `${m[1]}-${m[2]}-${m[3]}`;
+ m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);if(m)return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+ m=s.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);if(!m)return '';
+ const months=['january','february','march','april','may','june','july','august','september','october','november','december'],month=months.findIndex(x=>x===m[2].toLowerCase());return month<0?'':`${m[3]}-${String(month+1).padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+}

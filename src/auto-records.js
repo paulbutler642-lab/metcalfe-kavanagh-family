@@ -1,4 +1,4 @@
-import {familyContext,runGenealogySearch,renderSearchResults,providerLinks} from '/genealogy-search.js?v=20261003-1';
+import {familyContext,runGenealogySearch,renderSearchResults,providerLinks} from '/genealogy-search.js?v=20261003-refined-2';
 async function run(){
  const q=new URLSearchParams(location.search),id=q.get('id'),db=window.__SUPABASE_CLIENT__;if(q.get('view')!=='profile'||!id||!db)return;
  const {data:person,error}=await db.from('people').select('*').eq('id',id).single();if(error||!person)return;
@@ -8,5 +8,5 @@ async function run(){
  const section=document.createElement('section');section.id='automatic-record-search';section.className='card profile-panel genealogy-results';section.innerHTML='<h2>Automatic genealogy search</h2><p>Searching available Irish censuses and civil and church records, including surname variants. Candidates are checked against this person’s dates and known family.</p><p class="genealogy-status" role="status">Preparing family checks…</p><button class="btn" type="button" disabled>Search again</button><div class="genealogy-output"></div>'+providerLinks(person);
  const anchor=host.querySelector('#verified-records');anchor?anchor.after(section):host.append(section);
  const button=section.querySelector('button'),status=section.querySelector('[role=status]'),output=section.querySelector('.genealogy-output');
- const search=async()=>{button.disabled=true;try{const context=await familyContext(db,person);const data=await runGenealogySearch(person,context,message=>status.textContent=message);output.innerHTML=renderSearchResults(data);status.textContent=`Search finished: ${data.results.filter(r=>r.status!=='conflict').length} candidates. ${data.sources.filter(s=>s.errors.length).length} sources unavailable or partly checked.`;}catch(e){status.textContent=e.message;}finally{button.disabled=false;}};button.onclick=search;await search();
+ const search=async()=>{button.disabled=true;try{const context=await familyContext(db,person);const data=await runGenealogySearch(person,context,message=>status.textContent=message);output.innerHTML=renderSearchResults(data);status.textContent=`Search finished: ${data.results.filter(r=>r.status==='strong').length} candidates. ${data.sources.filter(s=>s.errors.length).length} sources unavailable or partly checked.`;}catch(e){status.textContent=e.message;}finally{button.disabled=false;}};button.onclick=search;await search();
 }run().catch(console.error);
