@@ -27,11 +27,8 @@ export async function optimisePhoto(file){
   validateArchiveFile(file,'photo');
   const bitmap=await decode(file);
   try{
-    let size=dimensions(bitmap.width,bitmap.height,WEB_MAX_EDGE),canvas=draw(bitmap,size),quality=.88,web=await canvasBlob(canvas,'image/webp',quality);
-    while(web.size>TARGET_BYTES&&quality>.72){quality=Math.max(.72,quality-.04);web=await canvasBlob(canvas,'image/webp',quality)}
-    while(web.size>TARGET_BYTES*1.3&&Math.max(size.width,size.height)>1200){size={width:Math.round(size.width*.9),height:Math.round(size.height*.9)};canvas=draw(bitmap,size);web=await canvasBlob(canvas,'image/webp',quality)}
     const thumbSize=dimensions(bitmap.width,bitmap.height,THUMB_MAX_EDGE),thumb=await canvasBlob(draw(bitmap,thumbSize),'image/webp',.8);
-    return{web,thumbnail:thumb,width:size.width,height:size.height,thumbnailWidth:thumbSize.width,thumbnailHeight:thumbSize.height,originalBytes:file.size,quality,outputType:'image/webp'};
+    return{thumbnail:thumb,width:bitmap.width,height:bitmap.height,thumbnailWidth:thumbSize.width,thumbnailHeight:thumbSize.height,originalBytes:file.size,outputType:file.type};
   }finally{bitmap.close?.()}
 }
 
