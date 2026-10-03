@@ -1,0 +1,31 @@
+import {nameParts,nameQueries,searchPlan,assessRecord} from '/genealogy-match.js?v=20261003-1';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export async function runGenealogySearch(person,context,onProgress=()=>{}){
+ const queries=nameQueries(person),plan=searchPlan(person),results=[],sources=[];
+ for(const task of plan){const status={...task,count:0,errors:[],incomplete:false,checkedAt:''};onProgress(`Searching ${task.label}…`);
+  for(const {first,surname} of queries){
+   onProgress(`Searching ${task.label}: ${first} ${surname}…`);
+   const params=new URLSearchParams({source:task.source,first,surname});for(const key of ['year','start','end'])if(task[key])params.set(key,task[key]);
+   try{const r=await fetch(`/api/genealogy-search?${params}`,{signal:AbortSignal.timeout(58000)}),data=await r.json();if(!r.ok)throw Error(data.error||'Source unavailable');status.count+=data.results.length;status.incomplete ||=data.incomplete;status.checkedAt=data.checkedAt;results.push(...data.results.map(row=>assessRecord(row,person,context)));}
+   catch(e){status.errors.push(e.name==='TimeoutError'?'Search timed out.':e.message);if(task.source==='vital')break;}
+  }sources.push(status);
+ }
+ return {results:[...new Map(results.map(r=>[`${r.provider}:${r.year||''}:${r.id}`,r])).values()],sources};
+}
+export function renderSearchResults(data){
+ const rows=data.results,rank={strong:0,possible:1,conflict:2};rows.sort((a,b)=>rank[a.status]-rank[b.status]);
+ const cards=rows.filter(r=>r.status!=='conflict').map(r=>`<article class="auto-record-card"><strong>${esc(r.title||r.name)}</strong><p>${esc([r.date,r.place,r.occupation].filter(Boolean).join(' · '))}</p><p><b>${r.status==='strong'?'Strong candidate — review original':'Possible match — further evidence needed'}</b></p><ul>${r.reasons.map(reason=>`<li>${esc(reason)}</li>`).join('')}</ul>${!r.reasons.length?'<p>Not enough indexed evidence to assess this record.</p>':''}<a href="${esc(r.url)}" target="_blank" rel="noopener">Open original record</a>${r.image?` · <a href="${esc(r.image)}" target="_blank" rel="noopener">Open register image</a>`:''}${Object.keys(r.fields||{}).length?`<details><summary>Indexed record details</summary><dl>${Object.entries(r.fields).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></details>`:''}</article>`).join('');
+ const conflicts=rows.filter(r=>r.status==='conflict');
+ return `<p>Candidate records are research leads. Check the original before adding evidence to the family tree.</p><details open><summary>Sources searched</summary><ul>${data.sources.map(s=>`<li><strong>${esc(s.label)}</strong>: ${s.errors.length?`unavailable or partly checked — ${esc([...new Set(s.errors)].join(' '))}`:`${s.count} result${s.count===1?'':'s'} retrieved`}${s.incomplete?' · Search limited; further pages or record details remain unchecked.':''}${s.checkedAt?` · Checked ${esc(new Date(s.checkedAt).toLocaleDateString())}`:''}</li>`).join('')}</ul></details>${cards||'<p>No compatible candidates were retrieved from the completed searches.</p>'}${conflicts.length?`<details><summary>Records with conflicting evidence (${conflicts.length})</summary>${conflicts.map(r=>`<article class="auto-record-card"><strong>${esc(r.title||r.name)}</strong><p>${esc(r.conflicts.join('; '))}</p><a href="${esc(r.url)}" target="_blank" rel="noopener">Inspect conflicting record</a></article>`).join('')}</details>`:''}`;
+}
+export function providerLinks(person){const p=nameParts(person),q=encodeURIComponent;return `<details><summary>Search account-based and other archives</summary><p>These collections require their own search or account access; they have not been searched automatically.</p><ul><li><a target="_blank" rel="noopener" href="https://www.irishgenealogy.ie/search/?church-or-civil=all&event-birth=1&event-baptism=1&event-marriage=1&event-death=1&event-burial=1&firstname=${q(p.first)}&lastname=${q(p.surname)}">Irish Genealogy — civil and church records</a></li><li><a target="_blank" rel="noopener" href="https://www.ancestry.co.uk/search/?name=${q(`${p.first}_${p.surname}`)}">Ancestry — Irish and British census, military and vital records</a></li><li><a target="_blank" rel="noopener" href="https://www.familysearch.org/en/search/record/results?q.givenName=${q(p.first)}&q.surname=${q(p.surname)}">FamilySearch — worldwide historical records</a></li><li><a target="_blank" rel="noopener" href="https://www.findmypast.ie/search/results?firstname=${q(p.first)}&lastname=${q(p.surname)}">Findmypast — census, military, prison and parish records</a></li><li><a target="_blank" rel="noopener" href="https://www.britishnewspaperarchive.co.uk/search/results?basicsearch=${q(person.name)}">Newspaper archives</a></li></ul></details>`;}
+export async function familyContext(db,person){
+ const [pc,cp,pr,people]=await Promise.all([db.from('parent_child').select('*'),db.from('couples').select('*'),db.from('person_relationships').select('*'),db.from('people').select('*')]);
+ for(const result of [pc,cp,pr,people])if(result.error)throw Error('Family relationships could not be read. Search paused to avoid assessing matches without family context.');
+ const parents=new Set(),spouses=new Set(),relatives=new Set(),id=person.id;
+ for(const r of pc.data||[]){if(r.child_id===id){parents.add(r.parent_id);relatives.add(r.parent_id);}if(r.parent_id===id)relatives.add(r.child_id);}
+ for(const r of cp.data||[]){const a=r.person1_id||r.person_a_id||r.partner1_id,b=r.person2_id||r.person_b_id||r.partner2_id;if(a===id){spouses.add(b);relatives.add(b);}if(b===id){spouses.add(a);relatives.add(a);}}
+ for(const r of pr.data||[]){if(r.person_id===id)relatives.add(r.related_person_id);if(r.related_person_id===id)relatives.add(r.person_id);}
+ for(const r of pc.data||[])if(parents.has(r.parent_id)&&r.child_id!==id)relatives.add(r.child_id);
+ return {parents:(people.data||[]).filter(p=>parents.has(p.id)),spouses:(people.data||[]).filter(p=>spouses.has(p.id)),relatives:(people.data||[]).filter(p=>relatives.has(p.id))};
+}
