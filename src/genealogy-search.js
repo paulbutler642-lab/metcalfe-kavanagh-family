@@ -6,7 +6,7 @@ export async function runGenealogySearch(person,context,onProgress=()=>{}){
  for(const task of plan){const status={...task,count:0,errors:[],incomplete:false,checkedAt:''};onProgress(`Searching ${task.label}…`);
   for(const {first,surname} of queries){
    onProgress(`Searching ${task.label}: ${first} ${surname}…`);
-   const params=new URLSearchParams({source:task.source,first,surname});const born=year(person.birth_date||person.birth_date_text);if(task.source==='census'&&born)params.set('born',born);for(const key of ['year','start','end'])if(task[key])params.set(key,task[key]);
+   const params=new URLSearchParams({source:task.source,first,surname});const born=year(person.birth_date||person.birth_date_text);if(task.source==='census'&&born)params.set('born',born);for(const key of ['year','start','end','event'])if(task[key])params.set(key,task[key]);
    try{const r=await fetch(`/api/genealogy-search?${params}`,{signal:AbortSignal.timeout(58000)}),data=await r.json();if(!r.ok)throw Error(data.error||'Source unavailable');status.count+=data.results.length;status.incomplete ||=data.incomplete;status.checkedAt=data.checkedAt;results.push(...data.results.map(row=>assessRecord(row,person,context)));}
    catch(e){status.errors.push(e.name==='TimeoutError'?'Search timed out.':e.message);if(task.source==='vital')break;}
   }sources.push(status);
