@@ -1,6 +1,6 @@
 import {familyContext,runGenealogySearch,renderSearchResults,providerLinks} from '/genealogy-search.js?v=20261013-manual-2';
 const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-const getYear=s=>Number(String(s||'').match(/\\b(?:1[5-9]|20)\\d{2}\\b/)?.[0])||0;
+const getYear=s=>Number((String(s||'').match(/[0-9]{4}/)||[])[0])||0;
 function readResearch(id){try{return JSON.parse(localStorage.getItem('research-checklist:'+id)||'{}')}catch{return {}}}
 async function syncResearch(db,personId){
  const {data:{user}}=await db.auth.getUser();if(!user)return null;
