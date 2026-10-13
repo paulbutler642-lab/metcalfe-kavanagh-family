@@ -1,5 +1,5 @@
 import {alreadyVerified,recordKey} from '/genealogy-review.js?v=20261003-review-1';
-import {nameParts,nameQueries,searchPlan,assessRecord,year} from '/genealogy-match.js?v=20261003-refined-2';
+import {nameParts,nameQueries,searchPlan,assessRecord,year} from '/genealogy-match.js?v=20261013-targeted-1';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export async function runGenealogySearch(person,context,onProgress=()=>{}){
  const queries=nameQueries(person),plan=searchPlan(person),results=[],sources=[];
