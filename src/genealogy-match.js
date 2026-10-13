@@ -1,6 +1,6 @@
 export const norm=s=>String(s??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
 export const year=s=>Number(String(s||'').match(/\b(?:1[5-9]|20)\d{2}\b/)?.[0])||0;
-export function surnames(s){const n=norm(s);return /^(metcalfe?|medcalfe?)$/.test(n)?['metcalfe','metcalf','medcalf','medcalfe']:[s];}
+export function surnames(s){const n=norm(s);return /^(metcalfe?|medcalfe?)$/.test(n)?['metcalfe','metcalf','medcalf','medcalfe'] :/^(kavanagh|cavanagh|kavanaugh|cavanaugh)$/.test(n)?['kavanagh','cavanagh','kavanaugh','cavanaugh']:[s];}
 export function nameParts(p){const words=String(p.name||'').trim().split(/\s+/);return {first:p.given_names||words.slice(0,-1).join(' '),surname:p.surname||words.at(-1)||''};}
 const words=s=>norm(s).split(' ').filter(Boolean);
 function givenEqual(a,b){return words(a).some(w=>words(b).includes(w)||(['enoch','enock'].includes(w)&&words(b).some(x=>['enoch','enock'].includes(x))));}
