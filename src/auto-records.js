@@ -1,4 +1,4 @@
-import {familyContext,runGenealogySearch,renderSearchResults,providerLinks} from '/genealogy-search.js?v=20261013-targeted-1';
+import {familyContext,runGenealogySearch,renderSearchResults,providerLinks} from '/genealogy-search.js?v=20261013-manual-2';
 async function run(){
  const q=new URLSearchParams(location.search),id=q.get('id'),db=window.__SUPABASE_CLIENT__;if(q.get('view')!=='profile'||!id||!db)return;
  const {data:person,error}=await db.from('people').select('*').eq('id',id).single();if(error||!person)return;
