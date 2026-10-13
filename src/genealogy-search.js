@@ -1,8 +1,8 @@
 import {alreadyVerified,recordKey} from '/genealogy-review.js?v=20261003-review-1';
 import {nameParts,nameQueries,searchPlan,assessRecord,year} from '/genealogy-match.js?v=20261013-targeted-1';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-export async function runGenealogySearch(person,context,onProgress=()=>{}){
- const queries=nameQueries(person),plan=searchPlan(person),results=[],sources=[];
+export async function runGenealogySearch(person,context,onProgress=()=>{},options={}){
+ const queries=nameQueries(person),plan=searchPlan(person).filter(task=>!options.censusOnly||task.source==='census'),results=[],sources=[];
  for(const task of plan){const status={...task,count:0,errors:[],incomplete:false,checkedAt:''};onProgress(`Searching ${task.label}…`);
   for(const {first,surname} of queries){
    onProgress(`Searching ${task.label}: ${first} ${surname}…`);
