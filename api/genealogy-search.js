@@ -6,8 +6,9 @@ export default async function handler(req,res){
  if(!first||!surname||first.length>80||surname.length>80||!['census','vital'].includes(source)||(source==='census'&&!CENSUS_YEARS.includes(year)))return res.status(400).json({error:'Choose a supported source and provide given name and surname.'});
  const born=Number(q.get('born'))||0;
  if(born&&(born<1500||born>2026))return res.status(400).json({error:'Invalid birth year.'});
- const start=Number(q.get('start'))||0,end=Number(q.get('end'))||0;
+ const start=Number(q.get('start'))||0,end=Number(q.get('end'))||0,event=String(q.get('event')||'');
+ if(event&&!['birth','baptism','marriage','death','burial'].includes(event))return res.status(400).json({error:'Unsupported event type.'});
  if((start&&(start<1500||start>2026))||(end&&(end<1500||end>2026))||(start&&end&&start>end))return res.status(400).json({error:'Invalid date range.'});
- try{const data=source==='census'?await searchCensus(year,first,surname,born):await searchVital(first,surname,start,end);res.setHeader('Cache-Control','s-maxage=86400, stale-while-revalidate=3600');return res.status(200).json({...data,checkedAt:new Date().toISOString()});}
+ try{const data=source==='census'?await searchCensus(year,first,surname,born):await searchVital(first,surname,start,end,event);res.setHeader('Cache-Control','s-maxage=86400, stale-while-revalidate=3600');return res.status(200).json({...data,checkedAt:new Date().toISOString()});}
  catch(e){res.setHeader('Cache-Control','no-store');return res.status(502).json({error:e.name==='TimeoutError'?'The source took too long to respond.':e.message,results:[],status:'unavailable'});}
 }
