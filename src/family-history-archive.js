@@ -192,6 +192,13 @@ const archive = {
         recordLabel: 'View 1922 marriage record — Irish Genealogy',
       },
       {
+        title: 'The 1926 census household — Georges Avenue, Blackrock',
+        text: 'The National Archives of Ireland’s 1926 census record identifies Mary Metcalfe (née Kavanagh), age 29, married and head of household, at Georges Avenue (part of), Blackrock Number 2 DED. The household includes Annie Metcalfe, recorded as a daughter aged 2, and John Metcalfe, recorded as a son. William is not listed on this schedule. The census gives no reason for his absence. Family hypothesis: he may have been away with the Army; this remains unverified. William’s Army file documents service in the 1920s, including a 1926 attestation, but does not establish that military duty explains his absence from this household on census night.',
+        evidence: 'verified_primary',
+        recordUrl: 'https://nationalarchives.ie/collections/search-the-1926-census/census-record/#surname=Metcalfe&first_name=Mary&limit=30&a_id=469691',
+        recordLabel: 'View the National Archives census record',
+      },
+      {
         title: 'National Army attestation — 12 July 1922',
         text: 'The National Army Census, taken on 12–13 November 1922, records William as a Corporal in the Infantry and gives his attestation date as 12 July 1922 at Dundalk, with paybook number 19818. The July date is his recorded attestation date, not the date the census was taken. This census entry is separate from the surviving 50-page personnel file.',
         evidence: 'verified_primary',
